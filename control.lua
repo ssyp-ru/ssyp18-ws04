@@ -2,7 +2,7 @@ coll = require "collision"
 local function conThief (self, dt)
 	local mx = love.mouse.getX ()
 	local my = love.mouse.getY ()
-	mx,my = cam:toWorld(mx,my)
+	mx,my = cam:toWorld (mx,my)
 	local oldx = self.x
 	local oldy = self.y
 	if self.x > mx then
@@ -45,7 +45,7 @@ local function conThief (self, dt)
 			end
 		end
 	end
-	if self.x > mx - 5 and self.x < mx + 5 and self.y > my - 5 and self.y < my + 5 then
+	if self.x > mx - 10 and self.x < mx + 10 and self.y > my - 10 and self.y < my + 10 then
 		self.x = oldx
 		self.y = oldy
 	end

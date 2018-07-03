@@ -1,3 +1,4 @@
+brAnimal = require "brainAnimal"
 con = require "control"
 drawUnits = require "drawUnits"
 local function createWall(x1,y1,w1,h1)
@@ -17,8 +18,17 @@ local function createWall(x1,y1,w1,h1)
 end
 local function wall_update(dt)
 end
-local function updateAnimal(dt)
+local function updateAnimal(animal, dt)
 	--drawUnits.animal (animal)
+	animal.delay = animal.delay - dt
+	if animal.delay < 0 then
+		animal.delay1 = animal.delay1 - dt
+		brAnimal.brainAnimal (animal, dt, x, y)
+		if animal.delay1 < 0 then
+			animal.delay = 4
+			animal.delay1 = 20
+		end
+	end
 end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
@@ -32,6 +42,8 @@ local function createAnimal(x,y,r)
 		y=y,
 		angel=0,
 		r=r,
+		delay = 4,
+		delay1 = 20
 	}
 	return t
 end
