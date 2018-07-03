@@ -59,7 +59,6 @@ function love.draw()
 			end
 		end)
 end
-
 function love.update(dt)
 	cam:setPosition(u[5].x, u[5].y)
 	u[6]:update (dt,u )
