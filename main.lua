@@ -2,6 +2,8 @@ obj = require "constructor"
 tf = require "control"
 drwUnit = require "drawUnits"
 camera = require "gamera"
+edt = require "edit"
+
 function love.load()
 	math.randomseed(os.time())
 	maxid = 0
@@ -48,10 +50,10 @@ function love.load()
 end
 function love.draw()
 	cam:draw(function(l,t,w,h)
-		for i = 1,#u do
-			u[i]:draw()
-		end
-	end)
+			for i = 1,#u do
+				u[i]:draw()
+			end
+		end)
 end
 
 function love.update(dt)
@@ -60,4 +62,9 @@ function love.update(dt)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
+end
+
+function love.mousepressed( x, y, button, isTouch )
+	editWall(x,y)
+	print(x,y)
 end
