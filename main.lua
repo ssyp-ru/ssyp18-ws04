@@ -1,12 +1,14 @@
 obj = require "constructor"
 tf = require "control"
 drwUnit = require "drawUnits"
-local x = 1300
-local y = 300
+camera = require "gamera"
 function love.load()
-	maxid = 0
 	math.randomseed(os.time())
-	love.window.setMode(1366, 768, {})
+	maxid = 0
+	local x = 1300
+	local y = 300
+	cam = camera.new( 0, 0, 2000,2000)
+	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	u = {}
 	for i = 1, 15 do
 		if i == 1 then
@@ -45,19 +47,15 @@ function love.load()
 	i = 255
 end
 function love.draw()
-	--cam:draw(function(l,t,w,h)
-	--	for i = 1,#units do
-	--		units[i]:draw()
-	--	end
-	--end)
-	--love.graphics.print(units[4].x .. " " .. units[4].y .. "\n" .. love.mouse.getX() ..
-	--" " .. love.mouse.getY(), 100, 100)
-	for i=1,#u do
-		u[i]:draw()
-	end
+	cam:draw(function(l,t,w,h)
+		for i = 1,#u do
+			u[i]:draw()
+		end
+	end)
 end
 
 function love.update(dt)
+	cam:setPosition(u[5].x,u[5].y)
 	u[5]:update(dt, u)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
