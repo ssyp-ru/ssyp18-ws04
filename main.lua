@@ -8,6 +8,7 @@ function love.load()
 	editor = {}
 	maxid = 0
 	math.randomseed(os.time())
+	love.window.setMode(1366, 768, {})
 	units = {}
 	units[1] = constructor.createWall(100, 100, 10, 50)
 	units[2] = constructor.createAnimal(600,600,15)
@@ -21,6 +22,8 @@ function love.draw()
 			units[i]:draw()
 		end
 	end)
+	love.graphics.print(units[4].x .. " " .. units[4].y .. "\n" .. love.mouse.getX() ..
+	" " .. love.mouse.getY(), 100, 100)
 end
 	function love.update(dt)
 		cam:setPosition(units[4].x,units[4].y)
