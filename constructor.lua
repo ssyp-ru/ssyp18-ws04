@@ -1,6 +1,5 @@
+con = require "control"
 drawUnits = require "drawUnits"
-mainFunc = require "mainFunction"
-control = require "control"
 local function createWall(x1,y1,w1,h1)
 	maxid = maxid + 1
 	local t = {
@@ -19,7 +18,7 @@ end
 local function wall_update(dt)
 end
 local function updateAnimal(dt)
-	
+	drawUnits.animal (animal)
 end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
@@ -36,8 +35,8 @@ local function createAnimal(x,y,r)
 	}
 	return t
 end
-function updateThief(thief,units,dt)
-	control.conThief(thief,units,dt)
+function updateThief(thief, dt)
+	con.conThief(thief, dt)
 end
 local function createThief(x,y,r)
 	maxid = maxid + 1
@@ -55,9 +54,9 @@ local function createThief(x,y,r)
 	return t
 end
 local function updateMovement(dt)
-	
+	drawUnits.movement (movement, w, h)
 end
-local function createMovement(x,y)
+local function createMovement(x,y, w, h)
 	maxid = maxid + 1
 	local t = {
 		kind='sensor',
@@ -67,14 +66,16 @@ local function createMovement(x,y)
 		update=updateMovement,
 		x=x,
 		y=y,
+		w=w,
+		h=h,
 		angel=0
 	}
 	return t
 end
 local function updateNoise(dt)
-	
+	drawUnits.noise (noise, w, h)
 end
-local function createNoise(x,y)
+local function createNoise(x,y,w,h)
 	maxid = maxid + 1
 	local t = {
 		kind='sensor',
@@ -84,14 +85,22 @@ local function createNoise(x,y)
 		update=updateNoise,
 		x=x,
 		y=y,
+		w=w,
+		h=h,
 		angel=0
 	}
 	return t
 end
 local function updateDoor(dt)
-	
+	drawUnits.door (door)
+	for i=1,#u do 
+		if u[i].kind=='animal' or u[i].kind=='human' then
+			if rect2circle (self, u[i])==true then
+			end
+		end
+	end
 end
-local function createDoor(x,y)
+local function createDoor(x,y,w,h)
 	maxid = maxid + 1
 	local t = {
 		kind='sensor',
@@ -101,12 +110,14 @@ local function createDoor(x,y)
 		update=updateDoor,
 		x=x,
 		y=y,
+		w=w,
+		h=h,
 		angel=0
 	}
 	return t
 end
 local function updateLight(dt)
-	
+	drawUnits.light (light)
 end
 local function createLight(x,y)
 	maxid = maxid + 1
@@ -123,6 +134,6 @@ local function createLight(x,y)
 	return t
 end
 --[[updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
-	updateLight=updateLight,updateDoor=updateDoor,updateAnimal=updateAnimal]]--
+updateLight=updateLight,updateDoor=updateDoor,updateAnimal=updateAnimal]]--
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
 	createNoise=createNoise,createDoor=createDoor,createLight=createLight,createWall = createWall}
