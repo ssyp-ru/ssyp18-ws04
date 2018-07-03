@@ -29,8 +29,8 @@ local function rect2rect (rect1,rect2)
 	end
 end
 local function rect2circle (circle, rect)
-	if circle.x + circle.r >= rect.x and circle.x - circle.r <= rect.x + rect.w and circle.y + circle.r
-	>= rect.y and circle.y - circle.r <= rect.y + rect.h then --х, у, r относятся к кругу, r - радиус.
+	if circle.x + circle.r >= rect.x and circle.x - circle.r <= rect.x + rect.w and circle.y + 
+	circle.r>= rect.y and circle.y - circle.r <= rect.y + rect.h then --х, у, r относятся к кругу.
 		return true
 	else
 		return false
