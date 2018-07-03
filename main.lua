@@ -6,7 +6,6 @@ local x = 1300
 local y = 300
 function love.load()
 	maxid = 0
-	math.randomseed(os.time())
 	love.window.setMode(1366, 768, {})
 	u = {}
 	for i = 1, 15 do
