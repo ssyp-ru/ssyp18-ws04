@@ -41,15 +41,15 @@ end
 local function createThief(x,y,r)
 	maxid = maxid + 1
 	local t = {
-		kind='human',
-		subkind='thief',
-		id=maxid,
-		draw=drawUnits.thief,
-		update=updateThief,
-		x=x,
-		y=y,
-		angel=0,
-		r=r,
+		kind = 'human',
+		subkind = 'thief',
+		id = maxid,
+		draw = drawUnits.thief,
+		update = updateThief,
+		x = x,
+		y = y,
+		angel = 0,
+		r = r,
 	}
 	return t
 end
