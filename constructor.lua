@@ -18,7 +18,7 @@ end
 local function wall_update(dt)
 end
 local function updateAnimal(dt)
-	drawUnits.animal (animal)
+	--drawUnits.animal (animal)
 end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
@@ -54,7 +54,7 @@ local function createThief(x,y,r)
 	return t
 end
 local function updateMovement(dt)
-	drawUnits.movement (movement, w, h)
+	--drawUnits.movement (movement, w, h)
 end
 local function createMovement(x,y, w, h)
 	maxid = maxid + 1
@@ -73,7 +73,7 @@ local function createMovement(x,y, w, h)
 	return t
 end
 local function updateNoise(dt)
-	drawUnits.noise (noise, w, h)
+	--drawUnits.noise (noise, w, h)
 end
 local function createNoise(x,y,w,h)
 	maxid = maxid + 1
@@ -92,7 +92,7 @@ local function createNoise(x,y,w,h)
 	return t
 end
 local function updateDoor(dt)
-	drawUnits.door (door)
+	--drawUnits.door (door)
 	for i=1,#u do 
 		if u[i].kind=='animal' or u[i].kind=='human' then
 			if rect2circle (self, u[i])==true then
@@ -117,7 +117,7 @@ local function createDoor(x,y,w,h)
 	return t
 end
 local function updateLight(dt)
-	drawUnits.light (light)
+	--drawUnits.light (light)
 end
 local function createLight(x,y)
 	maxid = maxid + 1
