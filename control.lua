@@ -2,6 +2,12 @@ coll = require "collision"
 local function conThief (self, units, dt)
 	local mx = love.mouse.getX()
 	local my = love.mouse.getY()
+	if self.x > 683 then 
+		mx = mx + self.x - 683
+	end
+	if self.y > 384 then 
+		my = my + self.y - 384
+	end
 	local oldx = self.x
 	local oldy = self.y
 	if self.x > mx then
@@ -44,7 +50,7 @@ local function conThief (self, units, dt)
 			end
 		end
 	end
-	if self.x > mx - 10 and self.x < mx + 10 and self.y > my - 10 and self.y < my + 10 then
+	if self.x > mx - 5 and self.x < mx + 5 and self.y > my - 5 and self.y < my + 5 then
 	self.x = oldx
 	self.y = oldy
 	end
