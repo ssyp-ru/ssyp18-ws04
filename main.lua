@@ -48,15 +48,23 @@ function love.load()
 end
 function love.draw()
 	cam:draw(function(l,t,w,h)
-		for i = 1,#u do
-			u[i]:draw()
-		end
+			for i = 1,#u do
+				u[i]:draw()
+			end
 	end)
 end
 
 function love.update(dt)
 	cam:setPosition(u[5].x,u[5].y)
-	u[5]:update(dt, u)
+	for i = 1, #u do 
+		if u[i].update then
+			u[i]:update(dt)
+		end
+	end
+	--u[5]:update(dt)
+	--u[7]:update(dt)
+	--u[15]:update(dt)
+
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
