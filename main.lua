@@ -1,4 +1,3 @@
-units = require "unit"
 obj = require "constructor"
 tf = require "control"
 drwUnit = require "drawUnits"
@@ -10,13 +9,13 @@ function love.load()
 	u = {}
 	for i = 1, 15 do
 		if i == 1 then
-			u[#u+1] = units.createWall(300, 200, 20, 360)
+			u[#u+1] = obj.createWall(300, 200, 20, 360)
 		elseif i == 2 then
-			u[#u+1] = units.createWall(i * 500, 200, 20, 380)
+			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
 		elseif i == 3 then
-			u[#u+1] = units.createWall(300, 180, 720, 20)
+			u[#u+1] = obj.createWall(300, 180, 720, 20)
 		elseif i == 4 then
-			u[#u+1] = units.createWall(300, 560, 620, 20)
+			u[#u+1] = obj.createWall(300, 560, 620, 20)
 		elseif i == 5 then
 			u[#u+1] = obj.createThief (x, y, 15)
 		elseif i == 6 then
@@ -30,13 +29,13 @@ function love.load()
 		elseif i == 10 then
 			u[#u+1] = obj.createDoor (890, 535, 25, 25)
 		elseif i == 11 then
-			u[#u+1] = units.createWall(100, 20, 20, 670)
+			u[#u+1] = obj.createWall(100, 20, 20, 670)
 		elseif i == 12 then
-			u[#u+1] = units.createWall(100, 0, 1100, 20)
+			u[#u+1] = obj.createWall(100, 0, 1100, 20)
 		elseif i == 13 then
-			u[#u+1] = units.createWall(250, 670, 970, 20)
+			u[#u+1] = obj.createWall(250, 670, 970, 20)
 		elseif i == 14 then
-			u[#u+1] = units.createWall(1200, 0, 20, 670)
+			u[#u+1] = obj.createWall(1200, 0, 20, 670)
 		elseif i == 15 then
 			u[#u+1] = obj.createMovement (120, 20, 180, 650)
 		end
@@ -45,6 +44,13 @@ function love.load()
 	i = 255
 end
 function love.draw()
+	--cam:draw(function(l,t,w,h)
+	--	for i = 1,#units do
+	--		units[i]:draw()
+	--	end
+	--end)
+	--love.graphics.print(units[4].x .. " " .. units[4].y .. "\n" .. love.mouse.getX() ..
+	--" " .. love.mouse.getY(), 100, 100)
 	for i=1,#u do
 		u[i]:draw()
 	end
