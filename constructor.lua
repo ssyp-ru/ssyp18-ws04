@@ -1,4 +1,5 @@
 con = require "control"
+coll = require "collision"
 drawUnits = require "drawUnits"
 local function createWall(x1,y1,w1,h1)
 	maxid = maxid + 1
@@ -8,7 +9,7 @@ local function createWall(x1,y1,w1,h1)
 		kind = "wall",
 		subKind = " ",
 		id = maxid,
-		w = w1, h = h1, r = 0,
+		w = w1, h = h1,
 		name = "wall"..maxid,
 		update = wall_update,
 		draw = drawUnits.wall
@@ -18,7 +19,6 @@ end
 local function wall_update(dt)
 end
 local function updateAnimal(dt)
-	drawUnits.animal (animal)
 end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
@@ -27,7 +27,7 @@ local function createAnimal(x,y,r)
 		subkind='none',
 		id=maxid,
 		draw=drawUnits.animal,
-		update=updateAnimal,
+		update=updateAnimal(),
 		x=x,
 		y=y,
 		angel=0,
@@ -53,8 +53,14 @@ local function createThief(x,y,r)
 	}
 	return t
 end
-local function updateMovement(dt)
-	drawUnits.movement (movement, w, h)
+local function updateMovement(self,dt)
+	for i = 1, #u do
+		if u[i].kind == "human" and coll.obj2obj(u[i],self) then
+			self.state = true
+		else
+			self.state = false
+		end
+	end
 end
 local function createMovement(x,y, w, h)
 	maxid = maxid + 1
@@ -62,18 +68,18 @@ local function createMovement(x,y, w, h)
 		kind='sensor',
 		subkind='movement',
 		id=maxid,
+		state = false,
 		draw=drawUnits.movement,
 		update=updateMovement,
 		x=x,
 		y=y,
 		w=w,
 		h=h,
-		angel=0
+		angle=0
 	}
 	return t
 end
 local function updateNoise(dt)
-	drawUnits.noise (noise, w, h)
 end
 local function createNoise(x,y,w,h)
 	maxid = maxid + 1
@@ -87,18 +93,17 @@ local function createNoise(x,y,w,h)
 		y=y,
 		w=w,
 		h=h,
-		angel=0
+		angle=0
 	}
 	return t
 end
 local function updateDoor(dt)
-	drawUnits.door (door)
-	for i=1,#u do 
-		if u[i].kind=='animal' or u[i].kind=='human' then
-			if rect2circle (self, u[i])==true then
-			end
-		end
-	end
+	--for i=1,#u do 
+	--	if u[i].kind=='animal' or u[i].kind=='human' then
+	--		if rect2circle (self, u[i])==true then
+	--		end
+	--	end
+	--end
 end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
@@ -112,12 +117,11 @@ local function createDoor(x,y,w,h)
 		y=y,
 		w=w,
 		h=h,
-		angel=0
+		angle=0
 	}
 	return t
 end
 local function updateLight(dt)
-	drawUnits.light (light)
 end
 local function createLight(x,y)
 	maxid = maxid + 1

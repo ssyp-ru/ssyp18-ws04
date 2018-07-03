@@ -1,4 +1,32 @@
 --Version 1.1
+local function obj2obj (obj1, obj2)
+	if obj1.r == nil then
+		if obj2.r == nil then
+			if obj1.h == nil then
+				if obj2.h == nil then
+					return dot2dot(obj1, obj2)
+				else
+					return dot2rect(obj1, obj2)
+				end
+			else
+				if obj2.h == nil then
+					return dot2rect(obj1, obj2)
+				else
+					return dot2dot(obj1, obj2)
+				end
+			end
+			return rect2rect(obj1, obj2)
+		else	
+			return rect2circle(obj2, obj1)
+		end
+	else
+		if obj2.r == nil then
+			return rect2circle(obj1,obj2)
+		else
+			return circle2circle(obj1, obj2)
+		end
+	end
+end
 local function circle2circle(circle1, circle2)
 	if (math.sqrt((circle1.x-circle2.x)*(circle1.x-circle2.x)+(circle1.y-circle2.y)*(circle1.y-circle2.y))) 
 	<= circle1.r + circle2.r then
@@ -44,5 +72,4 @@ local function dot2circle (dot, circle)
 	end
 end
 
-return {dot2dot = dot2dot, dot2rect = dot2rect, circle2rect = circle2rect,
-circle2circle = circle2circle, rect2rect = rect2rect, rect2circle=rect2circle, dot2circle = dot2circle}
+return {obj2obj = obj2obj} 
