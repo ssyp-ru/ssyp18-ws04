@@ -33,7 +33,7 @@ function love.load()
 		elseif i == 5 then
 			u[#u+1] = obj.createThief (x, y, 15)
 		elseif i == 6 then
-			u[#u+1] = obj.createAnimal (anX,anY,10)
+		--	u[#u+1] = obj.createAnimal (anX,anY,10)
 		elseif i == 7 then
 			u[#u+1] = obj.createMovement (300, 20, 900, 160)
 		elseif i == 8 then
@@ -55,7 +55,6 @@ function love.load()
 		end
 	end
 	love.graphics.setBackgroundColor{255,255,255}
-	i = 255
 end
 
 function love.draw()
