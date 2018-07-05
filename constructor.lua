@@ -113,9 +113,13 @@ local function createNoise(x,y,w,h)
 	return t
 end
 local function updateDoor(self , dt)
-	for i=1,#u do 
-		if u[i].kind=='animal' or u[i].kind=='human' then
-			if coll.obj2obj(self, u[i])== true then
+	for i = 1, #u do
+		if (u[i].kind == "human" or u[i].kind == "animal")  then
+			if coll.obj2obj(u[i],self) then
+				self.state = true
+				break
+			else
+				self.state = false
 			end
 		end
 	end
@@ -132,27 +136,41 @@ local function createDoor(x,y,w,h)
 		y=y,
 		w=w,
 		h=h,
-		angle=0
+		angle=0,
+		state=false
 	}
 	return t
 end
-local function updateLight(dt)
+local function updateLazer(self,dt)
+		for i = 1, #u do
+		if (u[i].kind == "human" or u[i].kind == "animal")  then
+			if coll.obj2obj(u[i],self) then
+				self.state = true
+				break
+			else
+				self.state = false
+			end
+		end
+	end
 end
-local function createLight(x,y)
+local function createLazer(x,y,w,h)
 	maxid = maxid + 1
 	local t = {
 		kind='sensor',
-		subkind='light',
+		subkind='lazer',
 		id=maxid,
-		draw=drawUnits.light,
-		update=updateLight,
+		draw=drawUnits.lazer,
+		update=updateLazer,
 		x=x,
 		y=y,
-		angel=0
+		angel=0,
+		state=false,
+		h=h,
+		w=w
 	}
 	return t
 end
---[[updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
-updateLight=updateLight,updateDoor=updateDoor,updateAnimal=updateAnimal]]--
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
-	createNoise=createNoise,createDoor=createDoor,createLight=createLight,createWall = createWall}
+	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
+	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
+updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal}
