@@ -71,8 +71,3 @@ function love.update(dt)
 		love.event.quit()
 	end
 end
-
-function love.mousepressed( x, y, button, isTouch )
-	editWall(x,y)
-	print(x,y)
-end
