@@ -41,13 +41,13 @@ function love.load()
 		elseif i == 10 then
 			u[#u+1] = obj.createDoor (920, 555, 25, 25)
 		elseif i == 11 then
-			u[#u+1] = units.createWall(100, 20, 20, 670)
+			u[#u+1] = obj.createWall(100, 20, 20, 670)
 		elseif i == 12 then
-			u[#u+1] = units.createWall(100, 0, 1100, 20)
+			u[#u+1] = obj.createWall(100, 0, 1100, 20)
 		elseif i == 13 then
-			u[#u+1] = units.createWall(250, 670, 970, 20)
+			u[#u+1] = obj.createWall(250, 670, 970, 20)
 		elseif i == 14 then
-			u[#u+1] = units.createWall(1200, 0, 20, 670)
+			u[#u+1] = obj.createWall(1200, 0, 20, 670)
 		elseif i == 15 then
 			u[#u+1] = obj.createMovement (120, 20, 180, 650)
 		end
@@ -62,6 +62,7 @@ function love.draw()
 			end
 	end)
 end
+init:init(u)
 function love.update(dt)
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
@@ -72,4 +73,5 @@ function love.update(dt)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
+	init:updateLog()
 end
