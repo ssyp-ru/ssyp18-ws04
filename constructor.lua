@@ -104,7 +104,7 @@ local function updateNoise(self ,dt)
 				AllNoize = AllNoize + u[i].noize
 			end
 		end
-		if AllNoize > 100 then
+		if AllNoize > 150 then
 			self.state = true
 			break
 		else
