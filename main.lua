@@ -3,7 +3,6 @@ obj = require "constructor"
 tf = require "control"
 drwUnit = require "drawUnits"
 camera = require 'gamera'
-init = require 'logging'
 camera = require "gamera"
 
 local time = 7
