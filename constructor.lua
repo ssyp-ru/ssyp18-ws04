@@ -67,13 +67,6 @@ local function createThief(x,y,r)
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
---		if u[i].kind == "animal" then
---			if coll.obj2obj(u[i],self) then
---				self.state = true
---			else
---				self.state = false
---			end
---		end
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true

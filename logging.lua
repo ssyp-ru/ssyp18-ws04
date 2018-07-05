@@ -13,8 +13,8 @@ local function checkState()
 end
 local function updateLog ()
 	for i=1, #log do
-		if log[i].oldstate~=log[i].sensor.state then
-			print ('IZMEN')
+		if log[i].oldstate ~= log[i].sensor.state then
+			print ('DETECT')
 		else
 			print('not')
 		end
