@@ -68,7 +68,7 @@ end
 local function updateMovement(dt)
 	--drawUnits.movement (movement, w, h)
 end
-local function createMovement(x,y, w, h)
+local function createMovement(x,y,w,h)
 	maxid = maxid + 1
 	local t = {
 		kind='sensor',
