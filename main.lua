@@ -64,6 +64,13 @@ function love.draw()
 				u[i]:draw()
 			end
 		end)
+	if love.mouse.isDown(2) and flag then
+		mX,mY = love.mouse.getX(), love.mouse.getY()
+		mX,mY = cam:toWorld(mX,mY)
+		local w = -(edit.x1 - mX) 
+		local h = -(edit.y1 - mY)
+		drwUnit.editWall(edit.x1,edit.y1,w,h)
+	end
 end 
 
 function love.update(dt)
@@ -87,6 +94,7 @@ function love.mousepressed(mX, mY, button, isTouch)
 		mX,mY = cam:toWorld(mX,mY)
 		edit.x1 = mX
 		edit.y1 = mY
+		flag = true
 	end
 end
 function love.mousereleased(mX, mY, button)
@@ -95,5 +103,6 @@ function love.mousereleased(mX, mY, button)
 		edit.x2 = mX
 		edit.y2 = mY
 		editWall()
+		flag = false
 	end
 end

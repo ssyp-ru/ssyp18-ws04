@@ -1,4 +1,8 @@
---Version 1.0
+--Version 1.1
+local function editWall(x,y,w,h)
+	love.graphics.setColor (141, 107, 33)
+	love.graphics.rectangle ("line", x, y, w, h)
+end
 local function wall (self)
 	love.graphics.setColor (141, 107, 33)
 	love.graphics.rectangle ("fill", self.x, self.y, self.w, self.h)
@@ -56,5 +60,5 @@ local function lazer (self)
 		self.x + 20, self.y + 12, self.x + 20, self.y + 20, self.x + 5, self.y + 20)
 end
 
-return {wall = wall, thief = thief, animal = animal, movement = movement,
+return {editWall = editWall, wall = wall, thief = thief, animal = animal, movement = movement,
 	noise = noise, door = door, lazer = lazer}
