@@ -1,6 +1,9 @@
 local function init(u)
-	local days = os.date (day)
-	local months = os.date (month)
+	prov = true
+	days = os.date (day)
+	months = os.date (month)
+	hours = os.date (hour)
+	mins = os.date (min)
 	f = io.open('logs.txt', 'a')
 	log={}
 	for i=1, #u do
@@ -19,15 +22,19 @@ f:write('zapis')
 f:flush()
 f:close()--]]
 local function updateLog (dt)
-	--[[for i=1, #log do
-		f:write(tostring(log[i].oldstate)..'\n'..log[i].sensor.subkind..'\n')
-	end--]]
-	for i=1, #log do
-		if log[i].oldstate ~= log[i].sensor.state then
-			f:write(log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
+	if prov then
+		f:write(months..'============\n')
+		prov = false
+		for i=1, #log do
+			f:write('#'..i..'	'..log[i].sensor.subkind..'\n')
 		end
 	end
-	f:write()
+	for i=1, #log do
+		if log[i].oldstate ~= log[i].sensor.state then
+			f:write('#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
+			log[i].oldstate = log[i].sensor.state
+		end
+	end
 end
 
 return {init=init,checkState=checkState,updateLog=updateLog}
