@@ -8,8 +8,6 @@ local function conThief (self, dt)
 	mx,my = cam:toWorld (mx,my)
 	local oldx = self.x
 	local oldy = self.y
-<<<<<<< HEAD
-<<<<<<< HEAD
 	if self.x > mx then
 		self.x = self.x - 1000 * dt
 		for i = 1, #u do
@@ -46,12 +44,10 @@ local function conThief (self, dt)
 			if u[i].kind == "wall" then
 				if coll.obj2obj(self,u[i]) == true then
 					self.y = oldy
-=======
-	print (self.x,self.y)
-=======
-	--print (self.x,self.y)
->>>>>>> b2ab71a1e0f61279624638c7853c95a51fa5a849
---	if self.x > mx then
+				end
+			end
+		end
+	end
 	if gx == nil then
 		gx = mx
 	end
@@ -102,7 +98,6 @@ local function conThief (self, dt)
 					if coll.rect2circle(self,u[i]) == true then
 						self.y = oldy
 					end
->>>>>>> c81b2cb6e0758fc04bdc5c9221720393c6864375
 				end
 			end
 		end

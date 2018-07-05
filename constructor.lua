@@ -10,7 +10,7 @@ local function createWall(x1,y1,w1,h1)
 		kind = "wall",
 		subKind = " ",
 		id = maxid,
-		w = w1, h = h1,
+		w = w1, h = h1,r = nil,
 		name = "wall"..maxid,
 		update = wall_update,
 		draw = drawUnits.wall
@@ -37,7 +37,7 @@ local function createAnimal(x,y,r)
 		subkind='none',
 		id=maxid,
 		draw=drawUnits.animal,
-		update=updateAnimal(),
+		update=updateAnimal,
 		x=x,
 		y=y,
 		angel=0,
@@ -109,10 +109,10 @@ local function createNoise(x,y,w,h)
 	}
 	return t
 end
-local function updateDoor(dt)
+local function updateDoor(self , dt)
 	for i=1,#u do 
 		if u[i].kind=='animal' or u[i].kind=='human' then
-			if rect2circle (self, u[i])==true then
+			if coll.obj2obj(self, u[i])== true then
 			end
 		end
 	end

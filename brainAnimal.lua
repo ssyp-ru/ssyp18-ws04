@@ -8,7 +8,7 @@ local function brainAnimal (self, dt)
 				self.x = self.x - 900 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
-						if coll.rect2circle(self,u[i]) == true then
+						if coll.obj2obj(self,u[i]) == true then
 							self.x = oldx
 						end
 					end
@@ -18,7 +18,7 @@ local function brainAnimal (self, dt)
 				self.x = self.x + 900 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
-						if coll.rect2circle(self,u[i]) == true then
+						if coll.obj2obj(self,u[i]) == true then
 							self.x = oldx
 						end
 					end
@@ -28,7 +28,7 @@ local function brainAnimal (self, dt)
 				self.y = self.y - 900 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
-						if coll.rect2circle(self,u[i]) == true then
+						if coll.obj2obj(self,u[i]) == true then
 							self.y = oldy
 						end
 					end
@@ -38,7 +38,7 @@ local function brainAnimal (self, dt)
 				self.y = self.y + 900 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
-						if coll.rect2circle(self,u[i]) == true then
+						if coll.obj2obj(self,u[i]) == true then
 							self.y = oldy
 						end
 					end
