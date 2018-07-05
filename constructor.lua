@@ -53,7 +53,7 @@ end
 local function createThief(x,y,r)
 	maxid = maxid + 1
 	local t = {
-		kind = 'human',
+		kind = "human",
 		subkind = 'thief',
 		id = maxid,
 		draw = drawUnits.thief,
@@ -67,14 +67,24 @@ local function createThief(x,y,r)
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
-		if u[i].kind == "human" and coll.obj2obj(u[i],self) then
-			self.state = true
-		else
-			self.state = false
+--		if u[i].kind == "animal" then
+--			if coll.obj2obj(u[i],self) then
+--				self.state = true
+--			else
+--				self.state = false
+--			end
+--		end
+		if (u[i].kind == "human" or u[i].kind == "animal")  then
+			if coll.obj2obj(u[i],self) then
+				self.state = true
+				break
+			else
+				self.state = false
+			end
 		end
 	end
 end
-local function createMovement(x,y, w, h)
+local function createMovement(x,y,w,h)
 	maxid = maxid + 1
 	local t = {
 		kind='sensor',

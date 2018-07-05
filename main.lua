@@ -1,8 +1,9 @@
 brAnimal = require "brainAnimal"
-units = require "unit"
 obj = require "constructor"
 tf = require "control"
+init = require 'logging'
 drwUnit = require "drawUnits"
+camera = require 'gamera'
 camera = require "gamera"
 require "edit"
 
@@ -18,17 +19,18 @@ function love.load()
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
+	
 	--love.window.setMode(1366, 768, {})
 	u = {}
 	for i = 1, 15 do
 		if i == 1 then
-			u[#u+1] = units.createWall(300, 200, 20, 360)
+			u[#u+1] = obj.createWall(300, 200, 20, 360)
 		elseif i == 2 then
-			u[#u+1] = units.createWall(i * 500, 200, 20, 380)
+			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
 		elseif i == 3 then
-			u[#u+1] = units.createWall(300, 180, 720, 20)
+			u[#u+1] = obj.createWall(300, 180, 720, 20)
 		elseif i == 4 then
-			u[#u+1] = units.createWall(300, 560, 620, 20)
+			u[#u+1] = obj.createWall(300, 560, 620, 20)
 		elseif i == 5 then
 			u[#u+1] = obj.createThief (x, y, 15)
 		elseif i == 6 then
@@ -42,13 +44,13 @@ function love.load()
 		elseif i == 10 then
 			u[#u+1] = obj.createDoor (920, 555, 25, 25)
 		elseif i == 11 then
-			u[#u+1] = units.createWall(100, 20, 20, 670)
+			u[#u+1] = obj.createWall(100, 20, 20, 670)
 		elseif i == 12 then
-			u[#u+1] = units.createWall(100, 0, 1100, 20)
+			u[#u+1] = obj.createWall(100, 0, 1100, 20)
 		elseif i == 13 then
-			u[#u+1] = units.createWall(250, 670, 970, 20)
+			u[#u+1] = obj.createWall(250, 670, 970, 20)
 		elseif i == 14 then
-			u[#u+1] = units.createWall(1200, 0, 20, 670)
+			u[#u+1] = obj.createWall(1200, 0, 20, 670)
 		elseif i == 15 then
 			u[#u+1] = obj.createMovement (120, 20, 180, 650)
 		end
@@ -64,7 +66,7 @@ function love.draw()
 			end
 		end)
 end
-
+init:init(u)
 function love.update(dt)
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
@@ -91,4 +93,5 @@ function love.mousereleased(mX, mY, button)
 		edit.y2 = mY
 		editWall()
 	end
+	init:updateLog()
 end
