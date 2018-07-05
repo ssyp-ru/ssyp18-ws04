@@ -1,22 +1,23 @@
 local function init(u)
 	log={}
+	print("log", #u)
 	for i=1, #u do
 		if u[i].kind == 'sensor' then
 			log[#log+1]={
 				oldstate=u[i].state,
 				sensor=u[i]
 			}
+			print(i)
 		end
 	end
 end
 local function checkState()
 end
-local function updateLog ()
+local function updateLog (dt)
 	for i=1, #log do
 		if log[i].oldstate ~= log[i].sensor.state then
 			print ('DETECT')
-		else
-			print('not')
+			break
 		end
 	end
 end

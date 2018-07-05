@@ -1,7 +1,7 @@
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
-init = require 'logging'
+logging = require 'logging'
 drwUnit = require "drawUnits"
 camera = require 'gamera'
 camera = require "gamera"
@@ -11,7 +11,6 @@ local time = 7
 local time1 = 20
 local anX = 700
 local anY = 750
-
 x = 1300
 y = 300
 
@@ -56,7 +55,7 @@ function love.load()
 		end
 	end
 	love.graphics.setBackgroundColor{255,255,255}
-	i = 255
+	logging.init(u)
 end
 
 function love.draw()
@@ -65,7 +64,8 @@ function love.draw()
 				u[i]:draw()
 			end
 		end)
-end
+end 
+
 function love.update(dt)
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
@@ -76,11 +76,13 @@ function love.update(dt)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
-	init:init(u)
-	init:updateLog()
+	logging.updateLog(dt)
 end
 
 function love.mousepressed(mX, mY, button, isTouch)
+	if button == 1 then
+		gx, gy = cam:toWorld(mX,mY)
+	end
 	if button == 2 then
 		mX,mY = cam:toWorld(mX,mY)
 		edit.x1 = mX

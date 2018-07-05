@@ -5,7 +5,7 @@ local function brainAnimal (self, dt)
 	for i = 1, 15 do
 		if u[i].subkind == 'thief' then
 			if self.x > u[i].x then
-				self.x = self.x - 300 * dt
+				self.x = self.x - 50 * dt
 				self.noize = self.noize + 15 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
@@ -16,7 +16,7 @@ local function brainAnimal (self, dt)
 				end
 			end
 			if self.x < u[i].x then
-				self.x = self.x + 300 * dt
+				self.x = self.x + 50 * dt
 				self.noize = self.noize + 15 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
@@ -27,7 +27,7 @@ local function brainAnimal (self, dt)
 				end
 			end
 			if self.y > u[i].y then
-				self.y = self.y - 300 * dt
+				self.y = self.y - 50 * dt
 				self.noize = self.noize + 15 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
@@ -38,7 +38,7 @@ local function brainAnimal (self, dt)
 				end
 			end
 			if self.y < u[i].y then
-				self.y = self.y + 300 * dt
+				self.y = self.y + 50 * dt
 				self.noize = self.noize + 15 * dt
 				for i = 1, #u do
 					if u[i].kind == "wall" then
