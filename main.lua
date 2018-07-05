@@ -1,6 +1,7 @@
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
+init = require 'logging'
 drwUnit = require "drawUnits"
 camera = require 'gamera'
 camera = require "gamera"
@@ -72,4 +73,5 @@ function love.update(dt)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
+	init:updateLog()
 end
