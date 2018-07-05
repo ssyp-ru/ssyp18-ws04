@@ -37,9 +37,9 @@ function love.load()
 		elseif i == 8 then
 			u[#u+1] = obj.createNoise (320, 200, 680, 360)
 		elseif i == 9 then
-			u[#u+1] = obj.createLight (974, 200)
+			u[#u+1] = obj.createLazer (974, 200,1,200)
 		elseif i == 10 then
-			u[#u+1] = obj.createDoor (920, 555, 25, 25)
+			u[#u+1] = obj.createDoor (920, 555, 85, 25)
 		elseif i == 11 then
 			u[#u+1] = obj.createWall(100, 20, 20, 670)
 		elseif i == 12 then

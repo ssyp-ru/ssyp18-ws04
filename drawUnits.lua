@@ -43,12 +43,13 @@ local function door (self)
 	love.graphics.rectangle ('fill', self.x, self.y, self.w, self.h)
 	love.graphics.setColor (255, 0, 0, 255)
 end
-local function light (self)
+local function lazer (self)
 	love.graphics.setColor (255, 0, 0)
 	love.graphics.rectangle ("line", self.x, self.y, 25, 25)
+	love.graphics.line (self.x+12, self.y+25,self.w+self.x+12,self.h+self.y)
 	love.graphics.line (self.x + 20, self.y + 5, self.x + 5, self.y + 5, self.x + 5, self.y + 12,
 		self.x + 20, self.y + 12, self.x + 20, self.y + 20, self.x + 5, self.y + 20)
 end
 
 return {wall = wall, thief = thief, animal = animal, movement = movement,
-	noise = noise, door = door, light = light}
+	noise = noise, door = door, lazer = lazer}
