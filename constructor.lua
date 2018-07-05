@@ -25,7 +25,7 @@ local function updateAnimal(animal, dt)
 		animal.delay1 = animal.delay1 - dt
 		brAnimal.brainAnimal (animal, dt, x, y)
 		if animal.delay1 < 0 then
-			animal.delay = 4
+			animal.delay = 3
 			animal.delay1 = 20
 		end
 	end
@@ -38,9 +38,9 @@ local function createAnimal(x,y,r)
 		id=maxid,
 		draw=drawUnits.animal,
 		update=updateAnimal,
-		x=x,
-		y=y,
+		x=x, y=y,
 		angel=0,
+		noize = 0,
 		r=r,
 		delay = 4,
 		delay1 = 20
@@ -60,20 +60,14 @@ local function createThief(x,y,r)
 		update = updateThief,
 		x = x,
 		y = y,
-		angel = 0,
+		angle = 0,
 		r = r,
+		noize = 0
 	}
 	return t
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
---		if u[i].kind == "animal" then
---			if coll.obj2obj(u[i],self) then
---				self.state = true
---			else
---				self.state = false
---			end
---		end
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
@@ -101,7 +95,22 @@ local function createMovement(x,y,w,h)
 	}
 	return t
 end
-local function updateNoise(dt)
+local function updateNoise(self ,dt)
+	local AllNoize
+	for i = 1, #u do
+		AllNoize = 0
+		if u[i].kind == "human" or u[i].kind == "animal" then
+			if coll.obj2obj(u[i], self) then
+				AllNoize = AllNoize + u[i].noize
+			end
+		end
+		if AllNoize > 15 then
+			self.state = true
+			break
+		else
+			self.state = false
+		end
+	end
 end
 local function createNoise(x,y,w,h)
 	maxid = maxid + 1
@@ -111,11 +120,10 @@ local function createNoise(x,y,w,h)
 		id=maxid,
 		draw=drawUnits.noise,
 		update=updateNoise,
-		x=x,
-		y=y,
-		w=w,
-		h=h,
-		angle=0
+		x=x, y=y,
+		w=w, h=h,
+		angle=0,
+		state = false
 	}
 	return t
 end

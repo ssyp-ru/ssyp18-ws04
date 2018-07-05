@@ -15,9 +15,9 @@ local function conThief (self, dt)
 		gy = my
 	end
 	if down then
-		--print (self.x,self.y)
 		if self.x > gx then
-			self.x = self.x - 1000 * dt
+			self.x = self.x - 400 * dt
+			self.noize = self.noize + 100 * dt
 			for i = 1, #u do
 				if u[i].kind == "wall" then
 					if coll.obj2obj(self,u[i]) == true then
@@ -26,10 +26,9 @@ local function conThief (self, dt)
 				end
 			end
 		end
---	if self.x < mx then
-
 		if self.x < gx then
-			self.x = self.x + 1000 * dt
+			self.x = self.x + 400 * dt
+			self.noize = self.noize + 100 * dt
 			for i = 1, #u do
 				if u[i].kind == "wall" then
 					if coll.obj2obj(self,u[i]) == true then
@@ -38,10 +37,9 @@ local function conThief (self, dt)
 				end
 			end
 		end
---	if self.y > my then
-
 		if self.y > gy then
-			self.y = self.y - 1000 * dt
+			self.y = self.y - 400 * dt
+			self.noize = self.noize + 100 * dt
 			for i = 1, #u do
 				if u[i].kind == "wall" then
 					if coll.obj2obj(self,u[i]) == true then
@@ -50,9 +48,9 @@ local function conThief (self, dt)
 				end
 			end
 		end
---	if self.y < my then
 		if self.y < gy then
-			self.y = self.y + 1000 * dt
+			self.y = self.y + 400 * dt
+			self.noize = self.noize + 100 * dt
 			for i = 1, #u do
 				if u[i].kind == "wall" then
 					if coll.obj2obj(self,u[i]) == true then
@@ -65,6 +63,8 @@ local function conThief (self, dt)
 			self.x = oldx
 			self.y = oldy
 		end
+	else
+		self.noize =  0
 	end
 end
 return {conThief = conThief}

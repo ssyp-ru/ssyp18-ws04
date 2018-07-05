@@ -31,8 +31,13 @@ local function noise (self)
 	love.graphics.line (self.x + 5, self.y + 23, self.x + 5, self.y + 3, self.x + 20, self.y + 23,
 		self.x + 20, self.y + 3)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.rectangle ('fill', self.x, self.y, self.w, self.h)
+	if self.state then
+		love.graphics.rectangle ('fill', self.x, self.y, self.w, self.h)
+		love.graphics.setColor (255, 0, 0, 255)
+	else
+	love.graphics.rectangle ('line', self.x, self.y, self.w, self.h)
 	love.graphics.setColor (255, 0, 0, 255)
+	end
 end
 local function door (self)
 	love.graphics.setColor (255, 0, 0)
