@@ -9,6 +9,7 @@ local function conThief (self, dt)
 	local oldx = self.x
 	local oldy = self.y
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if self.x > mx then
 		self.x = self.x - 1000 * dt
 		for i = 1, #u do
@@ -47,6 +48,9 @@ local function conThief (self, dt)
 					self.y = oldy
 =======
 	print (self.x,self.y)
+=======
+	--print (self.x,self.y)
+>>>>>>> b2ab71a1e0f61279624638c7853c95a51fa5a849
 --	if self.x > mx then
 	if gx == nil then
 		gx = mx
@@ -55,7 +59,7 @@ local function conThief (self, dt)
 		gy = my
 	end
 	if down then
-		print (self.x,self.y)
+		--print (self.x,self.y)
 		if self.x > gx then
 			self.x = self.x - 1000 * dt
 			for i = 1, #u do

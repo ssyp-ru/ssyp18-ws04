@@ -1,5 +1,5 @@
 --Version 1.1
-local function obj2obj (obj1, obj2)
+local function obj2obj (obj 	1, obj2)
 	if obj1.r == nil then
 		if obj2.r == nil then
 			if obj1.h == nil then
