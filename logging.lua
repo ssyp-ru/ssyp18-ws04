@@ -7,7 +7,7 @@ local function init(u)
 				oldstate=u[i].state,
 				sensor=u[i]
 			}
-			print(i)
+			--print(i)
 		end
 	end
 end
