@@ -19,7 +19,7 @@ function love.load()
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
-	
+
 	--love.window.setMode(1366, 768, {})
 	u = {}
 	for i = 1, 15 do
@@ -66,7 +66,6 @@ function love.draw()
 			end
 		end)
 end
-init:init(u)
 function love.update(dt)
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
@@ -77,6 +76,8 @@ function love.update(dt)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
+	init:init(u)
+	init:updateLog()
 end
 
 function love.mousepressed(mX, mY, button, isTouch)
@@ -93,5 +94,4 @@ function love.mousereleased(mX, mY, button)
 		edit.y2 = mY
 		editWall()
 	end
-	init:updateLog()
 end

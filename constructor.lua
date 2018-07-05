@@ -142,7 +142,7 @@ local function createDoor(x,y,w,h)
 	return t
 end
 local function updateLazer(self,dt)
-		for i = 1, #u do
+	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
@@ -173,4 +173,4 @@ end
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
 	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
 	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
-updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal}
+	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal}
