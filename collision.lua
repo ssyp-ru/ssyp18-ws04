@@ -43,6 +43,19 @@ local function dot2circle (dot, circle)
 		return false
 	end
 end
-
-return {dot2dot = dot2dot, dot2rect = dot2rect, circle2rect = circle2rect,
-circle2circle = circle2circle, rect2rect = rect2rect, rect2circle=rect2circle, dot2circle = dot2circle}
+local function obj2obj (obj1, obj2)
+	if obj1.kind == "human" or obj1.kind == "animal" then
+		if obj2.kind == "human" or obj2.kind == "animal" then
+			return circle2circle(obj1, obj2)
+		else	
+			return rect2circle(obj1, obj2)
+		end
+	else
+		if obj2.kind == "human" or obj2.kind == "animal" then
+			return rect2circle(obj2, obj1)
+		else	
+			return rect2rect(obj1, obj2)
+		end
+	end
+end
+return {obj2obj = obj2obj} 

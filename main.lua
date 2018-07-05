@@ -1,10 +1,11 @@
 brAnimal = require "brainAnimal"
-units = require "unit"
 obj = require "constructor"
 tf = require "control"
 drwUnit = require "drawUnits"
 camera = require 'gamera'
 init = require 'logging'
+camera = require "gamera"
+
 local time = 7
 local time1 = 20
 local anX = 700
@@ -15,17 +16,18 @@ function love.load()
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
+	
 	--love.window.setMode(1366, 768, {})
 	u = {}
 	for i = 1, 15 do
 		if i == 1 then
-			u[#u+1] = units.createWall(300, 200, 20, 360)
+			u[#u+1] = obj.createWall(300, 200, 20, 360)
 		elseif i == 2 then
-			u[#u+1] = units.createWall(i * 500, 200, 20, 380)
+			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
 		elseif i == 3 then
-			u[#u+1] = units.createWall(300, 180, 720, 20)
+			u[#u+1] = obj.createWall(300, 180, 720, 20)
 		elseif i == 4 then
-			u[#u+1] = units.createWall(300, 560, 620, 20)
+			u[#u+1] = obj.createWall(300, 560, 620, 20)
 		elseif i == 5 then
 			u[#u+1] = obj.createThief (x, y, 15)
 		elseif i == 6 then
@@ -54,16 +56,19 @@ function love.load()
 	i = 255
 end
 function love.draw()
-	cam:draw(function (l,t,w,h)
-			for i=1,#u do
+	cam:draw(function(l,t,w,h)
+			for i = 1,#u do
 				u[i]:draw()
 			end
-		end)
+	end)
 end
 function love.update(dt)
-	cam:setPosition(u[5].x, u[5].y)
-	u[6]:update (dt,u )
-	u[5]:update(dt, u)
+	cam:setPosition(u[5].x,u[5].y)
+	for i = 1, #u do 
+		if u[i].update then
+			u[i]:update(dt)
+		end
+	end
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
