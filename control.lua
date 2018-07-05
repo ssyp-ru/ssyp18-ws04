@@ -2,14 +2,14 @@ coll = require "collision"
 local function conThief (self, dt)
 	local mx = love.mouse.getX ()
 	local my = love.mouse.getY ()
-	mx,my = cam:toWorld(mx,my)
+	mx,my = cam:toWorld (mx,my)
 	local oldx = self.x
 	local oldy = self.y
 	if self.x > mx then
 		self.x = self.x - 1000 * dt
 		for i = 1, #u do
 			if u[i].kind == "wall" then
-				if coll.rect2circle(self,u[i]) == true then
+				if coll.obj2obj(self,u[i]) == true then
 					self.x = oldx
 				end
 			end
@@ -19,7 +19,7 @@ local function conThief (self, dt)
 		self.x = self.x + 1000 * dt
 		for i = 1, #u do
 			if u[i].kind == "wall" then
-				if coll.rect2circle(self,u[i]) == true then
+				if coll.obj2obj(self,u[i]) == true then
 					self.x = oldx
 				end
 			end
@@ -29,7 +29,7 @@ local function conThief (self, dt)
 		self.y = self.y - 1000 * dt
 		for i = 1, #u do
 			if u[i].kind == "wall" then
-				if coll.rect2circle(self,u[i]) == true then
+				if coll.obj2obj(self,u[i]) == true then
 					self.y = oldy
 				end
 			end
@@ -39,13 +39,13 @@ local function conThief (self, dt)
 		self.y = self.y + 1000 * dt
 		for i = 1, #u do
 			if u[i].kind == "wall" then
-				if coll.rect2circle(self,u[i]) == true then
+				if coll.obj2obj(self,u[i]) == true then
 					self.y = oldy
 				end
 			end
 		end
 	end
-	if self.x > mx - 5 and self.x < mx + 5 and self.y > my - 5 and self.y < my + 5 then
+	if self.x > mx - 10 and self.x < mx + 10 and self.y > my - 10 and self.y < my + 10 then
 		self.x = oldx
 		self.y = oldy
 	end
