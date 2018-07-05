@@ -4,13 +4,16 @@ obj = require "constructor"
 tf = require "control"
 drwUnit = require "drawUnits"
 camera = require "gamera"
+require "edit"
 
 local time = 7
 local time1 = 20
 local anX = 700
 local anY = 750
+
 x = 1300
 y = 300
+
 function love.load()
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
@@ -53,13 +56,15 @@ function love.load()
 	love.graphics.setBackgroundColor{255,255,255}
 	i = 255
 end
+
 function love.draw()
 	cam:draw(function(l,t,w,h)
 			for i = 1,#u do
 				u[i]:draw()
 			end
-	end)
+		end)
 end
+
 function love.update(dt)
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
@@ -69,5 +74,21 @@ function love.update(dt)
 	end
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
+	end
+end
+
+function love.mousepressed(mX, mY, button, isTouch)
+	if button == 2 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x1 = mX
+		edit.y1 = mY
+	end
+end
+function love.mousereleased(mX, mY, button)
+	if button == 2 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x2 = mX
+		edit.y2 = mY
+		editWall()
 	end
 end
