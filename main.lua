@@ -11,7 +11,6 @@ local time = 7
 local time1 = 20
 local anX = 700
 local anY = 750
-
 x = 1300
 y = 300
 
@@ -80,6 +79,9 @@ function love.update(dt)
 end
 
 function love.mousepressed(mX, mY, button, isTouch)
+	if button == 1 then
+		gx, gy = cam:toWorld(mX,mY)
+	end
 	if button == 2 then
 		mX,mY = cam:toWorld(mX,mY)
 		edit.x1 = mX
