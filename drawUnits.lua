@@ -18,11 +18,6 @@ local function movement (self)
 	love.graphics.line (self.x + 2, self.y + 23, self.x + 2, self.y + 3, self.x + 12, self.y + 12,
 		self.x + 22, self.y + 3, self.x + 22, self.y + 23)
 	love.graphics.setColor (255, 0, 0, 140)
-	if self.state == true then
-		love.graphics.print("true", 100, 100)
-	else
-		love.graphics.print("false", 100, 100)
-	end
 	if self.state then
 		love.graphics.rectangle ('fill', self.x, self.y, self.w, self.h)	
 	else
