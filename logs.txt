@@ -261,3 +261,11 @@
 #5 movement	false
 #5 movement	true
 #1 movement	false
+07/06/18 16:07:08============
+#1	movement
+#2	noise
+#3	lazer
+#4	door
+#5	movement
+#5 movement	true
+#5 movement	false
