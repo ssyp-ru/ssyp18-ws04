@@ -36,5 +36,5 @@ local function updateLog (dt)
 		end
 	end
 end
-
+--
 return {init=init,checkState=checkState,updateLog=updateLog}
