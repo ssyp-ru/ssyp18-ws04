@@ -68,9 +68,7 @@ function love.draw()
 	mX,mY = love.mouse.getX(), love.mouse.getY()
 	mX,mY = cam:toWorld(mX,mY)
 	love.graphics.setColor(255,0,0)
-	love.graphics.print(love.mouse.getX() .. " " .. love.mouse.getY()
-		.. "\n" .. mX .. " " .. mY .. "\n" .. edit.x1 .. " "
-		.. edit.y1  .. "\n" .. edit.x3 .. " " .. edit.y3,100,100)
+	--love.graphics.print(u[5].noize,100,100)
 end 
 
 function love.update(dt)
