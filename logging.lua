@@ -1,10 +1,7 @@
+local prov = true
+local months = os.date (month)
+local f = io.open('logs.txt', 'a')
 local function init(u)
-	prov = true
-	days = os.date (day)
-	months = os.date (month)
-	hours = os.date (hour)
-	mins = os.date (min)
-	f = io.open('logs.txt', 'a')
 	log={}
 	for i=1, #u do
 		if u[i].kind == 'sensor' then
@@ -36,5 +33,5 @@ local function updateLog (dt)
 		end
 	end
 end
---
+
 return {init=init,checkState=checkState,updateLog=updateLog}
