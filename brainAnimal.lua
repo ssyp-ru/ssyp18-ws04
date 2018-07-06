@@ -4,6 +4,7 @@ local function brainAnimal (self, dt)
 	local oldy = self.y
 	for i = 1, 15 do
 		if u[i].subkind == 'thief' then
+			print("cat thief", u[i].x, u[i].y )
 			if self.x > u[i].x then
 				self.x = self.x - 50 * dt
 				--self.noize = self.noize + 15 * dt

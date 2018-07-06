@@ -1,6 +1,6 @@
 local prov = true
 local months = os.date (month)
-local f = io.open('logs.txt', 'a')
+local fLog = io.open('logs.txt', 'a')
 local function init(u)
 	log={}
 	for i=1, #u do
@@ -20,15 +20,15 @@ f:flush()
 f:close()--]]
 local function updateLog (dt)
 	if prov then
-		f:write(months..'============\n')
+		fLog:write(months..'============\n')
 		prov = false
 		for i=1, #log do
-			f:write('#'..i..'	'..log[i].sensor.subkind..'\n')
+			fLog:write('#'..i..'	'..log[i].sensor.subkind..'\n')
 		end
 	end
 	for i=1, #log do
 		if log[i].oldstate ~= log[i].sensor.state then
-			f:write('#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
+			fLog:write('#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
 			log[i].oldstate = log[i].sensor.state
 		end
 	end
