@@ -4,7 +4,6 @@ tf = require "control"
 logging = require 'logging'
 drwUnit = require "drawUnits"
 camera = require 'gamera'
-camera = require "gamera"
 require "edit"
 
 local time = 7
@@ -57,13 +56,21 @@ function love.load()
 	love.graphics.setBackgroundColor{255,255,255}
 	logging.init(u)
 end
-
 function love.draw()
 	cam:draw(function(l,t,w,h)
 			for i = 1,#u do
 				u[i]:draw()
 			end
+			if love.mouse.isDown(2) then
+				editDrawWall()
+			end
 		end)
+	mX,mY = love.mouse.getX(), love.mouse.getY()
+	mX,mY = cam:toWorld(mX,mY)
+	love.graphics.setColor(255,0,0)
+	love.graphics.print(love.mouse.getX() .. " " .. love.mouse.getY()
+		.. "\n" .. mX .. " " .. mY .. "\n" .. edit.x1 .. " "
+		.. edit.y1  .. "\n" .. edit.x3 .. " " .. edit.y3,100,100)
 end 
 
 function love.update(dt)
@@ -87,6 +94,7 @@ function love.mousepressed(mX, mY, button, isTouch)
 		mX,mY = cam:toWorld(mX,mY)
 		edit.x1 = mX
 		edit.y1 = mY
+		flag = true
 	end
 end
 function love.mousereleased(mX, mY, button)
@@ -95,5 +103,6 @@ function love.mousereleased(mX, mY, button)
 		edit.x2 = mX
 		edit.y2 = mY
 		editWall()
+		flag = false
 	end
 end

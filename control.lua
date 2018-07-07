@@ -54,7 +54,7 @@ local function conThief (self, dt)
 		end
 
 	end
-	if self.x > gx - 10 and self.x < gx + 10 and self.y > gy - 10 and self.y < gy + 10 then
+	if self.x > gx - 2 and self.x < gx + 2 and self.y > gy - 2 and self.y < gy + 2 then
 		self.x = gx
 		self.y = gy
 		speedNoice = -2000
