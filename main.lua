@@ -5,22 +5,26 @@ tf = require "control"
 logging = require 'logging'
 drwUnit = require "drawUnits"
 camera = require 'gamera'
-require "edit"
+editor = require "edit"
 file = require "file"
 json=require"json"
+
 local time = 7
 local time1 = 20
 local anX = 700
 local anY = 750
 x = 1300
 y = 300
+function love.load()
+	editor.load_editor()
+end
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
-		u=file.rabota("save.txt", {})
+	u=file.rabota("save.txt", {})
 	u={}
 	for i = 1, 14 do
 		if i == 1 then
@@ -61,9 +65,7 @@ function love.draw()
 			for i = 1,#u do
 				u[i]:draw()
 			end
-			if love.mouse.isDown(2) then
-				editDrawWall()
-			end
+			editor.editDraw()
 		end)
 	mX,mY = love.mouse.getX(), love.mouse.getY()
 	mX,mY = cam:toWorld(mX,mY)
@@ -73,6 +75,7 @@ function love.draw()
 end 
 
 function love.update(dt)
+	editor.full_editor()
 	if love.keyboard.isDown("p") then
 		file.save(u,'save.txt')
 		print("saved")

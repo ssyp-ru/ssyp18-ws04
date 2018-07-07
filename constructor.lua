@@ -11,7 +11,8 @@ local function createWall(x1,y1,w1,h1)
 		kind = "wall",
 		subKind = "none",
 		id = maxid,
-		w = w1, h = h1,r = nil,
+		w = w1, h = h1,
+		name = "wall"..maxid,
 		update = updateWall,
 		draw = drawUnits.wall
 	}

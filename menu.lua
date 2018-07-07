@@ -85,8 +85,8 @@ local function check (dt)
 		Mnu.y1 = Mnu.y1 + 100 * dt
 		Mnu.y4 = Mnu.y4 + 100 * dt
 		Mnu.y5 = Mnu.y5 + 100 * dt
-		if btnsLoad.y > 30 and btnsNew.y > 30 and btnsSave.y > 30 then
-			btnsLoad.y, btnsNew.y, btnsSave.y = 30, 30, 30
+		if btnsLoad.y > 0 and btnsNew.y > 0 and btnsSave.y > 0 then
+			btnsLoad.y, btnsNew.y, btnsSave.y = 0, 0, 0
 		end
 		if Mnu.y > 30 then Mnu.y = 30 end
 		if Mnu.y1 > 50 then Mnu.y1 = 50 end
@@ -108,6 +108,9 @@ local function check (dt)
 			if Mnu.y1 < 20 then Mnu.y1 = 20 end
 			if Mnu.y4 < 7 then Mnu.y4 = 7 end
 			if Mnu.y5 < 13 then Mnu.y5 = 13 end
+			if mx >= btnsNew.x and mx <= 800 and my >= 0 and my <= Mnu.y1 then
+				dat = 2
+			end
 		end
 	end
 end

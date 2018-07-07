@@ -1,5 +1,4 @@
 local prov = true
-local months = os.date (month)
 local fLog = io.open('logs.txt', 'a')
 local function init(u)
 	log={}
@@ -19,6 +18,7 @@ f:write('zapis')
 f:flush()
 f:close()--]]
 local function updateLog (dt)
+	local months = os.date (month)
 	if prov then
 		fLog:write(months..'============\n')
 		prov = false
