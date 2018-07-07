@@ -29,21 +29,28 @@ Mnu.y4 = 37
 Mnu.x5 = 738
 Mnu.y5 = 43
 local function drawMn (x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5)
+	love.graphics.setColor (0, 0, 0)
 	love.graphics.line (x, y, x1, y1, x2, y2, x3, y3)
 	love.graphics.line (x4, y4, x5, y4)
 	love.graphics.line (x4, y5, x5, y5)
 end
 local function drawSave (x, y, w, h)
+	love.graphics.setColor (0, 0, 0)
 	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.setColor (255, 0, 0, 140)
 	love.graphics.print('Save', x + 10, y + 10)
 end
 local function drawNew (x, y, w, h)
+	love.graphics.setColor (0, 0, 0)
 	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.setColor (255, 0, 0, 140)
 	love.graphics.print ('New', x + 10, y + 10)
 end
 
 local function drawLoad (x, y, w, h)
+	love.graphics.setColor (0, 0, 0)
 	love.graphics.rectangle ('line',x, y, w, h)
+	love.graphics.setColor (255, 0, 0, 140)
 	love.graphics.print ('Load', x + 10, y + 10)
 end
 local function drawAll ()
@@ -65,7 +72,7 @@ local function check (dt)
 		if mx >= btnsNew.x and mx <= btnsNew.x + btnsNew.w and my >= btnsNew.y and
 		my <= btnsNew.y + btnsNew.h and
 		btnsNew.click then
-			--k=file.rabota("new.txt", {})
+			u=file.rabota("new.txt", {})
 			btnsNew.click = false
 		end
 		if mx >= btnsSave.x and mx <= btnsSave.x + btnsSave.w and my >= btnsSave.y and 

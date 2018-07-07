@@ -76,7 +76,6 @@ end
 
 function love.update(dt)
 	editor.full_editor()
-	cam:setPosition(u[5].x,u[5].y)
 	mc.moveCamera(cam)
 	for i = 1, #u do 
 		if u[i].update then
