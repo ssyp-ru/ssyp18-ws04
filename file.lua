@@ -4,10 +4,8 @@ local function save(q,file)
 		u[o].draw=nil
 		u[o].update=nil
 	end
-	local f = io.open(file,"w")
 	local x=json.encode(q)
-	f:write(x)
-	f:close()
+	love.filesystem.write(file,x,all)
 end
 local function rabota(file, x)
 	local jol=love.filesystem.lines(file)

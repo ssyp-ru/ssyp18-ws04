@@ -146,7 +146,7 @@ local function createLazer(x,y,w,h)
 		update=updateLazer,
 		x=x,
 		y=y,
-		angel=0,
+		angel=1,
 		state=false,
 		h=h,
 		w=w
