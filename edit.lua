@@ -25,9 +25,6 @@ local function full_editor()
 	if love.keyboard.isDown("4") then
 		state = "Movement"
 	end
---	if love.keyboard.isDown("5") then
---		state = "Laser"
---	end
 	if love.keyboard.isDown("5") then
 		state = "Door"
 	end
@@ -35,12 +32,6 @@ local function full_editor()
 		state = "Delete"
 	end
 end
---local function editLaser()
---	edit.w = -(edit.x1 - edit.x2)
---	edit.h = -(edit.y1 - edit.y2)
---	u[#u+1] = obj.createLaser(edit.x1, edit.y1, edit.w, edit.h)
---	logging.init(u)
---end
 local function editDelete()
 	mx,my = cam:toWorld(love.mouse.getX(),love.mouse.getY())
 	local t = {
@@ -52,9 +43,8 @@ local function editDelete()
 	if love.mouse.isDown(2) then
 		for i = 1, #u do
 			if coll.obj2obj(t,u[i]) then
-				for j = i, #u - 1 do
-					u[j] = u[j + 1]
-				end
+				table.remove(u,i)
+				break
 			end
 		end
 	end

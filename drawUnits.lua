@@ -1,8 +1,4 @@
 --Version 1.1
-local function editWall(x,y,w,h)
-	love.graphics.setColor (141, 107, 33)
-	love.graphics.rectangle ("line", x, y, w, h)
-end
 local function wall (self)
 	love.graphics.setColor (141, 107, 33)
 	love.graphics.rectangle ("fill", self.x, self.y, self.w, self.h)
@@ -10,7 +6,6 @@ end
 local function thief (self)
 	love.graphics.setColor (0, 0, 0, 255)
 	love.graphics.circle ("fill", self.x, self.y, self.r)
-	love.graphics.print (self.id, self.x, self.y + 20)
 end
 local function animal (self)
 	love.graphics.setColor (125, 125, 125)

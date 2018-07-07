@@ -1,32 +1,33 @@
 local dat = 0.5
+local time = {}
+for i = 1, 3 do
+	time[i] = 5
+end
 local Mnu = {}
 local btnsNew = {}
 local btnsLoad = {}
 local btnsSave = {}
-btnsLoad.x = 700
+btnsLoad.x = love.graphics.getWidth() - 100
 btnsLoad.y = 0
 btnsLoad.w = 50
 btnsLoad.h = 30
-btnsLoad.click = true
-btnsSave.x = 750
+btnsSave.x = love.graphics.getWidth() - 50
 btnsSave.y = 0
 btnsSave.w = 50
 btnsSave.h = 30
-btnsSave.click = true
-btnsNew.x = 650
+btnsNew.x = love.graphics.getWidth() - 150
 btnsNew.y = 0
 btnsNew.w = 50
 btnsNew.h = 30
-btnsNew.click = true
-Mnu.x = 675
+Mnu.x = love.graphics.getWidth() - 125
 Mnu.y = 30
-Mnu.x1 = 700
+Mnu.x1 = love.graphics.getWidth() - 100
 Mnu.y1 = 50
-Mnu.x2 = 750
-Mnu.x3 = 775
-Mnu.x4 = 712
+Mnu.x2 = love.graphics.getWidth() - 50
+Mnu.x3 = love.graphics.getWidth() - 25
+Mnu.x4 = love.graphics.getWidth() - 88
 Mnu.y4 = 37
-Mnu.x5 = 738
+Mnu.x5 = love.graphics.getWidth() - 62
 Mnu.y5 = 43
 local function drawMn (x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5)
 	love.graphics.setColor (0, 0, 0)
@@ -62,29 +63,31 @@ end
 local function check (dt)
 	local mx = love.mouse.getX()
 	local my = love.mouse.getY()
+	time[1] = time[1] - dt
+	time[2] = time[2] - dt
+	time[3] = time[3] - dt
 	if down then
 		if mx >= btnsLoad.x and mx <= btnsLoad.x + btnsLoad.w and my >= btnsLoad.y and
 		my <= btnsLoad.y + btnsLoad.h and
-		btnsLoad.click then
+		time[1] < 0 then
 			u=file.rabota("save.txt", {})
-			btnsLoad.click = false
+			time[1] = 5
 		end
 		if mx >= btnsNew.x and mx <= btnsNew.x + btnsNew.w and my >= btnsNew.y and
 		my <= btnsNew.y + btnsNew.h and
-		btnsNew.click then
+		time[2] < 0 then
 			u=file.rabota("new.txt", {})
-			btnsNew.click = false
+			time[2] = 5
 		end
 		if mx >= btnsSave.x and mx <= btnsSave.x + btnsSave.w and my >= btnsSave.y and 
 		my <= btnsSave.y + btnsSave.h and
-		btnsSave.click then
-
+		time[3] < 0 then
+			time[3] = 5
 			file.save(u,'save.txt')
 			print("saved")
 			for i=1,#u do
 				u[i].draw,u[i].update=obj.getFuncByKind(u[i])
 			end
-			btnsSave.click = false
 		end
 	end
 	dat = dat - dt
