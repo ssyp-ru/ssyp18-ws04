@@ -21,11 +21,29 @@ local function full_editor()
 	if love.keyboard.isDown("4") then
 		state = "Movement"
 	end
+--	if love.keyboard.isDown("5") then
+--		state = "Laser"
+--	end
+	if love.keyboard.isDown("5") then
+		state = "Door"
+	end
 end
+--local function editLaser()
+--	edit.w = -(edit.x1 - edit.x2)
+--	edit.h = -(edit.y1 - edit.y2)
+--	u[#u+1] = obj.createLaser(edit.x1, edit.y1, edit.w, edit.h)
+--	logging.init(u)
+--end
 local function editMovement()
 	edit.w = -(edit.x1 - edit.x2)
 	edit.h = -(edit.y1 - edit.y2)
 	u[#u+1] = obj.createMovement(edit.x1, edit.y1, edit.w, edit.h)
+	logging.init(u)
+end
+local function editDoor()
+	edit.w = -(edit.x1 - edit.x2)
+	edit.h = -(edit.y1 - edit.y2)
+	u[#u+1] = obj.createDoor(edit.x1, edit.y1, edit.w, edit.h)
 	logging.init(u)
 end
 local function editWall()
@@ -46,6 +64,12 @@ local function editDrawWall()
 	love.graphics.rectangle ("line",edit.x1, edit.y1, -(edit.x1 - mX), -(edit.y1 - mY))
 end
 local function editDrawMovement()
+	mX,mY = love.mouse.getX(), love.mouse.getY()
+	mX,mY = cam:toWorld(mX,mY)
+	love.graphics.setColor (255, 0, 0)
+	love.graphics.rectangle ("line",edit.x1, edit.y1, -(edit.x1 - mX), -(edit.y1 - mY))
+end
+local function editDrawDoor()
 	mX,mY = love.mouse.getX(), love.mouse.getY()
 	mX,mY = cam:toWorld(mX,mY)
 	love.graphics.setColor (255, 0, 0)
@@ -75,6 +99,10 @@ local function editDraw()
 		if love.mouse.isDown(2) then
 			editDrawMovement()
 		end
+	elseif state == "Door" then
+		if love.mouse.isDown(2) then
+			editDrawDoor()
+		end
 	end
 end
 function love.mousepressed(mX, mY, button, isTouch)
@@ -83,16 +111,13 @@ function love.mousepressed(mX, mY, button, isTouch)
 	end
 	if button == 2 then
 		mX,mY = cam:toWorld(mX,mY)
-		if state == "Wall" then
+		if state == "Wall" or state == "Movement" or state == "Door" then
 			edit.x1 = mX
 			edit.y1 = mY
 		elseif state == "Thief" then
 			editThief(mX,mY)
 		elseif state == "Animal" then
 			editAnimal(mX,mY)
-		elseif state == "Movement" then
-			edit.x1 = mX
-			edit.y1 = mY
 		end
 	end
 end
@@ -105,6 +130,8 @@ function love.mousereleased(mX, mY, button)
 			editWall()
 		elseif state == "Movement" then
 			editMovement()
+		elseif state == "Door" then
+			editDoor()
 		end
 	end
 end
