@@ -8,6 +8,10 @@ local function conThief (self, dt)
 	if gy == nil then
 		gy = self.y
 	end
+	--[[
+	if gx + 2 >= 650 and gx - 2 <= 800 and gy + 2 >= 0 and gy - 2 <= 30 then
+		return
+	end--]]
 	if self.x > gx - 2 then
 		self.x = self.x - 400 * dt
 		--self.noize = self.noize + 100 * dt

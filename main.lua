@@ -1,3 +1,4 @@
+menu = require 'menu'
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
@@ -14,8 +15,9 @@ local anX = 700
 local anY = 750
 x = 1300
 y = 300
-
-
+function love.load()
+	editor.load_editor()
+end
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
 
@@ -24,7 +26,7 @@ function love.load(arg)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
-		u=file.rabota("save.txt", {})
+	u=file.rabota("save.txt", {})
 	u={}
 	for i = 1, 14 do
 		if i == 1 then
@@ -67,6 +69,11 @@ function love.draw()
 			end
 			editor.editDraw()
 		end)
+	mX,mY = love.mouse.getX(), love.mouse.getY()
+	mX,mY = cam:toWorld(mX,mY)
+	love.graphics.setColor(255,0,0)
+	--love.graphics.print(u[5].noize,100,100)
+	menu:drawAll()
 end 
 
 function love.update(dt)
@@ -88,4 +95,27 @@ function love.update(dt)
 		love.event.quit()
 	end
 	logging.updateLog(dt)
+	down = love.mouse.isDown (1)
+	menu.check(dt)
+end
+
+function love.mousepressed(mX, mY, button, isTouch)
+	if button == 1 then
+		gx, gy = cam:toWorld(mX,mY)
+	end
+	if button == 2 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x1 = mX
+		edit.y1 = mY
+		flag = true
+	end
+end
+function love.mousereleased(mX, mY, button)
+	if button == 2 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x2 = mX
+		edit.y2 = mY
+		editWall()
+		flag = false
+	end
 end
