@@ -24,7 +24,8 @@ function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
 
 	editor.load_editor()
-	cam = camera.new( 0, 0, 2000,2000)
+	cam = camera.new( 0, 0, 4000,4000)
+	sucsess = love.window.setFullscreen(true)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
