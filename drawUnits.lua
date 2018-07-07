@@ -6,7 +6,6 @@ end
 local function thief (self)
 	love.graphics.setColor (0, 0, 0, 255)
 	love.graphics.circle ("fill", self.x, self.y, self.r)
-	love.graphics.print (self.id, self.x, self.y + 20)
 end
 local function animal (self)
 	love.graphics.setColor (125, 125, 125)
