@@ -7,7 +7,8 @@ drwUnit = require "drawUnits"
 camera = require 'gamera'
 editor = require "edit"
 file = require "file"
-json=require"json"
+json=require "json"
+mc = require "movecam"
 
 local time = 7
 local time1 = 20
@@ -69,15 +70,14 @@ function love.draw()
 			editor.editDraw()
 		end)
 	mX,mY = love.mouse.getX(), love.mouse.getY()
-	mX,mY = cam:toWorld(mX,mY)
 	love.graphics.setColor(255,0,0)
-	--love.graphics.print(u[5].noize,100,100)
 	menu:drawAll()
 end 
 
 function love.update(dt)
 	editor.full_editor()
 	cam:setPosition(u[5].x,u[5].y)
+	mc.moveCamera(cam)
 	for i = 1, #u do 
 		if u[i].update then
 			u[i]:update(dt)

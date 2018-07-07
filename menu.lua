@@ -65,7 +65,7 @@ local function check (dt)
 		if mx >= btnsNew.x and mx <= btnsNew.x + btnsNew.w and my >= btnsNew.y and
 		my <= btnsNew.y + btnsNew.h and
 		btnsNew.click then
-			k=file.rabota("new.txt", {})
+			--k=file.rabota("new.txt", {})
 			btnsNew.click = false
 		end
 		if mx >= btnsSave.x and mx <= btnsSave.x + btnsSave.w and my >= btnsSave.y and 
