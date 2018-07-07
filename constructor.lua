@@ -95,38 +95,6 @@ local function createMovement(x,y,w,h)
 	}
 	return t
 end
-local function updateNoise(self ,dt)
-	local AllNoize
-	for i = 1, #u do
-		AllNoize = 0
-		if u[i].kind == "human" or u[i].kind == "animal" then
-			if coll.obj2obj(u[i], self) then
-				AllNoize = AllNoize + u[i].noize
-			end
-		end
-		if AllNoize > 150 then
-			self.state = true
-			break
-		else
-			self.state = false
-		end
-	end
-end
-local function createNoise(x,y,w,h)
-	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='noise',
-		id=maxid,
-		draw=drawUnits.noise,
-		update=updateNoise,
-		x=x, y=y,
-		w=w, h=h,
-		angle=0,
-		state = false
-	}
-	return t
-end
 local function updateDoor(self , dt)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
