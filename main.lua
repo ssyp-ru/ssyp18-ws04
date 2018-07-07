@@ -26,7 +26,6 @@ function love.load(arg)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
-	u=file.rabota("save.txt", {})
 	u={}
 	for i = 1, 14 do
 		if i == 1 then
@@ -78,13 +77,6 @@ end
 
 function love.update(dt)
 	editor.full_editor()
-	if love.keyboard.isDown("p") then
-		file.save(u,'save.txt')
-		print("saved")
-		for i=1,#u do
-			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
-		end
-	end
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
 		if u[i].update then

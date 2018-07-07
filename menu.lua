@@ -59,19 +59,24 @@ local function check (dt)
 		if mx >= btnsLoad.x and mx <= btnsLoad.x + btnsLoad.w and my >= btnsLoad.y and
 		my <= btnsLoad.y + btnsLoad.h and
 		btnsLoad.click then
-			print('LOAD')
+			u=file.rabota("save.txt", {})
 			btnsLoad.click = false
 		end
 		if mx >= btnsNew.x and mx <= btnsNew.x + btnsNew.w and my >= btnsNew.y and
 		my <= btnsNew.y + btnsNew.h and
 		btnsNew.click then
-			print('NEW')
+			k=file.rabota("new.txt", {})
 			btnsNew.click = false
 		end
 		if mx >= btnsSave.x and mx <= btnsSave.x + btnsSave.w and my >= btnsSave.y and 
 		my <= btnsSave.y + btnsSave.h and
 		btnsSave.click then
-			print('SAVE')
+
+			file.save(u,'save.txt')
+			print("saved")
+			for i=1,#u do
+				u[i].draw,u[i].update=obj.getFuncByKind(u[i])
+			end
 			btnsSave.click = false
 		end
 	end
