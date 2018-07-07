@@ -20,38 +20,38 @@ function love.load(arg)
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
 		u=file.rabota("save.txt", {})
-	u={}
-	for i = 1, 14 do
-		if i == 1 then
-			u[#u+1] = obj.createWall(300, 200, 20, 360)
-		elseif i == 2 then
-			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
-		elseif i == 3 then
-			u[#u+1] = obj.createWall(300, 180, 720, 20)
-		elseif i == 4 then
-			u[#u+1] = obj.createWall(300, 560, 620, 20)
-		elseif i == 5 then
-			u[#u+1] = obj.createThief (x, y, 15)
-		elseif i == 6 then
-			u[#u+1] = obj.createAnimal (anX,anY,10)
-		elseif i == 7 then
-			u[#u+1] = obj.createMovement (300, 20, 900, 160)
-		elseif i == 8 then
-			u[#u+1] = obj.createLazer (974, 200,1,200)
-		elseif i == 9 then
-			u[#u+1] = obj.createDoor (920, 555, 85, 25)
-		elseif i == 10 then
-			u[#u+1] = obj.createWall(100, 20, 20, 670)
-		elseif i == 11 then
-			u[#u+1] = obj.createWall(100, 0, 1100, 20)
-		elseif i == 12 then
-			u[#u+1] = obj.createWall(250, 670, 970, 20)
-		elseif i == 13 then
-			u[#u+1] = obj.createWall(1200, 0, 20, 670)
-		elseif i == 14 then
-			u[#u+1] = obj.createMovement (120, 20, 180, 650)
-		end
-	end
+--	for i = 1, 14 do
+--		if i == 1 then
+--			u[#u+1] = obj.createWall(300, 200, 20, 360)
+--		elseif i == 2 then
+--			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
+--		elseif i == 3 then
+--			u[#u+1] = obj.createWall(300, 180, 720, 20)
+--		elseif i == 4 then
+--			u[#u+1] = obj.createWall(300, 560, 620, 20)
+--		elseif i == 5 then
+--			u[#u+1] = obj.createThief (x, y, 15)
+--		elseif i == 6 then
+--			u[#u+1] = obj.createAnimal (anX,anY,10)
+--		elseif i == 7 then
+--			u[#u+1] = obj.createMovement (300, 20, 900, 160)
+--		elseif i == 8 then
+--			u[#u+1] = obj.createLazer (974, 200,1,200)
+--		elseif i == 9 then
+--			u[#u+1] = obj.createDoor (920, 555, 85, 25)
+--		elseif i == 10 then
+--			u[#u+1] = obj.createWall(100, 20, 20, 670)
+--		elseif i == 11 then
+--			u[#u+1] = obj.createWall(100, 0, 1100, 20)
+--		elseif i == 12 then
+--			u[#u+1] = obj.createWall(250, 670, 970, 20)
+--		elseif i == 13 then
+--			u[#u+1] = obj.createWall(1200, 0, 20, 670)
+--		elseif i == 14 then
+--			u[#u+1] = obj.createMovement (120, 20, 180, 650)
+--		end
+--	end
+
 	love.graphics.setBackgroundColor{255,255,255}
 	logging.init(u)
 end
