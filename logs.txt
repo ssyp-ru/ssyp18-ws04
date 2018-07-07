@@ -273,3 +273,54 @@
 #3	door
 #4	movement
 #4 movement	true
+07/07/18 14:16:56============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+#4 movement	true
+07/07/18 14:19:43============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+#4 movement	true
+#1 movement	true
+#4 movement	false
+#1 movement	false
+#1 movement	true
+#1 movement	false
+#1 movement	true
+#1 movement	false
+#1 movement	true
+#1 movement	false
+#1 movement	true
+#1 movement	false
+#1 movement	true
+#1 movement	false
+#1 movement	true
+#1 movement	false
+07/07/18 14:20:34============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+#4 movement	true
+#4 movement	false
+07/07/18 14:23:08============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+#4 movement	true
+#4 movement	false
+07/07/18 14:24:44============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/07/18 14:26:01============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
