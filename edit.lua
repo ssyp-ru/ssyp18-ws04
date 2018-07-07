@@ -42,10 +42,11 @@ local function editDelete()
 	}
 	if love.mouse.isDown(2) then
 		for i = 1, #u do
+			print(u[i].kind)
 			if coll.obj2obj(t,u[i]) then
-				for j = i, #u - 1 do
-					u[j] = u[j + 1]
-				end
+				print("yes")
+				table.remove(u,i)
+				break
 			end
 		end
 	end
