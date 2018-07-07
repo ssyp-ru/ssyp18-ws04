@@ -1,5 +1,6 @@
 local prov = true
-local fLog = io.open('logs.txt', 'a')
+love.textinput(fl)
+local fLog = io.open(fl, 'a')
 local function init(u)
 	log={}
 	for i=1, #u do
