@@ -1,4 +1,4 @@
-local dat = 2
+local dat = 0.5
 local Mnu = {}
 local btnsNew = {}
 local btnsLoad = {}
@@ -77,7 +77,7 @@ local function check (dt)
 	end
 	dat = dat - dt
 	if mx >= btnsNew.x and mx <= 800 and my >= 0 and my <= Mnu.y1  and dat > 0 then
-		dat = 2
+		dat = 0.5
 		btnsSave.y = btnsSave.y + 100 * dt
 		btnsNew.y = btnsNew.y + 100 * dt
 		btnsLoad.y = btnsLoad.y + 100 * dt
@@ -109,7 +109,7 @@ local function check (dt)
 			if Mnu.y4 < 7 then Mnu.y4 = 7 end
 			if Mnu.y5 < 13 then Mnu.y5 = 13 end
 			if mx >= btnsNew.x and mx <= 800 and my >= 0 and my <= Mnu.y1 then
-				dat = 2
+				dat = 0.5
 			end
 		end
 	end
