@@ -2,22 +2,23 @@ brAnimal = require "brainAnimal"
 con = require "control"
 coll = require "collision"
 drawUnits = require "drawUnits"
+
 local function createWall(x1,y1,w1,h1)
 	maxid = maxid + 1
 	local t = {
 		x = x1, y = y1,
 		angle = 0,
 		kind = "wall",
-		subKind = " ",
+		subKind = "none",
 		id = maxid,
-		w = w1, h = h1,r = nil,
+		w = w1, h = h1,
 		name = "wall"..maxid,
-		update = wall_update,
+		update = updateWall,
 		draw = drawUnits.wall
 	}
 	return t
 end
-local function wall_update(dt)
+local function updateWall(dt)
 end
 local function updateAnimal(animal, dt)
 	animal.delay = animal.delay - dt
@@ -95,38 +96,6 @@ local function createMovement(x,y,w,h)
 	}
 	return t
 end
-local function updateNoise(self ,dt)
-	local AllNoize
-	for i = 1, #u do
-		AllNoize = 0
-		if u[i].kind == "human" or u[i].kind == "animal" then
-			if coll.obj2obj(u[i], self) then
-				AllNoize = AllNoize + u[i].noize
-			end
-		end
-		if AllNoize > 150 then
-			self.state = true
-			break
-		else
-			self.state = false
-		end
-	end
-end
-local function createNoise(x,y,w,h)
-	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='noise',
-		id=maxid,
-		draw=drawUnits.noise,
-		update=updateNoise,
-		x=x, y=y,
-		w=w, h=h,
-		angle=0,
-		state = false
-	}
-	return t
-end
 local function updateDoor(self , dt)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
@@ -185,7 +154,31 @@ local function createLazer(x,y,w,h)
 	}
 	return t
 end
+local function getFuncByKind(t)
+	if t.kind == "sensor" and t.subkind == "movement" then
+		return drawUnits.movement, updateMovement
+	end
+	if t.kind == "sensor" and t.subkind == "noise" then
+		return drawUnits.noise, updateNoise
+	end
+	if t.kind == "sensor" and t.subkind == "door" then
+		return drawUnits.door, updateDoor
+	end
+	if t.kind == "sensor" and t.subkind == "lazer" then
+		return drawUnits.lazer, updateLazer
+	end
+	if t.kind == "human" and t.subkind == "thief" then
+		return drawUnits.thief, updateThief
+	end
+	if t.kind == "animal" and t.subkind == "none" then
+		return drawUnits.animal, updateAnimal
+	end
+	if t.kind == "wall" then
+		return drawUnits.wall, updateWall
+	end
+end
+
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
 	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
 	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
-	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal}
+	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind}
