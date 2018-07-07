@@ -5,6 +5,8 @@ logging = require 'logging'
 drwUnit = require "drawUnits"
 camera = require 'gamera'
 editor = require "edit"
+file = require "file"
+json=require"json"
 
 local time = 7
 local time1 = 20
@@ -12,16 +14,17 @@ local anX = 700
 local anY = 750
 x = 1300
 y = 300
-
 function love.load()
 	editor.load_editor()
+function love.load(arg)
+	if arg[#arg] == "-debug" then require("mobdebug").start() end
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
-
-	--love.window.setMode(1366, 768, {})
-	u = {}
-	for i = 1, 15 do
+	love.graphics.setBackgroundColor{255,255,255}
+		u=file.rabota("save.txt", {})
+	u={}
+	for i = 1, 14 do
 		if i == 1 then
 			u[#u+1] = obj.createWall(300, 200, 20, 360)
 		elseif i == 2 then
@@ -37,20 +40,18 @@ function love.load()
 		elseif i == 7 then
 			u[#u+1] = obj.createMovement (300, 20, 900, 160)
 		elseif i == 8 then
-			u[#u+1] = obj.createNoise (320, 200, 680, 360)
-		elseif i == 9 then
 			u[#u+1] = obj.createLazer (974, 200,1,200)
-		elseif i == 10 then
+		elseif i == 9 then
 			u[#u+1] = obj.createDoor (920, 555, 85, 25)
-		elseif i == 11 then
+		elseif i == 10 then
 			u[#u+1] = obj.createWall(100, 20, 20, 670)
-		elseif i == 12 then
+		elseif i == 11 then
 			u[#u+1] = obj.createWall(100, 0, 1100, 20)
-		elseif i == 13 then
+		elseif i == 12 then
 			u[#u+1] = obj.createWall(250, 670, 970, 20)
-		elseif i == 14 then
+		elseif i == 13 then
 			u[#u+1] = obj.createWall(1200, 0, 20, 670)
-		elseif i == 15 then
+		elseif i == 14 then
 			u[#u+1] = obj.createMovement (120, 20, 180, 650)
 		end
 	end
@@ -68,6 +69,13 @@ end
 
 function love.update(dt)
 	editor.full_editor()
+	if love.keyboard.isDown("p") then
+		file.save(u,'save.txt')
+		print("saved")
+		for i=1,#u do
+			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
+		end
+	end
 	cam:setPosition(u[5].x,u[5].y)
 	for i = 1, #u do 
 		if u[i].update then
