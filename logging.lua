@@ -1,5 +1,4 @@
 local prov = true
---love.textinput(fl)
 local fLog = io.open('logs.txt', 'a')
 local function init(u)
 	log={}
