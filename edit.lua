@@ -1,5 +1,6 @@
 obj = require "constructor"
 cam = require "gamera"
+logging = require "logging"
 edit = {
 	x1 = 0,x2 = 0,
 	y1 = 0,y2 = 0
@@ -17,8 +18,16 @@ local function full_editor()
 	if love.keyboard.isDown("3") then
 		state = "Animal"
 	end
+	if love.keyboard.isDown("4") then
+		state = "Movement"
+	end
 end
-
+local function editMovement()
+	edit.w = -(edit.x1 - edit.x2)
+	edit.h = -(edit.y1 - edit.y2)
+	u[#u+1] = obj.createMovement(edit.x1, edit.y1, edit.w, edit.h)
+	logging.init(u)
+end
 local function editWall()
 	edit.w = -(edit.x1 - edit.x2)
 	edit.h = -(edit.y1 - edit.y2)
@@ -34,6 +43,12 @@ local function editDrawWall()
 	mX,mY = love.mouse.getX(), love.mouse.getY()
 	mX,mY = cam:toWorld(mX,mY)
 	love.graphics.setColor (141, 107, 33)
+	love.graphics.rectangle ("line",edit.x1, edit.y1, -(edit.x1 - mX), -(edit.y1 - mY))
+end
+local function editDrawMovement()
+	mX,mY = love.mouse.getX(), love.mouse.getY()
+	mX,mY = cam:toWorld(mX,mY)
+	love.graphics.setColor (255, 0, 0)
 	love.graphics.rectangle ("line",edit.x1, edit.y1, -(edit.x1 - mX), -(edit.y1 - mY))
 end
 local function editDrawAnimal()
@@ -56,6 +71,10 @@ local function editDraw()
 		editDrawThief()
 	elseif state == "Animal" then
 		editDrawAnimal()
+	elseif state == "Movement" then
+		if love.mouse.isDown(2) then
+			editDrawMovement()
+		end
 	end
 end
 function love.mousepressed(mX, mY, button, isTouch)
@@ -71,6 +90,9 @@ function love.mousepressed(mX, mY, button, isTouch)
 			editThief(mX,mY)
 		elseif state == "Animal" then
 			editAnimal(mX,mY)
+		elseif state == "Movement" then
+			edit.x1 = mX
+			edit.y1 = mY
 		end
 	end
 end
@@ -81,6 +103,8 @@ function love.mousereleased(mX, mY, button)
 		edit.y2 = mY
 		if state == "Wall" then
 			editWall()
+		elseif state == "Movement" then
+			editMovement()
 		end
 	end
 end

@@ -98,24 +98,3 @@ function love.update(dt)
 	down = love.mouse.isDown (1)
 	menu.check(dt)
 end
-
-function love.mousepressed(mX, mY, button, isTouch)
-	if button == 1 then
-		gx, gy = cam:toWorld(mX,mY)
-	end
-	if button == 2 then
-		mX,mY = cam:toWorld(mX,mY)
-		edit.x1 = mX
-		edit.y1 = mY
-		flag = true
-	end
-end
-function love.mousereleased(mX, mY, button)
-	if button == 2 then
-		mX,mY = cam:toWorld(mX,mY)
-		edit.x2 = mX
-		edit.y2 = mY
-		editWall()
-		flag = false
-	end
-end
