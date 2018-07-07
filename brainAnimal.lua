@@ -2,7 +2,7 @@ coll = require 'collision'
 local function brainAnimal (self, dt)
 	local oldx = self.x
 	local oldy = self.y
-	for i = 1, 15 do
+	for i = 1, 14 do
 		if u[i].subkind == 'thief' then
 			if self.x > u[i].x then
 				self.x = self.x - 50 * dt
@@ -49,7 +49,6 @@ local function brainAnimal (self, dt)
 				end
 			end
 		else
-			--self.noize = self.noize - 20 * dt
 		end
 	end
 end
