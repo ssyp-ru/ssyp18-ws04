@@ -1,3 +1,4 @@
+menu = require 'menu'
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
@@ -69,6 +70,7 @@ function love.draw()
 	mX,mY = cam:toWorld(mX,mY)
 	love.graphics.setColor(255,0,0)
 	--love.graphics.print(u[5].noize,100,100)
+	menu:drawAll()
 end 
 
 function love.update(dt)
@@ -82,6 +84,8 @@ function love.update(dt)
 		love.event.quit()
 	end
 	logging.updateLog(dt)
+	down = love.mouse.isDown (1)
+	menu.check(dt)
 end
 
 function love.mousepressed(mX, mY, button, isTouch)
