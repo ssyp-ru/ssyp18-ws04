@@ -1,5 +1,5 @@
 local prov = true
-local months = os.date (month)
+--love.textinput(fl)
 local fLog = io.open('logs.txt', 'a')
 local function init(u)
 	log={}
@@ -19,6 +19,7 @@ f:write('zapis')
 f:flush()
 f:close()--]]
 local function updateLog (dt)
+	local months = os.date (month)
 	if prov then
 		fLog:write(months..'============\n')
 		prov = false
@@ -28,7 +29,7 @@ local function updateLog (dt)
 	end
 	for i=1, #log do
 		if log[i].oldstate ~= log[i].sensor.state then
-			fLog:write('#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
+			fLog:write(months..'	'..'#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
 			log[i].oldstate = log[i].sensor.state
 		end
 	end

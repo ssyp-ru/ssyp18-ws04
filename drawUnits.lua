@@ -42,7 +42,13 @@ local function lazer (self)
 	love.graphics.setColor (255, 0, 0)
 	love.graphics.rectangle ("line", self.x, self.y, 25, 25)
 	if self.angle==1 then
-		love.graphics.rectangle("fill",self.x+12, self.y+25,self.w+13,self.h+25)
+		love.graphics.rectangle ("line", self.x+12, self.y+12,self.w,self.h+12)
+	elseif self.angle==2 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,-self.h-12,self.w)
+	elseif self.angle==3 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,self.w,-self.h-12)
+	elseif self.angle==4 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,self.h+12,-self.w)
 	end
 	love.graphics.line (self.x + 20, self.y + 5, self.x + 5, self.y + 5, self.x + 5, self.y + 12,
 		self.x + 20, self.y + 12, self.x + 20, self.y + 20, self.x + 5, self.y + 20)

@@ -1,12 +1,15 @@
+menu = require 'menu'
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
 logging = require 'logging'
 drwUnit = require "drawUnits"
 camera = require 'gamera'
-require "edit"
+editor = require "edit"
 file = require "file"
-json=require"json"
+json=require "json"
+mc = require "movecam"
+
 local time = 7
 local time1 = 20
 local anX = 700
@@ -16,6 +19,8 @@ y = 300
 sost=0
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
+	editor.load_editor()
+	editor.load_editor()
 	cam = camera.new( 0, 0, 2000,2000)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
@@ -53,7 +58,7 @@ function love.load(arg)
 --			u[#u+1] = obj.createMovement (120, 20, 180, 650)
 --		end
 --	end
-
+	--obj.createLazer(974,200,1,200)
 	love.graphics.setBackgroundColor{255,255,255}
 	logging.init(u)
 end
@@ -62,21 +67,19 @@ function love.draw()
 			for i = 1,#u do
 				u[i]:draw()
 			end
-			if love.mouse.isDown(2) then
-				editDrawWall()
-			end
+			editor.editDraw()
 		end)
 	mX,mY = love.mouse.getX(), love.mouse.getY()
-	mX,mY = cam:toWorld(mX,mY)
 	love.graphics.setColor(255,0,0)
-	--love.graphics.print(u[5].noize,100,100)
+	menu:drawAll()
 end 
-
 function love.update(_dt)
 local dt = _dt
 	if sost == 1 then
 		dt = 0
 	end
+	editor.full_editor()
+	mc.moveCamera(cam)
 	if love.keyboard.isDown("p") then
 		file.save(u,'save.txt')
 		print("saved")
@@ -100,25 +103,6 @@ local dt = _dt
 		sost=0
 	end
 	logging.updateLog(dt)
-end
-
-function love.mousepressed(mX, mY, button, isTouch)
-	if button == 1 then
-		gx, gy = cam:toWorld(mX,mY)
-	end
-	if button == 2 then
-		mX,mY = cam:toWorld(mX,mY)
-		edit.x1 = mX
-		edit.y1 = mY
-		flag = true
-	end
-end
-function love.mousereleased(mX, mY, button)
-	if button == 2 then
-		mX,mY = cam:toWorld(mX,mY)
-		edit.x2 = mX
-		edit.y2 = mY
-		editWall()
-		flag = false
-	end
+	down = love.mouse.isDown (1)
+	menu.check(dt)
 end
