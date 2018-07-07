@@ -9,6 +9,7 @@ editor = require "edit"
 file = require "file"
 json=require "json"
 mc = require "movecam"
+success = love.window.setFullscreen(true)
 
 local time = 7
 local time1 = 20
