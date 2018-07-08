@@ -252,7 +252,7 @@ local function check (dt)
 		end
 	end
 	dat1 = dat1 - dt
-	if mx >= wall.x and mx <= nemu.x1 and my >= wall.y and --my <= wall.y + wall.h and dat1 > 0 then
+	if mx >= wall.x and mx <= nemu.x1 and my >= wall.y and my <= wall.y + wall.h and dat1 > 0 then
 		dat1 = 0.5
 		wall.x = wall.x + 500 * dt
 		delete.x = delete.x + 500 * dt
