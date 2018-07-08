@@ -7,7 +7,7 @@ local function moveCamera(self,dt)
 	else
 		if love.mouse.isDown(3) then
 			mx,my = self:toWorld(mx,my)
-			self:setPosition(self.x + (mx - edit.x3) * -dt * 2,self.y + (my - edit.y3) * -dt * 2)
+			self:setPosition(self.x + (mx - edit.x3) * -dt * 3,self.y + (my - edit.y3) * -dt * 3)
 		else
 			if my > love.graphics.getHeight() - padding then
 				self:setPosition(self.x,self.y + 10)
