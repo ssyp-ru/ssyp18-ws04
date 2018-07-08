@@ -1,36 +1,14 @@
 obj = require "constructor"
+
 cam = require "gamera"
 logging = require "logging"
 coll = require "collision"
 edit = {
-	x1 = 0,x2 = 0,
-	y1 = 0,y2 = 0
+	x1 = 0,x2 = 0,x3 = 0, x4 = 0,
+	y1 = 0,y2 = 0,y3 = 0, y4 = 0
 }
 local function load_editor()
 	local state = "Wall"
-end
-local function full_editor()
-	if love.keyboard.isDown("0") then
-		state = "Point"
-	end
-	if love.keyboard.isDown("1") then
-		state = "Wall"
-	end
-	if love.keyboard.isDown("2") then
-		state = "Thief"
-	end
-	if love.keyboard.isDown("3") then
-		state = "Animal"
-	end
-	if love.keyboard.isDown("4") then
-		state = "Movement"
-	end
-	if love.keyboard.isDown("5") then
-		state = "Door"
-	end
-	if love.keyboard.isDown("backspace") then
-		state = "Delete"
-	end
 end
 local function editDelete()
 	mx,my = cam:toWorld(love.mouse.getX(),love.mouse.getY())
@@ -145,6 +123,10 @@ function love.mousepressed(mX, mY, button, isTouch)
 			editDelete()
 		end
 	end
+	if button == 3 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x3,edit.y3 = mX,mY
+	end
 end
 function love.mousereleased(mX, mY, button)
 	if button == 2 then
@@ -158,6 +140,10 @@ function love.mousereleased(mX, mY, button)
 		elseif state == "Door" then
 			editDoor()
 		end
+	end
+	if button == 3 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x4,edit.y4 = mX,mY
 	end
 end
 return {full_editor = full_editor, editWall = editWall, editDrawWall = editDrawWall,state = state,

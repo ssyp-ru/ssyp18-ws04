@@ -1,7 +1,7 @@
 local dat = 0.5
 local time = {}
 for i = 1, 3 do
-	time[i] = 5
+	time[i] = 0.2
 end
 local Mnu = {}
 local btnsNew = {}
