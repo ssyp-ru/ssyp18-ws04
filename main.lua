@@ -14,8 +14,12 @@ socket = require "socket"
 json=require "json"
 mc = require "movecam"
 success = love.window.setFullscreen(true)
+<<<<<<< HEAD
 >>>>>>> a8aecf3dcb5be564c901d1bf43096f81914b4bc9
 
+=======
+scale = 1
+>>>>>>> c960b043570ca2a93fcee2b101d768e6350ff1d3
 local time = 7
 local time1 = 20
 local anX = 700
@@ -86,7 +90,8 @@ local dt = _dt
 		dt = 0
 	end
 	editor.full_editor()
-	mc.moveCamera(cam) -- двигать камеру мышкой по краям экрана
+	cam:setScale(scale)
+	mc.moveCamera(cam,dt) -- двигать камеру мышкой по краям экрана
 	for i = 1, #u do
 		if u[i].update then
 			u[i]:update(dt)
@@ -111,4 +116,12 @@ local dt = _dt
 	logging.updateLog(dt)
 	down = love.mouse.isDown (1)
 	menu.check(dt)
+end
+function love.wheelmoved(x,y)
+	if y > 0 then
+		scale = scale + 0.1
+	end
+	if y < 0 then
+		scale = scale - 0.1
+	end
 end
