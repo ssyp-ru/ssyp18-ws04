@@ -1,3 +1,9 @@
+function love.load(arg)
+	if arg[#arg] == "-debug" then require("mobdebug").start() end
+	sprtree1=love.graphics.newImage("tree1.png")
+	sprtree2=love.graphics.newImage("krovat.png")
+	sprtree3=love.graphics.newImage("freezer.png")
+	sprtree4=love.graphics.newImage("stol.png")
 menu = require 'leftmenu'
 brAnimal = require "brainAnimal"
 obj = require "constructor"
@@ -9,54 +15,64 @@ editor = require "edit"
 file = require "file"
 json = require "json"
 mc = require "movecam"
-success = love.window.setFullscreen(true)
-scale = 1
-sost = 0
-function love.load(arg)
-	if arg[#arg] == "-debug" then require("mobdebug").start() end
+	local time = 7
+	local time1 = 20
+	local anX = 700
+	local anY = 750
+	x = 1300
+	y = 300
 	editor.load_editor()
-	cam = camera.new(0, 0, 5000, 5000)
-	cam:setWindow(0, 0, love.graphics.getWidth(), love.graphics.getHeight())
+	editor.load_editor()
+	cam = camera.new( 0, 0, 4000,4000)
+	sucsess = love.window.setFullscreen(true)
+	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
-	love.graphics.setBackgroundColor { 255, 255, 255 }
-	u = file.rabota("save.txt", {})
-	--		u={}
-	--	for i = 1, 14 do
-	--		if i == 1 then
-	--			u[#u+1] = obj.createWall(300, 200, 20, 360)
-	--		elseif i == 2 then
-	--			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
-	--		elseif i == 3 then
-	--			u[#u+1] = obj.createWall(300, 180, 720, 20)
-	--		elseif i == 4 then
-	--			u[#u+1] = obj.createWall(300, 560, 620, 20)
-	--		elseif i == 5 then
-	--			u[#u+1] = obj.createThief (x, y, 15)
-	--		elseif i == 6 then
-	--			u[#u+1] = obj.createAnimal (anX,anY,10)
-	--		elseif i == 7 then
-	--			u[#u+1] = obj.createMovement (300, 20, 900, 160)
-	--		elseif i == 8 then
-	--			u[#u+1] = obj.createLazer (974, 200,1,200)
-	--		elseif i == 9 then
-	--			u[#u+1] = obj.createDoor (920, 555, 85, 25)
-	--		elseif i == 10 then
-	--			u[#u+1] = obj.createWall(100, 20, 20, 670)
-	--		elseif i == 11 then
-	--			u[#u+1] = obj.createWall(100, 0, 1100, 20)
-	--		elseif i == 12 then
-	--			u[#u+1] = obj.createWall(250, 670, 970, 20)
-	--		elseif i == 13 then
-	--			u[#u+1] = obj.createWall(1200, 0, 20, 670)
-	--		elseif i == 14 then
-	--			u[#u+1] = obj.createMovement (120, 20, 180, 650)
-	--		end
-	--	end
+	love.graphics.setBackgroundColor{255,255,255}
+--		u=file.rabota("save.txt", {})
+	u={}
+	for i = 1, 18 do
+		if i == 1 then
+			u[#u+1] = obj.createWall(300, 200, 20, 360)
+		elseif i == 2 then
+			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
+		elseif i == 3 then
+			u[#u+1] = obj.createWall(300, 180, 720, 20)
+		elseif i == 4 then
+			u[#u+1] = obj.createWall(300, 560, 620, 20)
+		elseif i == 5 then
+			u[#u+1] = obj.createThief (x, y, 15)
+		elseif i == 6 then
+			u[#u+1] = obj.createAnimal (anX,anY,10)
+		elseif i == 7 then
+			u[#u+1] = obj.createMovement (300, 20, 900, 160)
+		elseif i == 8 then
+			u[#u+1] = obj.createLazer (974, 200,1,200)
+		elseif i == 9 then
+			u[#u+1] = obj.createDoor (920, 555, 85, 25)
+		elseif i == 10 then
+			u[#u+1] = obj.createWall(100, 20, 20, 670)
+		elseif i == 11 then
+			u[#u+1] = obj.createWall(100, 0, 1100, 20)
+		elseif i == 12 then
+			u[#u+1] = obj.createWall(250, 670, 970, 20)
+		elseif i == 13 then
+			u[#u+1] = obj.createWall(1200, 0, 20, 670)
+		elseif i == 14 then
+			u[#u+1] = obj.createMovement (120, 20, 180, 650)
+		elseif i == 15 then
+			u[#u+1] = obj.createTree(1500,800,30)
+		elseif i == 16 then
+			u[#u+1] = obj.createBed(150,800)
+		elseif i == 17 then
+			u[#u+1] = obj.createFridge(50,800)
+		elseif i == 18 then
+			u[#u+1] = obj.createDesk(1500,500)
+		end
+	end
 	--obj.createLazer(974,200,1,200)
-	love.graphics.setBackgroundColor { 255, 255, 255 }
+	love.graphics.setBackgroundColor{255,255,255}
 	logging.init(u)
 end
-
 function love.draw()
 	cam:draw(function(l, t, w, h)
 			for i = 1, #u do
