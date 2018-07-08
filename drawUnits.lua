@@ -7,6 +7,10 @@ local function thief (self)
 	love.graphics.setColor (0, 0, 0, 255)
 	love.graphics.circle ("fill", self.x, self.y, self.r)
 end
+local function tree (self)
+	love.graphics.setColor (255,255,255)
+	love.graphics.draw(sprtree, self.x, self.y, self.r)
+end
 local function animal (self)
 	love.graphics.setColor (125, 125, 125)
 	love.graphics.circle ("fill", self.x, self.y, self.r)

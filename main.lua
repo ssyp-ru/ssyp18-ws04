@@ -20,6 +20,7 @@ y = 300
 sost=0
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
+	sprtree=love.graphics.newImage("tree1.png")
 	editor.load_editor()
 	editor.load_editor()
 	cam = camera.new( 0, 0, 4000,4000)
@@ -27,39 +28,41 @@ function love.load(arg)
 	cam:setWindow(0,0,love.graphics.getWidth(),love.graphics.getHeight())
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
-		u=file.rabota("save.txt", {})
---		u={}
---	for i = 1, 14 do
---		if i == 1 then
---			u[#u+1] = obj.createWall(300, 200, 20, 360)
---		elseif i == 2 then
---			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
---		elseif i == 3 then
---			u[#u+1] = obj.createWall(300, 180, 720, 20)
---		elseif i == 4 then
---			u[#u+1] = obj.createWall(300, 560, 620, 20)
---		elseif i == 5 then
---			u[#u+1] = obj.createThief (x, y, 15)
---		elseif i == 6 then
---			u[#u+1] = obj.createAnimal (anX,anY,10)
---		elseif i == 7 then
---			u[#u+1] = obj.createMovement (300, 20, 900, 160)
---		elseif i == 8 then
---			u[#u+1] = obj.createLazer (974, 200,1,200)
---		elseif i == 9 then
---			u[#u+1] = obj.createDoor (920, 555, 85, 25)
---		elseif i == 10 then
---			u[#u+1] = obj.createWall(100, 20, 20, 670)
---		elseif i == 11 then
---			u[#u+1] = obj.createWall(100, 0, 1100, 20)
---		elseif i == 12 then
---			u[#u+1] = obj.createWall(250, 670, 970, 20)
---		elseif i == 13 then
---			u[#u+1] = obj.createWall(1200, 0, 20, 670)
---		elseif i == 14 then
---			u[#u+1] = obj.createMovement (120, 20, 180, 650)
---		end
---	end
+--		u=file.rabota("save.txt", {})
+		u={}
+	for i = 1, 15 do
+		if i == 1 then
+			u[#u+1] = obj.createWall(300, 200, 20, 360)
+		elseif i == 2 then
+			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
+		elseif i == 3 then
+			u[#u+1] = obj.createWall(300, 180, 720, 20)
+		elseif i == 4 then
+			u[#u+1] = obj.createWall(300, 560, 620, 20)
+		elseif i == 5 then
+			u[#u+1] = obj.createThief (x, y, 15)
+		elseif i == 6 then
+			u[#u+1] = obj.createAnimal (anX,anY,10)
+		elseif i == 7 then
+			u[#u+1] = obj.createMovement (300, 20, 900, 160)
+		elseif i == 8 then
+			u[#u+1] = obj.createLazer (974, 200,1,200)
+		elseif i == 9 then
+			u[#u+1] = obj.createDoor (920, 555, 85, 25)
+		elseif i == 10 then
+			u[#u+1] = obj.createWall(100, 20, 20, 670)
+		elseif i == 11 then
+			u[#u+1] = obj.createWall(100, 0, 1100, 20)
+		elseif i == 12 then
+			u[#u+1] = obj.createWall(250, 670, 970, 20)
+		elseif i == 13 then
+			u[#u+1] = obj.createWall(1200, 0, 20, 670)
+		elseif i == 14 then
+			u[#u+1] = obj.createMovement (120, 20, 180, 650)
+		elseif i == 15 then
+			u[#u+1] = obj.createTree(1500,800,30)
+		end
+	end
 	--obj.createLazer(974,200,1,200)
 	love.graphics.setBackgroundColor{255,255,255}
 	logging.init(u)
@@ -77,20 +80,12 @@ function love.draw()
 end 
 function love.update(_dt)
 local dt = _dt
-	if sost == 1 then
+	if sost == 1 then -- остановить движение объектов
 		dt = 0
 	end
 	editor.full_editor()
-	mc.moveCamera(cam)
-	if love.keyboard.isDown("p") then
-		file.save(u,'save.txt')
-		print("saved")
-		for i=1,#u do
-			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
-		end
-	end
-	cam:setPosition(u[5].x,u[5].y)
-	for i = 1, #u do 
+	mc.moveCamera(cam) -- двигать камеру мышкой по краям экрана
+	for i = 1, #u do
 		if u[i].update then
 			u[i]:update(dt)
 		end
@@ -103,7 +98,14 @@ local dt = _dt
 	end
 	if love.keyboard.isDown("i") then
 		sost=0
-	end
+    end
+    if love.keyboard.isDown("p") then -- сохранить план в файл
+        file.save(u,'save.txt')
+        print("saved")
+        for i=1,#u do
+            u[i].draw,u[i].update=obj.getFuncByKind(u[i])
+        end
+    end
 	logging.updateLog(dt)
 	down = love.mouse.isDown (1)
 	menu.check(dt)

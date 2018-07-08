@@ -34,6 +34,13 @@ local function createThief(x,y,r)
 	return {kind="human",subkind='thief',id=maxid,draw=drawUnits.thief,
 			update=updateThief,x=x,y=y,angel=1,r=r}
 end
+local function updateTree(dt)
+end
+local function createTree(x,y,r)
+	maxid = maxid + 1
+	return {kind="tree",subkind=1,id=maxid,draw=drawUnits.tree,
+			update=updateTree,x=x,y=y,angel=1,r=r}
+end
 local function updateMovement(self,dt)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
@@ -65,8 +72,8 @@ local function updateDoor(self , dt)
 end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
-	return {kind='sensor',subkind='door',id=maxid,draw=drawUnits.door,update=updateDoor,
-			x=x,y=y,w=w,h=h,angel=1,state=false}
+	return {kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
+			x=x, y=y, w=w,h=h,angel=1,state=false}
 end
 local function updateLazer(self,dt)
 	for i = 1, #u do
@@ -107,9 +114,13 @@ local function getFuncByKind(t)
 	if t.kind == "wall" then
 		return drawUnits.wall, updateWall
 	end
+	if t.kind == "tree" then
+		return drawUnits.tree, updateTree
+	end
 end
 
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
 	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
 	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
-	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind}
+	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind,
+	createTree = createTree}
