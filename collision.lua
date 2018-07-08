@@ -29,6 +29,9 @@ local function rect2rect (rect1,rect2)
 	end
 end
 local function rect2circle (circle, rect)
+	if not rect.w then
+		print(rect.kind, rect.subKind, rect.id, rect.x, rect.w, rect.r, rect.h)
+	end
 	if circle.x + circle.r >= rect.x and circle.x - circle.r <= rect.x + rect.w and circle.y + 
 	circle.r>= rect.y and circle.y - circle.r <= rect.y + rect.h then --х, у, r относятся к кругу.
 		return true
@@ -44,7 +47,11 @@ local function dot2circle (dot, circle)
 	end
 end
 local function obj2obj (obj1, obj2)
-	if obj1.kind == "human" or obj1.kind == "animal" then
+	if obj1.kind=="bed" or obj1.kind=="desk" or obj1.kind=="fridge" then
+		return false
+	elseif obj2.kind=="bed" or obj2.kind=="desk" or obj2.kind=="fridge" then
+		return false
+	elseif obj1.kind == "human" or obj1.kind == "animal" then
 		if obj2.kind == "human" or obj2.kind == "animal" then
 			return circle2circle(obj1, obj2)
 		else	

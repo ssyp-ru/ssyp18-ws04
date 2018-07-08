@@ -1,30 +1,26 @@
-
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
 	sprtree1=love.graphics.newImage("tree1.png")
 	sprtree2=love.graphics.newImage("krovat.png")
 	sprtree3=love.graphics.newImage("freezer.png")
 	sprtree4=love.graphics.newImage("stol.png")
-	menu = require 'menu'
-	brAnimal = require "brainAnimal"
-	obj = require "constructor"
-	tf = require "control"
-	logging = require 'logging'
-	drwUnit = require "drawUnits"
-	camera = require 'gamera'
-	editor = require "edit"
-	file = require "file"
-	json=require "json"
-	mc = require "movecam"
-	success = love.window.setFullscreen(true)
-
+menu = require 'leftmenu'
+brAnimal = require "brainAnimal"
+obj = require "constructor"
+tf = require "control"
+logging = require 'logging'
+drwUnit = require "drawUnits"
+camera = require 'gamera'
+editor = require "edit"
+file = require "file"
+json = require "json"
+mc = require "movecam"
 	local time = 7
 	local time1 = 20
 	local anX = 700
 	local anY = 750
 	x = 1300
 	y = 300
-	sost=0
 	editor.load_editor()
 	editor.load_editor()
 	cam = camera.new( 0, 0, 4000,4000)
@@ -78,23 +74,24 @@ function love.load(arg)
 	logging.init(u)
 end
 function love.draw()
-	cam:draw(function(l,t,w,h)
-			for i = 1,#u do
+	cam:draw(function(l, t, w, h)
+			for i = 1, #u do
 				u[i]:draw()
 			end
 			editor.editDraw()
 		end)
-	mX,mY = love.mouse.getX(), love.mouse.getY()
-	love.graphics.setColor(255,0,0)
+	mX, mY = love.mouse.getX(), love.mouse.getY()
+	love.graphics.setColor(255, 0, 0)
 	menu:drawAll()
-end 
-function love.update(_dt)
-	local dt = _dt
-	if sost == 1 then -- остановить движение объектов
-		dt = 0
+end
+
+function love.update(dt)
+	if edit.x3 == edit.x4 and edit.y3 == edit.y4 then
+		scale = 1
+		edit.x4 = 6000
 	end
-	editor.full_editor()
-	mc.moveCamera(cam) -- двигать камеру мышкой по краям экрана
+	cam:setScale(scale)
+	mc.moveCamera(cam, dt) -- двигать камеру мышкой по краям экрана
 	for i = 1, #u do
 		if u[i].update then
 			u[i]:update(dt)
@@ -103,20 +100,21 @@ function love.update(_dt)
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
-	if love.keyboard.isDown("o") then
-		sost=1
-	end
-	if love.keyboard.isDown("i") then
-		sost=0
-	end
-	if love.keyboard.isDown("p") then -- сохранить план в файл
-		file.save(u,'save.txt')
-		print("saved")
-		for i=1,#u do
-			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
-		end
-	end
 	logging.updateLog(dt)
-	down = love.mouse.isDown (1)
+	down = love.mouse.isDown(1)
 	menu.check(dt)
+end
+
+function love.wheelmoved(x, y)
+	if scale > 1.5 then
+		scale = 1.5
+	elseif scale < 0.5 then
+		scale = 0.5
+	end
+	if y > 0 then
+		scale = scale + 0.05
+	end
+	if y < 0 then
+		scale = scale - 0.05
+	end
 end
