@@ -1,4 +1,4 @@
-menu = require 'menu'
+menu = require 'leftmenu'
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
@@ -11,12 +11,6 @@ json = require "json"
 mc = require "movecam"
 success = love.window.setFullscreen(true)
 scale = 1
-local time = 7
-local time1 = 20
-local anX = 700
-local anY = 750
-x = 1300
-y = 300
 sost = 0
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
@@ -80,7 +74,6 @@ function love.update(dt)
 		scale = 1
 		edit.x4 = 6000
 	end
-	editor.full_editor()
 	cam:setScale(scale)
 	mc.moveCamera(cam, dt) -- двигать камеру мышкой по краям экрана
 	for i = 1, #u do
@@ -97,8 +90,8 @@ function love.update(dt)
 end
 
 function love.wheelmoved(x, y)
-	if scale > 2 then
-		scale = 2
+	if scale > 1.5 then
+		scale = 1.5
 	elseif scale < 0.5 then
 		scale = 0.5
 	end

@@ -9,8 +9,11 @@ local function conThief (self, dt)
 	if gy == nil then
 		gy = self.y
 	end
+	if mx >= 0 and mx <= 350 and my >= 530 and my <= 600 then
+		gx, gy = self.x, self.y
+	end
 	if mx >= 650 and mx <= 800 and my >= 0 and my <= 50 then
-	gx, gy = self.x, self.y
+		gx, gy = self.x, self.y
 	else
 		if self.x > gx - 2 then
 			self.x = self.x - 400 * dt

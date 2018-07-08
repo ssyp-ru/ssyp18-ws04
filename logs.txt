@@ -1,157 +1,61 @@
-07/06/18 09:32:14============
-#1	movement
-#2	noise
-#3	lazer
-#4	door
-#5	movement
-07/06/18 09:32:59============
-#1	movement
-#2	noise
-#3	lazer
-#4	door
-#5	movement
-07/07/18 15:00:25============
+07/08/18 16:32:39============
 #1	movement
 #2	lazer
 #3	door
 #4	movement
-07/07/18 15:00:49============
+07/08/18 16:42:39============
 #1	movement
 #2	lazer
 #3	door
 #4	movement
-07/07/18 15:08:51============
+07/08/18 17:03:19============
+07/08/18 17:03:39============
 #1	movement
 #2	lazer
 #3	door
 #4	movement
-#4 movement	true
-#4 movement	false
-#3 door	true
-#3 door	false
-#2 lazer	true
-#2 lazer	false
-#2 lazer	true
-#2 lazer	false
-#2 lazer	true
-#5 movement	true
-#5 movement	false
-#6 movement	true
-#6 movement	false
-#2 lazer	false
-#3 door	true
-#3 door	false
-#8 movement	true
-#9 movement	true
-#9 movement	false
-#8 movement	false
-#4 movement	true
-#4 movement	false
-#4 movement	true
-#4 movement	false
-#18 movement	true
-#18 movement	false
-#18 movement	true
-#18 movement	false
-#14 movement	true
-#15 movement	true
-#16 movement	true
-#19 movement	true
-#20 movement	true
-#21 movement	true
-#22 movement	true
-#23 movement	true
-#24 movement	true
-#25 movement	true
-#26 movement	true
-#27 movement	true
-#28 movement	true
-#29 movement	true
-#14 movement	false
-#15 movement	false
-#16 movement	false
-#19 movement	false
-#20 movement	false
-#21 movement	false
-#22 movement	false
-#23 movement	false
-#24 movement	false
-#25 movement	false
-#26 movement	false
-#27 movement	false
-#28 movement	false
-#29 movement	false
-#14 movement	true
-#15 movement	true
-#16 movement	true
-#14 movement	false
-#15 movement	false
-#16 movement	false
-#19 movement	true
-#20 movement	true
-#21 movement	true
-#22 movement	true
-#23 movement	true
-#24 movement	true
-#25 movement	true
-#26 movement	true
-#27 movement	true
-#28 movement	true
-#29 movement	true
-#19 movement	false
-#20 movement	false
-#21 movement	false
-#22 movement	false
-#23 movement	false
-#24 movement	false
-#25 movement	false
-#26 movement	false
-#27 movement	false
-#28 movement	false
-#29 movement	false
-#51 movement	true
-#51 movement	false
-#51 movement	true
-#51 movement	false
-#51 movement	true
-#51 movement	false
-#51 movement	true
-#51 movement	false
-#11 movement	true
-#11 movement	false
-#51 movement	true
-#51 movement	false
-#51 movement	true
-#51 movement	false
-#51 movement	true
-#51 movement	false
-#13 movement	true
-#13 movement	false
-#51 movement	true
-#51 movement	false
-07/07/18 15:35:36============
+07/08/18 17:04:03============
 #1	movement
 #2	lazer
 #3	door
 #4	movement
-#4 movement	true
-#4 movement	false
-#3 door	true
-#3 door	false
-#3 door	true
-#3 door	false
-#4 movement	true
-#4 movement	false
-07/07/18 15:39:50============
+07/08/18 17:31:45============
 #1	movement
 #2	lazer
 #3	door
 #4	movement
-#4 movement	true
-#4 movement	false
-#3 door	true
-#3 door	false
-#3 door	true
-#3 door	false
-#4 movement	true
-#4 movement	false
+07/08/18 17:31:57============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:33:52============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:34:26============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:35:10============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:35:35============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:35:43============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:35:59============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
