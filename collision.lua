@@ -1,4 +1,4 @@
---Version 1.1
+--Version 1.1a
 local function circle2circle(circle1, circle2)
 	if (math.sqrt((circle1.x-circle2.x)*(circle1.x-circle2.x)+(circle1.y-circle2.y)*(circle1.y-circle2.y))) 
 	<= circle1.r + circle2.r then
@@ -7,7 +7,7 @@ local function circle2circle(circle1, circle2)
 		return false
 	end
 end
-local function dot2dot(dot,dot1)
+--[[local function dot2dot(dot,dot1)
 	if dot1.x == dot1.x and dot.y == dot1.y then
 		return true
 	else
@@ -20,7 +20,7 @@ local function dot2rect(dot, rect)
 	else
 		return false
 	end
-end
+end]]
 local function rect2rect (rect1,rect2)
 	if rect1.x + rect1.w >= rect2.x and rect1.x <= rect2.x + rect2.w and rect1.y + rect1.h >= rect2.y and rect1.y <= rect2.y + rect1.h then
 		return true
@@ -39,13 +39,13 @@ local function rect2circle (circle, rect)
 		return false
 	end
 end
-local function dot2circle (dot, circle)
+--[[local function dot2circle (dot, circle)
 	if math.sqrt((circle.x - dot.x)^2 + (circle.y - dot.y)^2) < circle.r then
 		return true
 	else
 		return false
 	end
-end
+end]]
 local function obj2obj (obj1, obj2)
 	if obj1.kind=="bed" or obj1.kind=="desk" or obj1.kind=="fridge" then
 		return false
