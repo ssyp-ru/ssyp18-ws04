@@ -82,20 +82,12 @@ function love.draw()
 end 
 function love.update(_dt)
 local dt = _dt
-	if sost == 1 then
+	if sost == 1 then -- остановить движение объектов
 		dt = 0
 	end
 	editor.full_editor()
-	mc.moveCamera(cam)
-	if love.keyboard.isDown("p") then
-		file.save(u,'save.txt')
-		print("saved")
-		for i=1,#u do
-			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
-		end
-	end
-	cam:setPosition(u[5].x,u[5].y)
-	for i = 1, #u do 
+	mc.moveCamera(cam) -- двигать камеру мышкой по краям экрана
+	for i = 1, #u do
 		if u[i].update then
 			u[i]:update(dt)
 		end
@@ -108,7 +100,14 @@ local dt = _dt
 	end
 	if love.keyboard.isDown("i") then
 		sost=0
-	end
+    end
+    if love.keyboard.isDown("p") then -- сохранить план в файл
+        file.save(u,'save.txt')
+        print("saved")
+        for i=1,#u do
+            u[i].draw,u[i].update=obj.getFuncByKind(u[i])
+        end
+    end
 	logging.updateLog(dt)
 	down = love.mouse.isDown (1)
 	menu.check(dt)
