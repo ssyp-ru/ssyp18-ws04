@@ -6,7 +6,9 @@ local function moveCamera(self,dt)
 	if mx >= 650 and mx <= 800 and my >= 0 and my <= 50 or
 	mx >= 0 and mx <= 350 and my >= 530 and my <= 600 then
 	else
-		if mx >= love.graphics.getHeight() - 150 and mx <= love.graphics.getWidth() and my >= 0 and my <= 50 then
+		if love.mouse.isDown(3) then
+			mx,my = self:toWorld(mx,my)
+			self:setPosition(self.x + (mx - edit.x3) * -dt * 3,self.y + (my - edit.y3) * -dt * 3)
 		else
 			if love.mouse.isDown(3) then
 				mx,my = self:toWorld(mx,my)
