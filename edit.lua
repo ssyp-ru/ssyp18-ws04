@@ -146,5 +146,5 @@ function love.mousereleased(mX, mY, button)
 		edit.x4,edit.y4 = mX,mY
 	end
 end
-return {full_editor = full_editor, editWall = editWall, editDrawWall = editDrawWall,state = state,
+return {editWall = editWall, editDrawWall = editDrawWall,
 	load_editor = load_editor,editDraw = editDraw}
