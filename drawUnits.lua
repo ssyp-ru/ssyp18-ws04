@@ -9,7 +9,43 @@ local function thief (self)
 end
 local function tree (self)
 	love.graphics.setColor (255,255,255)
-	love.graphics.draw(sprtree, self.x, self.y, self.r)
+	love.graphics.draw(sprtree1, self.x, self.y)
+end
+local function bed (self)
+	love.graphics.setColor (255,255,255)
+	if self.angel==1 then
+		love.graphics.draw(sprtree2, self.x, self.y)
+	elseif self.angel==2 then
+		love.graphics.draw(sprtree2, self.x, self.y,math.pi*0.5)
+	elseif self.angel==3 then
+		love.graphics.draw(sprtree2, self.x, self.y,math.pi)
+	elseif self.angel==4 then
+		love.graphics.draw(sprtree2, self.x, self.y,math.pi*1.5)
+	end
+end
+local function fridge (self)
+	love.graphics.setColor (255,255,255)
+	if self.angel==1 then
+		love.graphics.draw(sprtree3, self.x, self.y)
+	elseif self.angel==2 then
+		love.graphics.draw(sprtree3, self.x, self.y,math.pi*0.5)
+	elseif self.angel==3 then
+		love.graphics.draw(sprtree3, self.x, self.y,math.pi)
+	elseif self.angel==4 then
+		love.graphics.draw(sprtree3, self.x, self.y,math.pi*1.5)
+	end
+end
+local function desk (self)
+	love.graphics.setColor (255,255,255)
+	if self.angel==1 then
+		love.graphics.draw(sprtree4, self.x, self.y)
+	elseif self.angel==2 then
+		love.graphics.draw(sprtree4, self.x, self.y,math.pi*0.5)
+	elseif self.angel==3 then
+		love.graphics.draw(sprtree4, self.x, self.y,math.pi)
+	elseif self.angel==4 then
+		love.graphics.draw(sprtree4, self.x, self.y,math.pi*1.5)
+	end
 end
 local function animal (self)
 	love.graphics.setColor (125, 125, 125)
@@ -54,4 +90,4 @@ local function lazer (self)
 end
 
 return {editWall = editWall, wall = wall, thief = thief, animal = animal, movement = movement,
-	noise = noise, door = door, lazer = lazer}
+	noise = noise, door = door, lazer = lazer,tree=tree,desk=desk,fridge=fridge,bed=bed}

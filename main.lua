@@ -1,26 +1,30 @@
-menu = require 'menu'
-brAnimal = require "brainAnimal"
-obj = require "constructor"
-tf = require "control"
-logging = require 'logging'
-drwUnit = require "drawUnits"
-camera = require 'gamera'
-editor = require "edit"
-file = require "file"
-json=require "json"
-mc = require "movecam"
-success = love.window.setFullscreen(true)
 
-local time = 7
-local time1 = 20
-local anX = 700
-local anY = 750
-x = 1300
-y = 300
-sost=0
 function love.load(arg)
 	if arg[#arg] == "-debug" then require("mobdebug").start() end
-	sprtree=love.graphics.newImage("tree1.png")
+	sprtree1=love.graphics.newImage("tree1.png")
+	sprtree2=love.graphics.newImage("krovat.png")
+	sprtree3=love.graphics.newImage("freezer.png")
+	sprtree4=love.graphics.newImage("stol.png")
+	menu = require 'menu'
+	brAnimal = require "brainAnimal"
+	obj = require "constructor"
+	tf = require "control"
+	logging = require 'logging'
+	drwUnit = require "drawUnits"
+	camera = require 'gamera'
+	editor = require "edit"
+	file = require "file"
+	json=require "json"
+	mc = require "movecam"
+	success = love.window.setFullscreen(true)
+
+	local time = 7
+	local time1 = 20
+	local anX = 700
+	local anY = 750
+	x = 1300
+	y = 300
+	sost=0
 	editor.load_editor()
 	editor.load_editor()
 	cam = camera.new( 0, 0, 4000,4000)
@@ -29,8 +33,8 @@ function love.load(arg)
 	maxid = 0
 	love.graphics.setBackgroundColor{255,255,255}
 --		u=file.rabota("save.txt", {})
-		u={}
-	for i = 1, 15 do
+	u={}
+	for i = 1, 18 do
 		if i == 1 then
 			u[#u+1] = obj.createWall(300, 200, 20, 360)
 		elseif i == 2 then
@@ -61,6 +65,12 @@ function love.load(arg)
 			u[#u+1] = obj.createMovement (120, 20, 180, 650)
 		elseif i == 15 then
 			u[#u+1] = obj.createTree(1500,800,30)
+		elseif i == 16 then
+			u[#u+1] = obj.createBed(150,800)
+		elseif i == 17 then
+			u[#u+1] = obj.createFridge(50,800)
+		elseif i == 18 then
+			u[#u+1] = obj.createDesk(1500,500)
 		end
 	end
 	--obj.createLazer(974,200,1,200)
@@ -79,7 +89,7 @@ function love.draw()
 	menu:drawAll()
 end 
 function love.update(_dt)
-local dt = _dt
+	local dt = _dt
 	if sost == 1 then -- остановить движение объектов
 		dt = 0
 	end
@@ -98,14 +108,14 @@ local dt = _dt
 	end
 	if love.keyboard.isDown("i") then
 		sost=0
-    end
-    if love.keyboard.isDown("p") then -- сохранить план в файл
-        file.save(u,'save.txt')
-        print("saved")
-        for i=1,#u do
-            u[i].draw,u[i].update=obj.getFuncByKind(u[i])
-        end
-    end
+	end
+	if love.keyboard.isDown("p") then -- сохранить план в файл
+		file.save(u,'save.txt')
+		print("saved")
+		for i=1,#u do
+			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
+		end
+	end
 	logging.updateLog(dt)
 	down = love.mouse.isDown (1)
 	menu.check(dt)

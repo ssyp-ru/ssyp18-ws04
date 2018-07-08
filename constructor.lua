@@ -34,12 +34,33 @@ local function createThief(x,y,r)
 	return {kind="human",subkind='thief',id=maxid,draw=drawUnits.thief,
 			update=updateThief,x=x,y=y,angel=1,r=r}
 end
-local function updateTree(dt)
+local function updateBed(self, dt)
+end
+local function createBed(x,y)
+	maxid = maxid + 1
+	return {kind="bed",subkind=2,id=maxid,draw=drawUnits.bed,
+			update=updateBed, x=x,y=y,angel=1,r=r}
+end
+local function updateFridge(self, dt)
+end
+local function createFridge(x,y)
+	maxid = maxid + 1
+	return {kind="fridge",subkind=3,id=maxid,draw=drawUnits.fridge,
+			update=updateFridge, x=x,y=y,angel=1,r=r}
+end
+local function updateDesk(self, dt)
+end
+local function createDesk(x,y)
+	maxid = maxid + 1
+	return {kind="desk",subkind=4,id=maxid,draw=drawUnits.desk,
+			update=updateDesk, x=x,y=y,angel=1,r=r}
+end
+local function updateTree(self, dt)
 end
 local function createTree(x,y,r)
 	maxid = maxid + 1
 	return {kind="tree",subkind=1,id=maxid,draw=drawUnits.tree,
-			update=updateTree,x=x,y=y,angel=1,r=r}
+			update=updateTree, x=x,y=y,angel=1,r=r}
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
@@ -117,10 +138,20 @@ local function getFuncByKind(t)
 	if t.kind == "tree" then
 		return drawUnits.tree, updateTree
 	end
+	if t.kind == "desk" then
+		return drawUnits.desk, updateDesk
+	end
+	if t.kind == "fridge" then
+		return drawUnits.fridge, updateFridge
+	end
+	if t.kind == "bed" then
+		return drawUnits.bed, updateBed
+	end
 end
 
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
 	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
 	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
 	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind,
-	createTree = createTree}
+	createTree = createTree,createBed=createBed,updateBed=updateBed,updateFridge=updateFridge,
+	createFridge=createFridge,updateDesk=updateDesk,createDesk=createDesk}
