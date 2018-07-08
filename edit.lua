@@ -9,29 +9,6 @@ edit = {
 local function load_editor()
 	local state = "Wall"
 end
-local function full_editor()
-	if love.keyboard.isDown("0") then
-		state = "Point"
-	end
-	if love.keyboard.isDown("1") then
-		state = "Wall"
-	end
-	if love.keyboard.isDown("2") then
-		state = "Thief"
-	end
-	if love.keyboard.isDown("3") then
-		state = "Animal"
-	end
-	if love.keyboard.isDown("4") then
-		state = "Movement"
-	end
-	if love.keyboard.isDown("5") then
-		state = "Door"
-	end
-	if love.keyboard.isDown("backspace") then
-		state = "Delete"
-	end
-end
 local function editDelete()
 	mx,my = cam:toWorld(love.mouse.getX(),love.mouse.getY())
 	local t = {

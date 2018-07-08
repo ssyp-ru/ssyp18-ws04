@@ -74,21 +74,20 @@ function love.draw()
 	mX,mY = love.mouse.getX(), love.mouse.getY()
 	love.graphics.setColor(255,0,0)
 	menu:drawAll()
-end 
+end
 function love.update(_dt)
 local dt = _dt
 	if sost == 1 then
 		dt = 0
 	end
-	editor.full_editor()
 	mc.moveCamera(cam)
-	if love.keyboard.isDown("p") then
-		file.save(u,'save.txt')
-		print("saved")
-		for i=1,#u do
-			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
-		end
-	end
+--	if love.keyboard.isDown("p") then
+--		file.save(u,'save.txt')
+--		print("saved")
+--		for i=1,#u do
+--			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
+--		end
+--	end
 	for i = 1, #u do
 		if u[i].update then
 			u[i]:update(dt)
@@ -97,12 +96,12 @@ local dt = _dt
 	if love.keyboard.isDown("escape") then
 		love.event.quit()
 	end
-	if love.keyboard.isDown("o") then
-		sost=1
-	end
-	if love.keyboard.isDown("i") then
-		sost=0
-	end
+--	if love.keyboard.isDown("o") then
+--		sost=1
+--	end
+--	if love.keyboard.isDown("i") then
+--		sost=0
+--	end
 	logging.updateLog(dt)
 	down = love.mouse.isDown (1)
 	menu.check(dt)

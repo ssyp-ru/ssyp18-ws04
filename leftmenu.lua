@@ -1,11 +1,14 @@
+edti = require 'edit'
 local nemu = {}
-local wall = {}
+local noth = {}
+wall = {}
 local delete = {}
 local door = {}
 local movement = {}
 local thief = {}
 local cat = {}
 local dat = 0.5
+local dat1  = 0.5
 local time = {}
 for i = 1, 3 do
 	time[i] = 5
@@ -55,16 +58,25 @@ thief.h = 70
 cat.x = 250
 cat.w = 50
 cat.h = 70
-nemu.x = 300
-nemu.y = love.graphics.getHeight() - 70
-nemu.x1 = 320
+nemu.x = 350
+nemu.y = love.graphics.getHeight() - 65
+nemu.x1 = 370
 nemu.y1 = love.graphics.getHeight() - 47
 nemu.y2 = love.graphics.getHeight() - 23
-nemu.y3 = love.graphics.getHeight()
-nemu.x4 = 306
+nemu.y3 = love.graphics.getHeight() - 5
+nemu.x4 = 356
 nemu.y4 = love.graphics.getHeight() - 47
-nemu.x5 = 314
+nemu.x5 = 364
 nemu.y5 = love.graphics.getHeight() - 23
+noth.x = 300
+noth.w = 50
+noth.h = 70
+local function drawNoth (x, y, w, h)
+	love.graphics.setColor (0, 0, 0)
+	love.graphics.rectangle('line', x, y, w, h)
+	love.graphics.setColor (255, 0, 0, 140)
+	love.graphics.print('nothing', x + 1, y + 25)
+end
 local function drawWall(x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
 	love.graphics.rectangle('line', x, y, w, h)
@@ -146,6 +158,7 @@ local function drawAll ()
 	drawCat(cat.x, wall.y, cat.w, cat.h)
 	drawNm(nemu.x, nemu.y, nemu.x1, nemu.y1, nemu.x1, nemu.y2, nemu.x, nemu.y3, nemu.x4,
 		nemu.y4, nemu.x4, nemu.y5, nemu.x5, nemu.y4, nemu.x5, nemu.y5)
+	drawNoth(noth.x, wall.y, noth.w, noth.h)
 end
 local function check (dt)
 	local mx = love.mouse.getX()
@@ -176,25 +189,28 @@ local function check (dt)
 				u[i].draw,u[i].update=obj.getFuncByKind(u[i])
 			end
 		end
+		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y and my <= wall.y + noth.h then
+			state = "Point"
+		end
 		if mx >= wall.x and mx <= wall.x + wall.w and my >= wall.y and my <= wall.y + wall.h then
-			print('WALL')
+			state = "Wall"
 		end
-		if mx >= delete.x and mx <= delete.x + delete.w and my >= delete.y and
-		my <= delete.y + delete.h then
-			print('DELETE')
+		if mx >= delete.x and mx <= delete.x + delete.w and my >= wall.y and
+		my <= wall.y + delete.h then
+			state = "Delete"
 		end
-		if mx >= door.x and mx <= door.x + door.w and my >= door.y and my <= door.y + door.h then
-			print('DOOR')
+		if mx >= door.x and mx <= door.x + door.w and my >= wall.y and my <= wall.y + door.h then
+			state = "Door"
 		end
-		if mx >= movement.x and mx <= movement.x + movement.w and my >= movement.y and
-		my <= movement.y + movement.h then
-			print('MOVEMENT')
+		if mx >= movement.x and mx <= movement.x + movement.w and my >= wall.y and
+		my <= wall.y + movement.h then
+			state = "Movement"
 		end
-		if mx >= thief.x and mx <= thief.x + thief.w and my >= thief.y and my <= thief.y + thief.h then
-			print('THIEF')
+		if mx >= thief.x and mx <= thief.x + thief.w and my >= wall.y and my <= wall.y + thief.h then
+			state = "Thief"
 		end
-		if mx >= cat.x and mx <= cat.x + cat.w and my >= cat.y and my <= cat.y + cat.h then
-			print('CAT')
+		if mx >= cat.x and mx <= cat.x + cat.w and my >= wall.y and my <= wall.y + cat.h then
+			state = "Animal"
 		end
 	end
 	dat = dat - dt
@@ -232,6 +248,67 @@ local function check (dt)
 			if Mnu.y5 < 13 then Mnu.y5 = 13 end
 			if mx >= btnsNew.x and mx <= 800 and my >= 0 and my <= Mnu.y1 then
 				dat = 0.5
+			end
+		end
+	end
+	dat1 = dat1 - dt
+	if mx >= wall.x and mx <= nemu.x and my >= wall.y and my <= wall.y + wall.h and dat1 > 0 then
+		dat1 = 0.5
+		wall.x = wall.x + 500 * dt
+		delete.x = delete.x + 500 * dt
+		door.x = door.x + 500 * dt
+		movement.x = movement.x + 500 * dt
+		thief.x = thief.x + 500 * dt
+		cat.x = cat.x + 500 * dt
+		noth.x = noth.x + 500 * dt
+		nemu.x = nemu.x + 500 * dt
+		nemu.x1 = nemu.x1 + 500 * dt
+		nemu.x4 = nemu.x4 + 500 * dt
+		nemu.x5 = nemu.x5 + 500 * dt
+		if wall.x > 0 and delete.x > 50 and door.x > 100 and movement.x > 150 and thief.x > 200 and
+		cat.x > 250 and noth.x > 300 and nemu.x > 350 and nemu.x1 > 370 and nemu.x4 > 356 and
+		nemu.x5 > 364 then
+			wall.x = 0
+			delete.x = 50
+			door.x = 100
+			movement.x = 150
+			thief.x = 200
+			cat.x = 250
+			nemu.x = 350
+			nemu.x1 = 370
+			nemu.x4 = 356
+			nemu.x5 = 364
+			noth.x = 300
+		end
+	else
+		if dat1 < 0 then
+			wall.x = wall.x - 500 * dt
+			delete.x = delete.x - 500 * dt
+			door.x = door.x - 500 * dt
+			movement.x = movement.x - 500 * dt
+			thief.x = thief.x - 500 * dt
+			cat.x = cat.x - 500 * dt
+			noth.x = noth.x - 500 * dt
+			nemu.x = nemu.x - 500 * dt
+			nemu.x1 = nemu.x1 - 500 * dt
+			nemu.x4 = nemu.x4 - 500 * dt
+			nemu.x5 = nemu.x5 - 500 * dt
+			if wall.x < -350 then
+				wall.x = -350
+				delete.x = -300
+				door.x = -250
+				movement.x = -200
+				thief.x = -150
+				cat.x = -100
+				nemu.x = 0
+				nemu.x1 = 20
+				nemu.x4 = 6
+				nemu.x5 = 14
+				noth.x = -50
+			end
+			if mx >= nemu.x and mx <= nemu.x1 and my >= wall.y and
+			my <= wall.y + wall.h then
+				dat1 = 0.5
 			end
 		end
 	end
