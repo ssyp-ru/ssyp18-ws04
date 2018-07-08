@@ -3,20 +3,10 @@ con = require "control"
 coll = require "collision"
 drawUnits = require "drawUnits"
 
-local function createWall(x1,y1,w1,h1)
-	maxid = maxid + 1
-	local t = {
-		x = x1, y = y1,
-		angle = 0,
-		kind = "wall",
-		subKind = "none",
-		id = maxid,
-		w = w1, h = h1,
-		name = "wall"..maxid,
-		update = updateWall,
-		draw = drawUnits.wall
-	}
-	return t
+local function createWall(x,y,w,h)
+	maxid = maxid + 1 
+	return {x=x,y=y,angel=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
+		update=updateWall,draw=drawUnits.wall}
 end
 local function updateWall(dt)
 end
@@ -33,39 +23,16 @@ local function updateAnimal(animal, dt)
 end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
-	local t = {
-		kind='animal',
-		subkind='none',
-		id=maxid,
-		draw=drawUnits.animal,
-		update=updateAnimal,
-		x=x, y=y,
-		angel=0,
-		noize = 0,
-		r=r,
-		delay = 4,
-		delay1 = 20
-	}
-	return t
+	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
+			update=updateAnimal,x=x,y=y,angel=1,r=r,delay=4,delay1=20}
 end
 function updateThief(thief, dt)
 	con.conThief(thief, dt)
 end
 local function createThief(x,y,r)
 	maxid = maxid + 1
-	local t = {
-		kind = "human",
-		subkind = 'thief',
-		id = maxid,
-		draw = drawUnits.thief,
-		update = updateThief,
-		x = x,
-		y = y,
-		angle = 0,
-		r = r,
-		noize = 0
-	}
-	return t
+	return {kind="human",subkind='thief',id=maxid,draw=drawUnits.thief,
+			update=updateThief,x=x,y=y,angel=1,r=r}
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
@@ -80,21 +47,9 @@ local function updateMovement(self,dt)
 	end
 end
 local function createMovement(x,y,w,h)
-	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='movement',
-		id=maxid,
-		state = false,
-		draw=drawUnits.movement,
-		update=updateMovement,
-		x=x,
-		y=y,
-		w=w,
-		h=h,
-		angle=0
-	}
-	return t
+	maxid = maxid + 1 
+	return {kind='sensor',subkind='movement',id=maxid,state=false,
+			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angel=1}
 end
 local function updateDoor(self , dt)
 	for i = 1, #u do
@@ -110,20 +65,8 @@ local function updateDoor(self , dt)
 end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='door',
-		id=maxid,
-		draw=drawUnits.door,
-		update=updateDoor,
-		x=x,
-		y=y,
-		w=w,
-		h=h,
-		angle=0,
-		state=false
-	}
-	return t
+	return {kind='sensor',subkind='door',id=maxid,draw=drawUnits.door,update=updateDoor,
+			x=x,y=y,w=w,h=h,angel=1,state=false}
 end
 local function updateLazer(self,dt)
 	for i = 1, #u do
@@ -139,20 +82,8 @@ local function updateLazer(self,dt)
 end
 local function createLazer(x,y,w,h)
 	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='lazer',
-		id=maxid,
-		draw=drawUnits.lazer,
-		update=updateLazer,
-		x=x,
-		y=y,
-		angle=2,
-		state=false,
-		h=h,
-		w=w
-	}
-	return t
+	return {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
+			x=x,y=y,angel=1,state=false,h=h,w=w}
 end
 local function getFuncByKind(t)
 	if t.kind == "sensor" and t.subkind == "movement" then
