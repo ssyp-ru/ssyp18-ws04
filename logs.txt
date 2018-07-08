@@ -8,3 +8,14 @@
 #2	lazer
 #3	door
 #4	movement
+07/08/18 17:03:19============
+07/08/18 17:03:39============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/08/18 17:04:03============
+#1	movement
+#2	lazer
+#3	door
+#4	movement

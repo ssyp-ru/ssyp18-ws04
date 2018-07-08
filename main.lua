@@ -132,10 +132,6 @@ function love.update(_dt)
     if love.keyboard.isDown("escape") then
         love.event.quit()
     end
-        for i = 1, #u do
-            u[i].draw, u[i].update = obj.getFuncByKind(u[i])
-        end
-    end
     logging.updateLog(dt)
     down = love.mouse.isDown(1)
     menu.check(dt)
