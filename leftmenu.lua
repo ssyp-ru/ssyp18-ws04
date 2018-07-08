@@ -1,7 +1,7 @@
-edti = require 'edit'
+--edti = require 'edit'
 local nemu = {}
 local noth = {}
-wall = {}
+local wall = {}
 local delete = {}
 local door = {}
 local movement = {}
