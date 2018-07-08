@@ -1,8 +1,4 @@
 --Version 1.1
-local function editWall(x,y,w,h)
-	love.graphics.setColor (141, 107, 33)
-	love.graphics.rectangle ("line", x, y, w, h)
-end
 local function wall (self)
 	love.graphics.setColor (141, 107, 33)
 	love.graphics.rectangle ("fill", self.x, self.y, self.w, self.h)
@@ -10,7 +6,6 @@ end
 local function thief (self)
 	love.graphics.setColor (0, 0, 0, 255)
 	love.graphics.circle ("fill", self.x, self.y, self.r)
-	love.graphics.print (self.id, self.x, self.y + 20)
 end
 local function animal (self)
 	love.graphics.setColor (125, 125, 125)
@@ -40,7 +35,15 @@ end
 local function lazer (self)
 	love.graphics.setColor (255, 0, 0)
 	love.graphics.rectangle ("line", self.x, self.y, 25, 25)
-	love.graphics.line (self.x+12, self.y+25,self.w+self.x+12,self.h+self.y)
+	if self.angle==1 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,self.w,self.h+12)
+	elseif self.angle==2 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,-self.h-12,self.w)
+	elseif self.angle==3 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,self.w,-self.h-12)
+	elseif self.angle==4 then
+		love.graphics.rectangle ("line", self.x+12, self.y+12,self.h+12,-self.w)
+	end
 	love.graphics.line (self.x + 20, self.y + 5, self.x + 5, self.y + 5, self.x + 5, self.y + 12,
 		self.x + 20, self.y + 12, self.x + 20, self.y + 20, self.x + 5, self.y + 20)
 end

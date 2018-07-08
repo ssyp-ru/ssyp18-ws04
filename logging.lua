@@ -28,7 +28,7 @@ local function updateLog (dt)
 	end
 	for i=1, #log do
 		if log[i].oldstate ~= log[i].sensor.state then
-			fLog:write('#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
+			fLog:write(months..'	'..'#'..i..' '..log[i].sensor.subkind..'	'..tostring(log[i].sensor.state)..'\n')
 			log[i].oldstate = log[i].sensor.state
 		end
 	end
