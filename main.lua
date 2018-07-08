@@ -1,4 +1,4 @@
-menu = require 'menu'
+menu = require 'leftmenu'
 brAnimal = require "brainAnimal"
 obj = require "constructor"
 tf = require "control"
