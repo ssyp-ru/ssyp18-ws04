@@ -3,8 +3,8 @@ cam = require "gamera"
 logging = require "logging"
 coll = require "collision"
 edit = {
-	x1 = 0,x2 = 0,
-	y1 = 0,y2 = 0
+	x1 = 0,x2 = 0,x3 = 0, x4 = 0,
+	y1 = 0,y2 = 0,y3 = 0, y4 = 0
 }
 local function load_editor()
 	local state = "Wall"
@@ -145,6 +145,10 @@ function love.mousepressed(mX, mY, button, isTouch)
 			editDelete()
 		end
 	end
+	if button == 3 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x3,edit.y3 = mX,mY
+	end
 end
 function love.mousereleased(mX, mY, button)
 	if button == 2 then
@@ -158,6 +162,10 @@ function love.mousereleased(mX, mY, button)
 		elseif state == "Door" then
 			editDoor()
 		end
+	end
+	if button == 3 then
+		mX,mY = cam:toWorld(mX,mY)
+		edit.x4,edit.y4 = mX,mY
 	end
 end
 return {full_editor = full_editor, editWall = editWall, editDrawWall = editDrawWall,state = state,
