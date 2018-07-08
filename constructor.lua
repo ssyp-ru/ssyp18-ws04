@@ -26,7 +26,7 @@ local function createAnimal(x,y,r)
 	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
 			update=updateAnimal,x=x,y=y,angel=1,r=r,delay=4,delay1=20}
 end
-function updateThief(thief, dt)
+local function updateThief(thief, dt)
 	con.conThief(thief, dt)
 end
 local function createThief(x,y,r)
@@ -150,8 +150,8 @@ local function getFuncByKind(t)
 end
 
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
-	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
-	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
+	createDoor=createDoor,createLazer=createLazer,createWall = createWall,
+	updateThief=updateThief,updateMovement=updateMovement,
 	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind,
 	createTree = createTree,createBed=createBed,updateBed=updateBed,updateFridge=updateFridge,
 	createFridge=createFridge,updateDesk=updateDesk,createDesk=createDesk}
