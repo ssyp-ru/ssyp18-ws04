@@ -132,15 +132,6 @@ function love.update(_dt)
     if love.keyboard.isDown("escape") then
         love.event.quit()
     end
-    if love.keyboard.isDown("o") then
-        sost = 1
-    end
-    if love.keyboard.isDown("i") then
-        sost = 0
-    end
-    if love.keyboard.isDown("p") then -- сохранить план в файл
-        file.save(u, 'save.txt')
-        print("saved")
         for i = 1, #u do
             u[i].draw, u[i].update = obj.getFuncByKind(u[i])
         end
