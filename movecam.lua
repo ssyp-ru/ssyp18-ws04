@@ -3,7 +3,8 @@ cam = require "gamera"
 local function moveCamera(self)
 	mx,my = love.mouse.getX(),love.mouse.getY()
 	local padding = 50
-	if mx >= 650 and mx <= 800 and my >= 0 and my <= 50 then
+	if mx >= 650 and mx <= 800 and my >= 0 and my <= 50 or
+	mx >= 0 and mx <= 350 and my >= 530 and my <= 600 then
 	else
 		if my > love.graphics.getHeight() - padding then
 			self:setPosition(self.x,self.y + 10)
