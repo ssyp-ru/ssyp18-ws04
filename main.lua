@@ -89,8 +89,7 @@ local dt = _dt
 			u[i].draw,u[i].update=obj.getFuncByKind(u[i])
 		end
 	end
-	cam:setPosition(u[5].x,u[5].y)
-	for i = 1, #u do 
+	for i = 1, #u do
 		if u[i].update then
 			u[i]:update(dt)
 		end
