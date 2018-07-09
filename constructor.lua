@@ -5,7 +5,7 @@ drawUnits = require "drawUnits"
 
 local function createWall(x,y,w,h)
 	maxid = maxid + 1 
-	return {x=x,y=y,angel=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
+	return {x=x,y=y,angle=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
 		update=updateWall,draw=drawUnits.wall}
 end
 local function updateWall(dt)
@@ -24,7 +24,7 @@ end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
 	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
-			update=updateAnimal,x=x,y=y,angel=1,r=r,delay=4,delay1=20}
+			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20}
 end
 local function updateThief(thief, dt)
 	con.conThief(thief, dt)
@@ -32,35 +32,35 @@ end
 local function createThief(x,y,r)
 	maxid = maxid + 1
 	return {kind="human",subkind='thief',id=maxid,draw=drawUnits.thief,
-			update=updateThief,x=x,y=y,angel=1,r=r}
+			update=updateThief,x=x,y=y,angle=1,r=r}
 end
 local function updateBed(self, dt)
 end
 local function createBed(x,y)
 	maxid = maxid + 1
 	return {kind="bed",subkind=2,id=maxid,draw=drawUnits.bed,
-			update=updateBed, x=x,y=y,angel=1,r=r}
+			update=updateBed, x=x,y=y,angle=1,r=r}
 end
 local function updateFridge(self, dt)
 end
 local function createFridge(x,y)
 	maxid = maxid + 1
 	return {kind="fridge",subkind=3,id=maxid,draw=drawUnits.fridge,
-			update=updateFridge, x=x,y=y,angel=1,r=r}
+			update=updateFridge, x=x,y=y,angle=1,r=r}
 end
 local function updateDesk(self, dt)
 end
 local function createDesk(x,y)
 	maxid = maxid + 1
 	return {kind="desk",subkind=4,id=maxid,draw=drawUnits.desk,
-			update=updateDesk, x=x,y=y,angel=1,r=r}
+			update=updateDesk, x=x,y=y,angle=1,r=r}
 end
 local function updateTree(self, dt)
 end
 local function createTree(x,y,r)
 	maxid = maxid + 1
 	return {kind="tree",subkind=1,id=maxid,draw=drawUnits.tree,
-			update=updateTree, x=x,y=y,angel=1,r=r}
+			update=updateTree, x=x,y=y,angle=1,r=r}
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
@@ -77,7 +77,7 @@ end
 local function createMovement(x,y,w,h)
 	maxid = maxid + 1 
 	return {kind='sensor',subkind='movement',id=maxid,state=false,
-			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angel=1}
+			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angle=1}
 end
 local function updateDoor(self , dt)
 	for i = 1, #u do
@@ -94,7 +94,7 @@ end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
 	return {kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
-			x=x, y=y, w=w,h=h,angel=1,state=false}
+			x=x, y=y, w=w,h=h,angle=1,state=false}
 end
 local function updateLazer(self,dt)
 	for i = 1, #u do
@@ -111,7 +111,7 @@ end
 local function createLazer(x,y,w,h)
 	maxid = maxid + 1
 	return {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
-			x=x,y=y,angel=1,state=false,h=h,w=w}
+			x=x,y=y,angle=1,state=false,h=h,w=w}
 end
 local function getFuncByKind(t)
 	if t.kind == "sensor" and t.subkind == "movement" then
