@@ -4,7 +4,7 @@ coll = require "collision"
 drawUnits = require "drawUnits"
 
 local function addDangerTable(t2, maxDanger, maxTime)
-	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 1}
+	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 3}
 	t2.danger = t
 end
 
@@ -23,12 +23,12 @@ end
 local function updateDanger(dt, t)
     local d  = t.danger
     d.time = d.time - dt
-    if d.time <=0 then
-        return true
-    else
-        totalDanger = totalDanger + d.currentDanger
-        return false
+    if t.state then
+        onDanger(t)
+    elseif d.time <=0 then --and d.currentDanger == 0
+        offDanger(t)
     end
+    totalDanger = totalDanger + d.currentDanger
 end
 
 local function createWall(x,y,w,h)
@@ -91,6 +91,7 @@ local function createTree(x,y,r)
 			update=updateTree, x=x,y=y,angle=1,r=r}
 end
 local function updateMovement(self,dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
@@ -110,14 +111,11 @@ local function createMovement(x,y,w,h)
     return t
 end
 local function updateDoor(self , dt)
-    if not updateDanger(dt, self) then
-        offDanger(self)
-    end
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
-                onDanger(self)
 				break
 			else
 				self.state = false
@@ -133,6 +131,7 @@ local function createDoor(x,y,w,h)
     return t
 end
 local function updateLazer(self,dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
