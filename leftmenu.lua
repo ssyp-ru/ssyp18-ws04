@@ -73,9 +73,12 @@ noth.w = 50
 noth.h = 70
 local function drawNoth (x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle('line', x, y, w, h)
+	love.graphics.rectangle('line', x, y, w, h/2)
+	love.graphics.rectangle('line', x, y+35, w, h/2)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('nothing', x + 1, y + 25)
+	love.graphics.print('nothing', x + 1, y + 12)
+	love.graphics.print('furni', x + 5, y + 40)
+	love.graphics.print('ture', x + 5, y + 50)
 end
 local function drawWall(x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
@@ -91,9 +94,11 @@ local function drawDelete(x, y, w, h)
 end
 local function drawDoor(x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle('line', x, y, w, h)
+	love.graphics.rectangle('line', x, y, w, h/2)
+	love.graphics.rectangle('line', x, y+35, w, h/2)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('Door', x + 10, y + 25)
+	love.graphics.print('Door', x + 10, y + 12)
+	love.graphics.print('Laser', x + 10, y + 40)
 end
 local function drawMovement(x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
