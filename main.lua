@@ -70,14 +70,16 @@ function love.draw()
 end
 
 function love.update(dt)
+	if flag then
+		client.update(dt)
+	end
+
 	totalDanger = 0
 	if edit.x3 == edit.x4 and edit.y3 == edit.y4 then
 		scale = 1
 		edit.x4 = 6000
 	end
-	if flag then
-		client.update(dt)
-	end
+
 	if love.keyboard.isDown("c") then
 		flag = true
 		client.start()
