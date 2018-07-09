@@ -88,11 +88,12 @@ local function lazer (self)
 		self.x + 20, self.y + 12, self.x + 20, self.y + 20, self.x + 5, self.y + 20)
 end
 
-local function dangerIndicator()
-	totalDanger = 0
+local function dangerIndicator(x, y)
+	totalDanger = 010
 	love.graphics.setColor(255, 0, 0)
-	love.graphics.rectangle('line', 100, 800, 50, -300)
-	love.graphics.rectangle("fill", 100, 800, 50, -3 * totalDanger)
+	love.graphics.rectangle('line', x, y, 50, -300)
+	love.graphics.setColor(255, 0, 0, 127)
+	love.graphics.rectangle("fill", x, y, 50, -3 * totalDanger)
 end
 
 return {wall = wall, thief = thief, animal = animal, movement = movement,

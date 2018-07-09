@@ -58,7 +58,9 @@ function love.draw()
         end
         editor.editDraw()
     end)
-    mX, mY = love.mouse.getX(), love.mouse.getY()
+    drwUnit.dangerIndicator(love.graphics.getWidth() - 70, love.graphics.getHeight() - 20)
+--    mX, mY = love.mouse.getX(), love.mouse.getY()
+
     love.graphics.setColor(255, 0, 0)
     menu:drawAll()
 end
