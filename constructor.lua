@@ -22,6 +22,9 @@ end
 
 local function updateDanger(dt, t)
     local d  = t.danger
+    if not d then
+        return
+    end
     d.time = d.time - dt
     if t.state then
         onDanger(t)
