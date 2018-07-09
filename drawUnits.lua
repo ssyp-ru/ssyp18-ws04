@@ -13,37 +13,37 @@ local function tree (self)
 end
 local function bed (self)
 	love.graphics.setColor (255,255,255)
-	if self.angel==1 then
+	if self.angle==1 then
 		love.graphics.draw(sprtree2, self.x, self.y)
-	elseif self.angel==2 then
+	elseif self.angle==2 then
 		love.graphics.draw(sprtree2, self.x, self.y,math.pi*0.5)
-	elseif self.angel==3 then
+	elseif self.angle==3 then
 		love.graphics.draw(sprtree2, self.x, self.y,math.pi)
-	elseif self.angel==4 then
+	elseif self.angle==4 then
 		love.graphics.draw(sprtree2, self.x, self.y,math.pi*1.5)
 	end
 end
 local function fridge (self)
 	love.graphics.setColor (255,255,255)
-	if self.angel==1 then
+	if self.angle==1 then
 		love.graphics.draw(sprtree3, self.x, self.y)
-	elseif self.angel==2 then
+	elseif self.angle==2 then
 		love.graphics.draw(sprtree3, self.x, self.y,math.pi*0.5)
-	elseif self.angel==3 then
+	elseif self.angle==3 then
 		love.graphics.draw(sprtree3, self.x, self.y,math.pi)
-	elseif self.angel==4 then
+	elseif self.angle==4 then
 		love.graphics.draw(sprtree3, self.x, self.y,math.pi*1.5)
 	end
 end
 local function desk (self)
 	love.graphics.setColor (255,255,255)
-	if self.angel==1 then
+	if self.angle==1 then
 		love.graphics.draw(sprtree4, self.x, self.y)
-	elseif self.angel==2 then
+	elseif self.angle==2 then
 		love.graphics.draw(sprtree4, self.x, self.y,math.pi*0.5)
-	elseif self.angel==3 then
+	elseif self.angle==3 then
 		love.graphics.draw(sprtree4, self.x, self.y,math.pi)
-	elseif self.angel==4 then
+	elseif self.angle==4 then
 		love.graphics.draw(sprtree4, self.x, self.y,math.pi*1.5)
 	end
 end
@@ -75,13 +75,13 @@ end
 local function lazer (self)
 	love.graphics.setColor (255, 0, 0)
 	love.graphics.rectangle ("line", self.x, self.y, 25, 25)
-	if self.angel==1 then
+	if self.angle==1 then
 		love.graphics.rectangle ("line", self.x+12, self.y+12,self.w,self.h+12)
-	elseif self.angel==2 then
+	elseif self.angle==2 then
 		love.graphics.rectangle ("line", self.x+12, self.y+12,-self.h-12,self.w)
-	elseif self.angel==3 then
+	elseif self.angle==3 then
 		love.graphics.rectangle ("line", self.x+12, self.y+12,self.w,-self.h-12)
-	elseif self.angel==4 then
+	elseif self.angle==4 then
 		love.graphics.rectangle ("line", self.x+12, self.y+12,self.h+12,-self.w)
 	end
 	love.graphics.line (self.x + 20, self.y + 5, self.x + 5, self.y + 5, self.x + 5, self.y + 12,

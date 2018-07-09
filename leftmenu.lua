@@ -216,7 +216,13 @@ local function check (dt)
 				u[i].draw,u[i].update=obj.getFuncByKind(u[i])
 			end
 		end
-		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y and my <= wall.y + noth.h then
+		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y+35 and my <= wall.y + noth.h/2 then
+			state = "Tree"
+		end
+		if mx >= door.x and mx <= door.x + door.w and my >= wall.y+35 and my <= wall.y + door.h/2 then
+			state = "Laser"
+		end
+		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y and my <= wall.y + noth.h/2 then
 			state = "Point"
 		end
 		if mx >= wall.x and mx <= wall.x + wall.w and my >= wall.y and my <= wall.y + wall.h then
@@ -226,7 +232,7 @@ local function check (dt)
 		my <= wall.y + delete.h then
 			state = "Delete"
 		end
-		if mx >= door.x and mx <= door.x + door.w and my >= wall.y and my <= wall.y + door.h then
+		if mx >= door.x and mx <= door.x + door.w and my >= wall.y and my <= wall.y + door.h/2 then
 			state = "Door"
 		end
 		if mx >= movement.x and mx <= movement.x + movement.w and my >= wall.y and
