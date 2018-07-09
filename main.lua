@@ -15,10 +15,10 @@ function love.load(arg)
     file = require "file"
     json = require "json"
     mc = require "movecam"
-    local anX = 700
+    local anX = 700 -- начальная точка спавна животного
     local anY = 750
-    x = 1300
-    y = 300
+    local x = 1300  -- точка спавна вора
+    local y = 300
     editor.load_editor()
     editor.load_editor()
     cam = camera.new(0, 0, 4000, 4000)
