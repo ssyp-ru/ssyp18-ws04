@@ -58,3 +58,30 @@
 #2	lazer
 #3	door
 #4	movement
+07/09/18 19:09:02============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/09/18 19:09:13	#4 movement	true
+07/09/18 19:09:17	#1 movement	true
+07/09/18 19:09:17	#4 movement	false
+07/09/18 19:09:20	#1 movement	false
+07/09/18 19:09:22	#3 door	true
+07/09/18 19:09:22	#3 door	false
+07/09/18 19:09:26	#3 door	true
+07/09/18 19:09:26	#3 door	false
+07/09/18 19:09:34	#4 movement	true
+07/09/18 19:09:35	#4 movement	false
+07/09/18 19:09:38	#4 movement	true
+07/09/18 19:10:11	#4 movement	false
+07/09/18 19:12:47============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
+07/09/18 19:29:01============
+#1	movement
+#2	lazer
+#3	door
+#4	movement
