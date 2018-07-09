@@ -1,4 +1,5 @@
 --edti = require 'edit'
+local furn = {}
 local nemu = {}
 local noth = {}
 local wall = {}
@@ -75,21 +76,19 @@ local function drawNoth (x, y, w, h)
 	love.graphics.setColor (0, 0, 0, 50)
 	love.graphics.rectangle ('fill', x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle('line', x, y, w, h/2)
-	love.graphics.rectangle('line', x, y+35, w, h/2)
-	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.rectangle('line', x, y, w, h)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('nothing', x + 1, y + 12)
-	love.graphics.print('furni', x + 5, y + 40)
-	love.graphics.print('ture', x + 5, y + 50)
+	love.graphics.print('nothing', x + 1, y + 25)
 end
 local function drawWall(x, y, w, h)
 	love.graphics.setColor (0, 0, 0, 50)
 	love.graphics.rectangle ('fill', x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.rectangle ('line', x, y, w, h/2)
+	love.graphics.rectangle ('line', x, y+35, w, h/2)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('Wall', x + 10, y + 25)
+	love.graphics.print('Wall', x + 10, y + 12)
+	love.graphics.print('Tree', x + 10, y + 45)
 end
 local function drawDelete(x, y, w, h)
 	love.graphics.setColor (0, 0, 0, 50)
@@ -114,26 +113,32 @@ local function drawMovement(x, y, w, h)
 	love.graphics.setColor (0, 0, 0, 50)
 	love.graphics.rectangle ('fill', x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.rectangle ('line', x, y, w, h/2)
+	love.graphics.rectangle ('line', x, y+35, w, h/2)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('Move', x + 5, y + 22)
-	love.graphics.print('ment', x + 5, y + 34)
+	love.graphics.print('Move', x + 5, y + 3)
+	love.graphics.print('ment', x + 5, y + 15)
+	love.graphics.print('Desk', x + 7, y + 45)
 end
 local function drawThief(x, y, w, h)
 	love.graphics.setColor (0, 0, 0, 50)
 	love.graphics.rectangle ('fill', x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.rectangle ('line', x, y, w, h/2)
+	love.graphics.rectangle ('line', x, y+35, w, h/2)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('Thief', x + 10, y + 25)
+	love.graphics.print('Thief', x + 10, y + 12)
+	love.graphics.print('Bed', x + 14, y + 45)
 end
 local function drawCat(x, y, w, h)
 	love.graphics.setColor (0, 0, 0, 50)
 	love.graphics.rectangle ('fill', x, y, w, h)
 	love.graphics.setColor (0, 0, 0)
-	love.graphics.rectangle ('line', x, y, w, h)
+	love.graphics.rectangle ('line', x, y, w, h/2)
+	love.graphics.rectangle ('line', x, y+35, w, h/2)
 	love.graphics.setColor (255, 0, 0, 140)
-	love.graphics.print('Cat', x + 15, y + 25)
+	love.graphics.print('Cat', x + 13, y + 12)
+	love.graphics.print('Fridge', x + 6, y + 45)
 end
 local function drawNm (x, y, x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7)
 	love.graphics.setColor (0, 0, 0)
@@ -216,33 +221,47 @@ local function check (dt)
 				u[i].draw,u[i].update=obj.getFuncByKind(u[i])
 			end
 		end
-		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y+35 and my <= wall.y + noth.h/2 then
-			state = "Tree"
-		end
 		if mx >= door.x and mx <= door.x + door.w and my >= wall.y+35 and my <= wall.y + door.h/2 then
 			state = "Laser"
 		end
-		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y and my <= wall.y + noth.h/2 then
+		if mx >= noth.x and mx <= noth.x + noth.w and my >= wall.y and my <= wall.y + noth.h then
 			state = "Point"
 		end
-		if mx >= wall.x and mx <= wall.x + wall.w and my >= wall.y and my <= wall.y + wall.h then
+		if mx >= wall.x and mx <= wall.x + wall.w and my >= wall.y+35 and my <= wall.y+35 + wall.h/2 then
+			state = "Tree"
+		end
+		if mx >= wall.x and mx <= wall.x + wall.w and my >= wall.y and my <= wall.y + wall.h/2 then
 			state = "Wall"
 		end
 		if mx >= delete.x and mx <= delete.x + delete.w and my >= wall.y and
 		my <= wall.y + delete.h then
 			state = "Delete"
 		end
+		if mx >= door.x and mx <= door.x + door.w and my >= wall.y+35 and my <= wall.y+35 + door.h/2 then
+			state = "Laser"
+		end
 		if mx >= door.x and mx <= door.x + door.w and my >= wall.y and my <= wall.y + door.h/2 then
 			state = "Door"
 		end
+		if mx >= movement.x and mx <= movement.x + movement.w and my >= wall.y+35 and
+		my <= wall.y+35 + movement.h/2 then
+			state = "Desk"
+		end
 		if mx >= movement.x and mx <= movement.x + movement.w and my >= wall.y and
-		my <= wall.y + movement.h then
+		my <= wall.y + movement.h/2 then
 			state = "Movement"
 		end
-		if mx >= thief.x and mx <= thief.x + thief.w and my >= wall.y and my <= wall.y + thief.h then
+		if mx >= thief.x and mx <= thief.x + thief.w and my >= wall.y+35 and
+		my <= wall.y+35 + thief.h/2 then
+			state = "Bed"
+		end
+		if mx >= thief.x and mx <= thief.x + thief.w and my >= wall.y and my <= wall.y + thief.h/2 then
 			state = "Thief"
 		end
-		if mx >= cat.x and mx <= cat.x + cat.w and my >= wall.y and my <= wall.y + cat.h then
+		if mx >= cat.x and mx <= cat.x + cat.w and my >= wall.y + 35 and my <= wall.y + 35 + cat.h/2 then
+			state = "Fridge"
+		end
+		if mx >= cat.x and mx <= cat.x + cat.w and my >= wall.y and my <= wall.y + cat.h/2 then
 			state = "Animal"
 		end
 	end

@@ -3,9 +3,37 @@ con = require "control"
 coll = require "collision"
 drawUnits = require "drawUnits"
 
+local function addDangerTable(t2, maxDanger, maxTime)
+	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 1}
+	t2.danger = t
+end
+
+local function offDanger(t)
+    local d  = t.danger
+    d.currentDanger = 0
+    --d.time = d.maxTime
+end
+
+local function onDanger(t)
+    local d  = t.danger
+    d.currentDanger = d.maxDanger
+    d.time = d.maxTime
+end
+
+local function updateDanger(dt, t)
+    local d  = t.danger
+    d.time = d.time - dt
+    if d.time <=0 then
+        return true
+    else
+        totalDanger = totalDanger + d.currentDanger
+        return false
+    end
+end
+
 local function createWall(x,y,w,h)
 	maxid = maxid + 1 
-	return {x=x,y=y,angel=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
+	return {x=x,y=y,angle=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
 		update=updateWall,draw=drawUnits.wall}
 end
 local function updateWall(dt)
@@ -24,7 +52,7 @@ end
 local function createAnimal(x,y,r)
 	maxid = maxid + 1
 	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
-			update=updateAnimal,x=x,y=y,angel=1,r=r,delay=4,delay1=20}
+			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20}
 end
 local function updateThief(thief, dt)
 	con.conThief(thief, dt)
@@ -32,7 +60,7 @@ end
 local function createThief(x,y,r)
 	maxid = maxid + 1
 	return {kind="human",subkind='thief',id=maxid,draw=drawUnits.thief,
-			update=updateThief,x=x,y=y,angel=1,r=r}
+			update=updateThief,x=x,y=y,angle=1,r=r}
 end
 local function updateBed(self, dt)
 end
@@ -76,14 +104,20 @@ local function updateMovement(self,dt)
 end
 local function createMovement(x,y,w,h)
 	maxid = maxid + 1 
-	return {kind='sensor',subkind='movement',id=maxid,state=false,
-			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angel=1}
+	local t =  {kind='sensor',subkind='movement',id=maxid,state=false,
+			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angle=1 }
+    addDangerTable(t)
+    return t
 end
 local function updateDoor(self , dt)
+    if not updateDanger(dt, self) then
+        offDanger(self)
+    end
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
+                onDanger(self)
 				break
 			else
 				self.state = false
@@ -93,8 +127,10 @@ local function updateDoor(self , dt)
 end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
-	return {kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
-			x=x, y=y, w=w,h=h,angel=1,state=false}
+	local t ={kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
+			x=x, y=y, w=w,h=h,angle=1,state=false }
+    addDangerTable(t)
+    return t
 end
 local function updateLazer(self,dt)
 	for i = 1, #u do
@@ -110,8 +146,10 @@ local function updateLazer(self,dt)
 end
 local function createLazer(x,y,w,h)
 	maxid = maxid + 1
-	return {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
+	local t = {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
 			x=x,y=y,angle=1,state=false,h=h,w=w}
+    addDangerTable(t)
+    return t
 end
 local function getFuncByKind(t)
 	if t.kind == "sensor" and t.subkind == "movement" then

@@ -88,5 +88,16 @@ local function lazer (self)
 		self.x + 20, self.y + 12, self.x + 20, self.y + 20, self.x + 5, self.y + 20)
 end
 
-return {editWall = editWall, wall = wall, thief = thief, animal = animal, movement = movement,
-	noise = noise, door = door, lazer = lazer,tree=tree,desk=desk,fridge=fridge,bed=bed}
+local function dangerIndicator(x, y)
+	if not totalDanger then
+        totalDanger = 0
+    end
+	love.graphics.setColor(255, 0, 0)
+	love.graphics.rectangle('line', x, y, 50, -300)
+	love.graphics.setColor(255, 0, 0, 127)
+	love.graphics.rectangle("fill", x, y, 50, -3 * totalDanger)
+end
+
+return {wall = wall, thief = thief, animal = animal, movement = movement,
+	door = door, lazer = lazer,tree=tree,desk=desk,fridge=fridge,bed=bed,
+	dangerIndicator = dangerIndicator}
