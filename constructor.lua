@@ -175,16 +175,16 @@ local function getFuncByKind(t)
 	if t.kind == "wall" then
 		return drawUnits.wall, updateWall
 	end
-	if t.kind == "tree" then
+	if t.kind == "furniture" and t.subkind == "tree" then
 		return drawUnits.tree, updateTree
 	end
-	if t.kind == "desk" then
+	if t.kind == "furniture" and t.subkind == "desk" then
 		return drawUnits.desk, updateDesk
 	end
-	if t.kind == "fridge" then
+	if t.kind == "furniture" and t.subkind == "fridge" then
 		return drawUnits.fridge, updateFridge
 	end
-	if t.kind == "bed" then
+	if t.kind == "furniture" and t.subkind == "bed" then
 		return drawUnits.bed, updateBed
 	end
 end
