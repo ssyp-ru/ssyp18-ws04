@@ -54,9 +54,9 @@ end
 local function movement (self)
 	love.graphics.setColor (255, 0, 0)
 	love.graphics.rectangle ("line", self.x, self.y, 25, 25)
-	love.graphics.line (self.x + 2, self.y + 23, self.x + 2, self.y + 3, self.x + 12, self.y + 12,
-		self.x + 22, self.y + 3, self.x + 22, self.y + 23)
-	love.graphics.setColor (255, 0, 0, 140)
+	love.graphics.line (self.x + 4, self.y + 21, self.x + 4, self.y + 3, self.x + 12, self.y + 12,
+		self.x + 21, self.y + 3, self.x + 21, self.y + 21)
+	love.graphics.setColor (255, 0, 0, 100)
 	if self.state then
 		love.graphics.rectangle ('fill', self.x, self.y, self.w, self.h)	
 	else
