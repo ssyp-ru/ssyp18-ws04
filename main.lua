@@ -30,45 +30,45 @@ mc = require "movecam"
 	love.graphics.setBackgroundColor{255,255,255}
 --		u=file.rabota("save.txt", {})
 	u={}
-	for i = 1, 18 do
-		if i == 1 then
-			u[#u+1] = obj.createWall(300, 200, 20, 360)
-		elseif i == 2 then
-			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
-		elseif i == 3 then
-			u[#u+1] = obj.createWall(300, 180, 720, 20)
-		elseif i == 4 then
-			u[#u+1] = obj.createWall(300, 560, 620, 20)
-		elseif i == 5 then
-			u[#u+1] = obj.createThief (x, y, 15)
-		elseif i == 6 then
-			u[#u+1] = obj.createAnimal (anX,anY,10)
-		elseif i == 7 then
-			u[#u+1] = obj.createMovement (300, 20, 900, 160)
-		elseif i == 8 then
-			u[#u+1] = obj.createLazer (974, 200,1,200)
-		elseif i == 9 then
-			u[#u+1] = obj.createDoor (920, 555, 85, 25)
-		elseif i == 10 then
-			u[#u+1] = obj.createWall(100, 20, 20, 670)
-		elseif i == 11 then
-			u[#u+1] = obj.createWall(100, 0, 1100, 20)
-		elseif i == 12 then
-			u[#u+1] = obj.createWall(250, 670, 970, 20)
-		elseif i == 13 then
-			u[#u+1] = obj.createWall(1200, 0, 20, 670)
-		elseif i == 14 then
-			u[#u+1] = obj.createMovement (120, 20, 180, 650)
-		elseif i == 15 then
-			u[#u+1] = obj.createTree(1500,800,30)
-		elseif i == 16 then
-			u[#u+1] = obj.createBed(150,800)
-		elseif i == 17 then
-			u[#u+1] = obj.createFridge(50,800)
-		elseif i == 18 then
-			u[#u+1] = obj.createDesk(1500,500)
-		end
-	end
+--	for i = 1, 18 do
+--		if i == 1 then
+--			u[#u+1] = obj.createWall(300, 200, 20, 360)
+--		elseif i == 2 then
+--			u[#u+1] = obj.createWall(i * 500, 200, 20, 380)
+--		elseif i == 3 then
+--			u[#u+1] = obj.createWall(300, 180, 720, 20)
+--		elseif i == 4 then
+--			u[#u+1] = obj.createWall(300, 560, 620, 20)
+--		elseif i == 5 then
+--			u[#u+1] = obj.createThief (x, y, 15)
+--		elseif i == 6 then
+--			u[#u+1] = obj.createAnimal (anX,anY,10)
+--		elseif i == 7 then
+--			u[#u+1] = obj.createMovement (300, 20, 900, 160)
+--		elseif i == 8 then
+--			u[#u+1] = obj.createLazer (974, 200,1,200)
+--		elseif i == 9 then
+--			u[#u+1] = obj.createDoor (920, 555, 85, 25)
+--		elseif i == 10 then
+--			u[#u+1] = obj.createWall(100, 20, 20, 670)
+--		elseif i == 11 then
+--			u[#u+1] = obj.createWall(100, 0, 1100, 20)
+--		elseif i == 12 then
+--			u[#u+1] = obj.createWall(250, 670, 970, 20)
+--		elseif i == 13 then
+--			u[#u+1] = obj.createWall(1200, 0, 20, 670)
+--		elseif i == 14 then
+--			u[#u+1] = obj.createMovement (120, 20, 180, 650)
+--		elseif i == 15 then
+--			u[#u+1] = obj.createTree(1500,800,30)
+--		elseif i == 16 then
+--			u[#u+1] = obj.createBed(150,800)
+--		elseif i == 17 then
+--			u[#u+1] = obj.createFridge(50,800)
+--		elseif i == 18 then
+--			u[#u+1] = obj.createDesk(1500,500)
+--		end
+--	end
 	--obj.createLazer(974,200,1,200)
 	love.graphics.setBackgroundColor{255,255,255}
 	logging.init(u)
