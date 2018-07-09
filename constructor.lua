@@ -64,31 +64,31 @@ local function createThief(x,y,r)
 end
 local function updateBed(self, dt)
 end
-local function createBed(x,y)
+local function createBed(x,y,angle)
 	maxid = maxid + 1
-	return {kind="bed",subkind=2,id=maxid,draw=drawUnits.bed,
-			update=updateBed, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="bed",id=maxid,draw=drawUnits.bed,
+			update=updateBed, x=x,y=y,angle=angle,r=r}
 end
 local function updateFridge(self, dt)
 end
-local function createFridge(x,y)
+local function createFridge(x,y,angle)
 	maxid = maxid + 1
-	return {kind="fridge",subkind=3,id=maxid,draw=drawUnits.fridge,
-			update=updateFridge, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="fridge",id=maxid,draw=drawUnits.fridge,
+			update=updateFridge, x=x,y=y,angle=angle,r=r}
 end
 local function updateDesk(self, dt)
 end
-local function createDesk(x,y)
+local function createDesk(x,y,angle)
 	maxid = maxid + 1
-	return {kind="desk",subkind=4,id=maxid,draw=drawUnits.desk,
-			update=updateDesk, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="desk",id=maxid,draw=drawUnits.desk,
+			update=updateDesk, x=x,y=y,angle=angle,r=r}
 end
 local function updateTree(self, dt)
 end
-local function createTree(x,y,r)
+local function createTree(x,y)
 	maxid = maxid + 1
-	return {kind="tree",subkind=1,id=maxid,draw=drawUnits.tree,
-			update=updateTree, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="tree",id=maxid,draw=drawUnits.tree,
+			update=updateTree, x=x,y=y,angle=1}
 end
 local function updateMovement(self,dt)
     updateDanger(dt, self)

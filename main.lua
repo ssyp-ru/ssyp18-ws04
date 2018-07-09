@@ -88,15 +88,15 @@ function love.update(dt)
 end
 
 function love.wheelmoved(x, y)
-    if scale > 1.5 then
-        scale = 1.5
-    elseif scale < 0.5 then
-        scale = 0.5
-    end
-    if y > 0 then
-        scale = scale + 0.05
-    end
-    if y < 0 then
-        scale = scale - 0.05
-    end
+	if scale > 1.5 then
+		scale = 1.5
+	elseif scale < 0.5 then
+		scale = 0.5
+	end
+	if y > 0 then
+		scale = scale + 0.05
+	end
+	if y < 0 then
+		scale = scale - 0.05
+	end
 end
