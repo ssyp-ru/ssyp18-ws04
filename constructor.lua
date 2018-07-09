@@ -8,6 +8,29 @@ local function addDangerTable(t2, maxDanger, maxTime)
 	t2.danger = t
 end
 
+local function offDanger(t)
+    local d  = t.danger
+    d.currentDanger = 0
+    --d.time = d.maxTime
+end
+
+local function onDanger(t)
+    local d  = t.danger
+    d.currentDanger = d.maxDanger
+    d.time = d.maxTime
+end
+
+local function updateDanger(dt, t)
+    local d  = t.danger
+    d.time = d.time - dt
+    if d.time <=0 then
+        return true
+    else
+        totalDanger = totalDanger + d.currentDanger
+        return false
+    end
+end
+
 local function createWall(x,y,w,h)
 	maxid = maxid + 1 
 	return {x=x,y=y,angle=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
@@ -87,10 +110,14 @@ local function createMovement(x,y,w,h)
     return t
 end
 local function updateDoor(self , dt)
+    if not updateDanger(dt, self) then
+        offDanger(self)
+    end
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
+                onDanger(self)
 				break
 			else
 				self.state = false

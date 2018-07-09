@@ -15,6 +15,7 @@ function love.load(arg)
     file = require "file"
     json = require "json"
     mc = require "movecam"
+    totalDanger = 0
     local anX = 700 -- начальная точка спавна животного
     local anY = 750
     local x = 1300  -- точка спавна вора
@@ -66,6 +67,7 @@ function love.draw()
 end
 
 function love.update(dt)
+    totalDanger = 0
     if edit.x3 == edit.x4 and edit.y3 == edit.y4 then
         scale = 1
         edit.x4 = 6000
