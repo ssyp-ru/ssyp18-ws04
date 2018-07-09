@@ -3,6 +3,11 @@ con = require "control"
 coll = require "collision"
 drawUnits = require "drawUnits"
 
+local function addDangerTable(t2, maxDanger, maxTime)
+	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 1}
+	t2.danger = t
+end
+
 local function createWall(x,y,w,h)
 	maxid = maxid + 1 
 	return {x=x,y=y,angle=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
@@ -76,8 +81,10 @@ local function updateMovement(self,dt)
 end
 local function createMovement(x,y,w,h)
 	maxid = maxid + 1 
-	return {kind='sensor',subkind='movement',id=maxid,state=false,
-			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angle=1}
+	local t =  {kind='sensor',subkind='movement',id=maxid,state=false,
+			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angle=1 }
+    addDangerTable(t)
+    return t
 end
 local function updateDoor(self , dt)
 	for i = 1, #u do
@@ -93,8 +100,10 @@ local function updateDoor(self , dt)
 end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
-	return {kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
-			x=x, y=y, w=w,h=h,angle=1,state=false}
+	local t ={kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
+			x=x, y=y, w=w,h=h,angle=1,state=false }
+    addDangerTable(t)
+    return t
 end
 local function updateLazer(self,dt)
 	for i = 1, #u do
@@ -110,8 +119,10 @@ local function updateLazer(self,dt)
 end
 local function createLazer(x,y,w,h)
 	maxid = maxid + 1
-	return {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
+	local t = {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
 			x=x,y=y,angle=1,state=false,h=h,w=w}
+    addDangerTable(t)
+    return t
 end
 local function getFuncByKind(t)
 	if t.kind == "sensor" and t.subkind == "movement" then
