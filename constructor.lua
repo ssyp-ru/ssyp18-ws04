@@ -40,12 +40,16 @@ local function createAnimal(x,y,r)
 		draw=drawUnits.animal,
 		update=updateAnimal,
 		x=x, y=y,
+		randR=math.random (10,40),  
+		randYc=y,
+		angleC = 2*math.pi / 360,
 		angel=0,
 		noize = 0,
 		r=r,
 		delay = 4,
 		delay1 = 20
 	}
+	t.randXc=x - t.randR
 	return t
 end
 function updateThief(thief, dt)

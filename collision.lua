@@ -58,4 +58,24 @@ local function obj2obj (obj1, obj2)
 		end
 	end
 end
+--[[local function obj2obj (obj1, obj2)
+	if obj1.kind == "human" or obj1.kind == "animal" then
+		if obj2.kind == "human" or obj2.kind == "animal" then
+			return circle2circle(obj1, obj2)
+		else	
+			return rect2circle(obj1, obj2)
+		end
+	elseif obj2.kind == "human" or obj2.kind == "animal" then
+			return rect2circle(obj2, obj1)
+		elseif	obj2.kind == "animal" or obj2.kind == "human" then
+			return rect2rect(obj1, obj2)
+		--end
+	else
+		if obj2.kind == "wall" or obj2.kind == "animal" then
+			return rect2circle(obj2, obj1)
+		else	
+			return circle2rect(obj1, obj2)
+		end
+	end
+end]]
 return {obj2obj = obj2obj} 
