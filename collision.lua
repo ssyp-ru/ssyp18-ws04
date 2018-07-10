@@ -47,10 +47,8 @@ end
 	end
 end]]
 local function obj2obj (obj1, obj2)
-	if obj1.kind=="bed" or obj1.kind=="desk" or obj1.kind=="fridge" then
-		return false
-	elseif obj2.kind=="bed" or obj2.kind=="desk" or obj2.kind=="fridge" then
-		return false
+	if obj1.kind =="furniture" or obj2.kind == "furniture" then
+		return
 	elseif obj1.kind == "human" or obj1.kind == "animal" then
 		if obj2.kind == "human" or obj2.kind == "animal" then
 			return circle2circle(obj1, obj2)

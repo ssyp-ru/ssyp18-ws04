@@ -89,7 +89,9 @@ local function lazer (self)
 end
 
 local function dangerIndicator(x, y)
-	totalDanger = 010
+	if not totalDanger then
+        totalDanger = 0
+    end
 	love.graphics.setColor(255, 0, 0)
 	love.graphics.rectangle('line', x, y, 50, -300)
 	love.graphics.setColor(255, 0, 0, 127)

@@ -8,6 +8,29 @@ local function addDangerTable(t2, maxDanger, maxTime)
 	t2.danger = t
 end
 
+local function offDanger(t)
+    local d  = t.danger
+    d.currentDanger = 0
+    --d.time = d.maxTime
+end
+
+local function onDanger(t)
+    local d  = t.danger
+    d.currentDanger = d.maxDanger
+    d.time = d.maxTime
+end
+
+local function updateDanger(dt, t)
+    local d  = t.danger
+    d.time = d.time - dt
+    if d.time <=0 then
+        return true
+    else
+        totalDanger = totalDanger + d.currentDanger
+        return false
+    end
+end
+
 local function createWall(x,y,w,h)
 	maxid = maxid + 1 
 	return {x=x,y=y,angle=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
@@ -41,31 +64,31 @@ local function createThief(x,y,r)
 end
 local function updateBed(self, dt)
 end
-local function createBed(x,y)
+local function createBed(x,y,angle)
 	maxid = maxid + 1
-	return {kind="bed",subkind=2,id=maxid,draw=drawUnits.bed,
-			update=updateBed, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="bed",id=maxid,draw=drawUnits.bed,
+			update=updateBed, x=x,y=y,angle=angle,r=r}
 end
 local function updateFridge(self, dt)
 end
-local function createFridge(x,y)
+local function createFridge(x,y,angle)
 	maxid = maxid + 1
-	return {kind="fridge",subkind=3,id=maxid,draw=drawUnits.fridge,
-			update=updateFridge, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="fridge",id=maxid,draw=drawUnits.fridge,
+			update=updateFridge, x=x,y=y,angle=angle,r=r}
 end
 local function updateDesk(self, dt)
 end
-local function createDesk(x,y)
+local function createDesk(x,y,angle)
 	maxid = maxid + 1
-	return {kind="desk",subkind=4,id=maxid,draw=drawUnits.desk,
-			update=updateDesk, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="desk",id=maxid,draw=drawUnits.desk,
+			update=updateDesk, x=x,y=y,angle=angle,r=r}
 end
 local function updateTree(self, dt)
 end
-local function createTree(x,y,r)
+local function createTree(x,y)
 	maxid = maxid + 1
-	return {kind="tree",subkind=1,id=maxid,draw=drawUnits.tree,
-			update=updateTree, x=x,y=y,angle=1,r=r}
+	return {kind="furniture",subkind="tree",id=maxid,draw=drawUnits.tree,
+			update=updateTree, x=x,y=y,angle=1}
 end
 local function updateMovement(self,dt)
 	for i = 1, #u do
@@ -87,10 +110,14 @@ local function createMovement(x,y,w,h)
     return t
 end
 local function updateDoor(self , dt)
+    if not updateDanger(dt, self) then
+        offDanger(self)
+    end
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
+                onDanger(self)
 				break
 			else
 				self.state = false
