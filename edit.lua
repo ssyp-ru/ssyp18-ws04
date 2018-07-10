@@ -34,7 +34,8 @@ local function editTree()
 end
 local function editMovement()
 	edit.w = -(edit.x1 - edit.x2)
-	edit.h = -(edit.y1 - edit.y2)	if (edit.w < 0 and edit.h < 0) then
+	edit.h = -(edit.y1 - edit.y2)
+	if (edit.w < 0 and edit.h < 0) then
 		edit.x1,edit.y1 = edit.x2,edit.y2
 		edit.w = -edit.w
 		edit.h = -edit.h
