@@ -4,7 +4,7 @@ coll = require "collision"
 drawUnits = require "drawUnits"
 
 local function addDangerTable(t2, maxDanger, maxTime)
-	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 1}
+	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 3}
 	t2.danger = t
 end
 
@@ -22,13 +22,16 @@ end
 
 local function updateDanger(dt, t)
     local d  = t.danger
-    d.time = d.time - dt
-    if d.time <=0 then
-        return true
-    else
-        totalDanger = totalDanger + d.currentDanger
-        return false
+    if not d then
+        return
     end
+    d.time = d.time - dt
+    if t.state then
+        onDanger(t)
+    elseif d.time <=0 then --and d.currentDanger == 0
+        offDanger(t)
+    end
+    totalDanger = totalDanger + d.currentDanger
 end
 
 local function createWall(x,y,w,h)
@@ -50,9 +53,30 @@ local function updateAnimal(animal, dt)
 	end
 end
 local function createAnimal(x,y,r)
-	maxid = maxid + 1
+--	maxid = maxid + 1
+--	local t = {
+--		kind='animal',
+--		subkind='none',
+--		id=maxid,
+--		draw=drawUnits.animal,
+--		update=updateAnimal,
+--		x=x, y=y,
+--		randR=math.random (10,40),  
+--		randYc=y,
+--		angleC = 2*math.pi / 360,
+--		angel=0,
+--		noize = 0,
+--		r=r,
+--		delay = 4,
+--		delay1 = 20
+--	}
+--	t.randXc=x - t.randR
+--	return t
+--end
+--function updateThief(thief, dt)
 	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
-			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20}
+			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20,randR=20,  
+		randYc=y,angleC = 2*math.pi / 360,randXc = x - 20}
 end
 local function updateThief(thief, dt)
 	con.conThief(thief, dt)
@@ -91,6 +115,7 @@ local function createTree(x,y)
 			update=updateTree, x=x,y=y,angle=1}
 end
 local function updateMovement(self,dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
@@ -110,14 +135,11 @@ local function createMovement(x,y,w,h)
     return t
 end
 local function updateDoor(self , dt)
-    if not updateDanger(dt, self) then
-        offDanger(self)
-    end
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
 				self.state = true
-                onDanger(self)
 				break
 			else
 				self.state = false
@@ -133,6 +155,7 @@ local function createDoor(x,y,w,h)
     return t
 end
 local function updateLazer(self,dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
@@ -173,16 +196,16 @@ local function getFuncByKind(t)
 	if t.kind == "wall" then
 		return drawUnits.wall, updateWall
 	end
-	if t.kind == "tree" then
+	if t.kind == "furniture" and t.subkind == "tree" then
 		return drawUnits.tree, updateTree
 	end
-	if t.kind == "desk" then
+	if t.kind == "furniture" and t.subkind == "desk" then
 		return drawUnits.desk, updateDesk
 	end
-	if t.kind == "fridge" then
+	if t.kind == "furniture" and t.subkind == "fridge" then
 		return drawUnits.fridge, updateFridge
 	end
-	if t.kind == "bed" then
+	if t.kind == "furniture" and t.subkind == "bed" then
 		return drawUnits.bed, updateBed
 	end
 end
