@@ -3,20 +3,41 @@ con = require "control"
 coll = require "collision"
 drawUnits = require "drawUnits"
 
-local function createWall(x1,y1,w1,h1)
-	maxid = maxid + 1
-	local t = {
-		x = x1, y = y1,
-		angle = 0,
-		kind = "wall",
-		subKind = "none",
-		id = maxid,
-		w = w1, h = h1,
-		name = "wall"..maxid,
-		update = updateWall,
-		draw = drawUnits.wall
-	}
-	return t
+local function addDangerTable(t2, maxDanger, maxTime)
+	local t = { currentDanger = 0, maxDanger = maxDanger or 10, time = 0, maxTime = maxTime or 3}
+	t2.danger = t
+end
+
+local function offDanger(t)
+    local d  = t.danger
+    d.currentDanger = 0
+    --d.time = d.maxTime
+end
+
+local function onDanger(t)
+    local d  = t.danger
+    d.currentDanger = d.maxDanger
+    d.time = d.maxTime
+end
+
+local function updateDanger(dt, t)
+    local d  = t.danger
+    if not d then
+        return
+    end
+    d.time = d.time - dt
+    if t.state then
+        onDanger(t)
+    elseif d.time <=0 then --and d.currentDanger == 0
+        offDanger(t)
+    end
+    totalDanger = totalDanger + d.currentDanger
+end
+
+local function createWall(x,y,w,h)
+	maxid = maxid + 1 
+	return {x=x,y=y,angle=1,kind="wall",subKind="none",id=maxid,w=w,h=h,
+		update=updateWall,draw=drawUnits.wall}
 end
 local function updateWall(dt)
 end
@@ -32,46 +53,69 @@ local function updateAnimal(animal, dt)
 	end
 end
 local function createAnimal(x,y,r)
-	maxid = maxid + 1
-	local t = {
-		kind='animal',
-		subkind='none',
-		id=maxid,
-		draw=drawUnits.animal,
-		update=updateAnimal,
-		x=x, y=y,
-		randR=math.random (10,40),  
-		randYc=y,
-		angleC = 2*math.pi / 360,
-		angel=0,
-		noize = 0,
-		r=r,
-		delay = 4,
-		delay1 = 20
-	}
-	t.randXc=x - t.randR
-	return t
+--	maxid = maxid + 1
+--	local t = {
+--		kind='animal',
+--		subkind='none',
+--		id=maxid,
+--		draw=drawUnits.animal,
+--		update=updateAnimal,
+--		x=x, y=y,
+--		randR=math.random (10,40),  
+--		randYc=y,
+--		angleC = 2*math.pi / 360,
+--		angel=0,
+--		noize = 0,
+--		r=r,
+--		delay = 4,
+--		delay1 = 20
+--	}
+--	t.randXc=x - t.randR
+--	return t
+--end
+--function updateThief(thief, dt)
+	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
+			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20,randR=20,  
+		randYc=y,angleC = 2*math.pi / 360,randXc = x - 20}
 end
-function updateThief(thief, dt)
+local function updateThief(thief, dt)
 	con.conThief(thief, dt)
 end
 local function createThief(x,y,r)
 	maxid = maxid + 1
-	local t = {
-		kind = "human",
-		subkind = 'thief',
-		id = maxid,
-		draw = drawUnits.thief,
-		update = updateThief,
-		x = x,
-		y = y,
-		angle = 0,
-		r = r,
-		noize = 0
-	}
-	return t
+	return {kind="human",subkind='thief',id=maxid,draw=drawUnits.thief,
+			update=updateThief,x=x,y=y,angle=1,r=r}
+end
+local function updateBed(self, dt)
+end
+local function createBed(x,y,angle)
+	maxid = maxid + 1
+	return {kind="furniture",subkind="bed",id=maxid,draw=drawUnits.bed,
+			update=updateBed, x=x,y=y,angle=angle,r=r}
+end
+local function updateFridge(self, dt)
+end
+local function createFridge(x,y,angle)
+	maxid = maxid + 1
+	return {kind="furniture",subkind="fridge",id=maxid,draw=drawUnits.fridge,
+			update=updateFridge, x=x,y=y,angle=angle,r=r}
+end
+local function updateDesk(self, dt)
+end
+local function createDesk(x,y,angle)
+	maxid = maxid + 1
+	return {kind="furniture",subkind="desk",id=maxid,draw=drawUnits.desk,
+			update=updateDesk, x=x,y=y,angle=angle,r=r}
+end
+local function updateTree(self, dt)
+end
+local function createTree(x,y)
+	maxid = maxid + 1
+	return {kind="furniture",subkind="tree",id=maxid,draw=drawUnits.tree,
+			update=updateTree, x=x,y=y,angle=1}
 end
 local function updateMovement(self,dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
@@ -84,23 +128,14 @@ local function updateMovement(self,dt)
 	end
 end
 local function createMovement(x,y,w,h)
-	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='movement',
-		id=maxid,
-		state = false,
-		draw=drawUnits.movement,
-		update=updateMovement,
-		x=x,
-		y=y,
-		w=w,
-		h=h,
-		angle=0
-	}
-	return t
+	maxid = maxid + 1 
+	local t =  {kind='sensor',subkind='movement',id=maxid,state=false,
+			draw=drawUnits.movement,update=updateMovement,x=x,y=y,w=w,h=h,angle=1 }
+    addDangerTable(t)
+    return t
 end
 local function updateDoor(self , dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
@@ -114,22 +149,13 @@ local function updateDoor(self , dt)
 end
 local function createDoor(x,y,w,h)
 	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='door',
-		id=maxid,
-		draw=drawUnits.door,
-		update=updateDoor,
-		x=x,
-		y=y,
-		w=w,
-		h=h,
-		angle=0,
-		state=false
-	}
-	return t
+	local t ={kind='sensor', subkind='door', id=maxid, draw=drawUnits.door, update=updateDoor,
+			x=x, y=y, w=w,h=h,angle=1,state=false }
+    addDangerTable(t)
+    return t
 end
 local function updateLazer(self,dt)
+    updateDanger(dt, self)
 	for i = 1, #u do
 		if (u[i].kind == "human" or u[i].kind == "animal")  then
 			if coll.obj2obj(u[i],self) then
@@ -143,20 +169,10 @@ local function updateLazer(self,dt)
 end
 local function createLazer(x,y,w,h)
 	maxid = maxid + 1
-	local t = {
-		kind='sensor',
-		subkind='lazer',
-		id=maxid,
-		draw=drawUnits.lazer,
-		update=updateLazer,
-		x=x,
-		y=y,
-		angle=2,
-		state=false,
-		h=h,
-		w=w
-	}
-	return t
+	local t = {kind='sensor',subkind='lazer',id=maxid,draw=drawUnits.lazer,update=updateLazer,
+			x=x,y=y,angle=1,state=false,h=h,w=w}
+    addDangerTable(t)
+    return t
 end
 local function getFuncByKind(t)
 	if t.kind == "sensor" and t.subkind == "movement" then
@@ -180,9 +196,23 @@ local function getFuncByKind(t)
 	if t.kind == "wall" then
 		return drawUnits.wall, updateWall
 	end
+	if t.kind == "furniture" and t.subkind == "tree" then
+		return drawUnits.tree, updateTree
+	end
+	if t.kind == "furniture" and t.subkind == "desk" then
+		return drawUnits.desk, updateDesk
+	end
+	if t.kind == "furniture" and t.subkind == "fridge" then
+		return drawUnits.fridge, updateFridge
+	end
+	if t.kind == "furniture" and t.subkind == "bed" then
+		return drawUnits.bed, updateBed
+	end
 end
 
 return {createAnimal=createAnimal,createThief=createThief,createMovement=createMovement,
-	createNoise=createNoise,createDoor=createDoor,createLazer=createLazer,createWall = createWall,
-	updateThief=updateThief,updateMovement=updateMovement,updateNoise=updateNoise,
-	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind}
+	createDoor=createDoor,createLazer=createLazer,createWall = createWall,
+	updateThief=updateThief,updateMovement=updateMovement,
+	updateLazer=updateLazer,updateDoor=updateDoor,updateAnimal=updateAnimal,getFuncByKind=getFuncByKind,
+	createTree = createTree,createBed=createBed,updateBed=updateBed,updateFridge=updateFridge,
+	createFridge=createFridge,updateDesk=updateDesk,createDesk=createDesk}

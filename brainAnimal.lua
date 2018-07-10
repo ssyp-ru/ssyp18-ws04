@@ -1,7 +1,7 @@
 coll = require 'collision'
 local function brainAnimal (self, dt)
 	math.randomseed(os.time())
-	local oldx = self.x
+	--[[local oldx = self.x
 	local oldy = self.y
 	if t == nil then
 		t = 0
@@ -14,45 +14,46 @@ local function brainAnimal (self, dt)
 		randX = math.random (800)
 		randY = math.random (600)
 		--print (randX, randY)
-	elseif self.x < randX and t>0 then
-		--for i = 1, #u do
-			--if u[i].kind == "wall" --[[and coll.obj2obj(self,u[i]) == false]] then
+	else
+		if self.x < randX then
+		self.x = self.x + 10 * dt
+		for i = 1, #u do
+			if u[i].kind == "wall" and coll.obj2obj(self,u[i]) == false then
 				t = t - dt
-				self.x = self.x + 0.05
-			--elseif coll.obj2obj(self,u[i]) then self.x = oldx
-			--end
-		--end
-	elseif self.y < randY and t>0 then
-		--for i = 1, #u do
-			--if u[i].kind == "wall" --[[and coll.obj2obj(self,u[i]) == false]] then
+			elseif coll.obj2obj(self,u[i]) then self.x = oldx
+			end
+		end
+	elseif self.y < randY then
+		self.y = self.y + 10 * dt
+		for i = 1, #u do
+			if u[i].kind == "wall" and coll.obj2obj(self,u[i]) == false then
 				t = t - dt
-				self.y = self.y + 0.05
-			--elseif coll.obj2obj(self,u[i]) then self.y = oldy
-			--end
-		--end
-	elseif self.x > randX and t>0 then
-		--for i = 1, #u do
-			--if u[i].kind == "wall" --[[and coll.obj2obj(self,u[i]) == false]] then
+			elseif coll.obj2obj(self,u[i]) then self.y = oldy
+			end
+		end
+	elseif self.x > randX then
+		self.x = self.x - 10 * dt
+		for i = 1, #u do
+			if u[i].kind == "wall" and coll.obj2obj(self,u[i]) == false then
 				t = t - dt
-				self.x = self.x - 0.05
-			--elseif coll.obj2obj(self,u[i]) then self.x = oldx
-			--end
-		--end
-	elseif self.y > randY and t>0 then
-		--for i = 1, #u do
-			--if u[i].kind == "wall" --[[and coll.obj2obj(self,u[i]) == false]] then
+			elseif coll.obj2obj(self,u[i]) then self.x = oldx
+			end
+		end
+	elseif self.y > randY then
+		self.y = self.y - 10 * dt
+		for i = 1, #u do
+			if u[i].kind == "wall" and coll.obj2obj(self,u[i]) == false then
 				t = t - dt
-				self.y = self.y - 0.05
-			--elseif coll.obj2obj(self,u[i]) then self.y = oldy
-			--end
-		--end
-	end
+			elseif coll.obj2obj(self,u[i]) then self.y = oldy
+			end
+		end
+	end]]
 	
 	
 	
 	
 	
-	--[[
+	
 	local s = self
 	--print("##", s.id, s.kind, s.r, s.w, s.x, s.y, s.angleC)
 	if s.angleC then
@@ -62,7 +63,7 @@ local function brainAnimal (self, dt)
 		if s.angleC == 2*math.pi then
 			s.angleC = 0
 		end
-	end]]
+	end
 	
 	
 	
