@@ -53,9 +53,30 @@ local function updateAnimal(animal, dt)
 	end
 end
 local function createAnimal(x,y,r)
-	maxid = maxid + 1
+--	maxid = maxid + 1
+--	local t = {
+--		kind='animal',
+--		subkind='none',
+--		id=maxid,
+--		draw=drawUnits.animal,
+--		update=updateAnimal,
+--		x=x, y=y,
+--		randR=math.random (10,40),  
+--		randYc=y,
+--		angleC = 2*math.pi / 360,
+--		angel=0,
+--		noize = 0,
+--		r=r,
+--		delay = 4,
+--		delay1 = 20
+--	}
+--	t.randXc=x - t.randR
+--	return t
+--end
+--function updateThief(thief, dt)
 	return {kind='animal',subkind='none',id=maxid,draw=drawUnits.animal,
-			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20}
+			update=updateAnimal,x=x,y=y,angle=1,r=r,delay=4,delay1=20,randR=20,  
+		randYc=y,angleC = 2*math.pi / 360,randXc = x - 20}
 end
 local function updateThief(thief, dt)
 	con.conThief(thief, dt)
