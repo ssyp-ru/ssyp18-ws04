@@ -23,12 +23,13 @@
 
 Как всё это запустить и продолжить дома?
 
-а) Установите Love2D https://love2d.org/ (мы использовали версию 10.1 на сайте новая 11.х в ней изменился формат параметров цвета. Не от 0 до 255, а от 0 до 1) б) Поставить Среду для разработки https://studio.zerobrane.com/ в) Рекомендую графический редактор Paint.Net https://www.getpaint.net/
+а) Установите Love2D https://love2d.org/ (мы использовали версию 10.1 на сайте новая 11.х в ней изменился формат параметров цвета. Не от 0 до 255, а от 0 до 1) 
+б) Поставить Среду для разработки https://studio.zerobrane.com/ 
+в) Рекомендую графический редактор Paint.Net https://www.getpaint.net/
 
 КАК НАУЧИТЬСЯ?
-
-    Читать книжки, сайты Краткий API по функциям Love2D http://love2d-community.github.io/love-api/#callbacks
-    Я (М.Братусь) создал видео канал с уроками по Lua: https://www.youtube.com/channel/UCrwjc6vNx-QSEe00QsU1-xg Ищите другие уроки,
-    есть група в ВК, где вам ответят на все вопросы по коду и проблемам: https://vk.com/club61441078
+Читать книжки, сайты Краткий API по функциям Love2D http://love2d-community.github.io/love-api/#callbacks
+Я (М.Братусь) создал видео канал с уроками по Lua: https://www.youtube.com/channel/UCrwjc6vNx-QSEe00QsU1-xg Ищите другие уроки,
+есть група в ВК, где вам ответят на все вопросы по коду и проблемам: https://vk.com/club61441078
 
 
